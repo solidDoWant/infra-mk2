@@ -1,0 +1,5 @@
+root
+opnsense
+8
+mount_cd9660 /dev/cd0 /mnt
+cp /mnt/conf/config.xml /conf/config.xml

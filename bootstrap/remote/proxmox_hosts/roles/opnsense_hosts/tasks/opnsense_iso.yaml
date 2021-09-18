@@ -1,0 +1,43 @@
+---
+- name: Create ISO working directory
+  file:
+    state: directory
+    path: "{{ working_dir_path }}/ISOs"
+  delegate_to: localhost
+  register: iso_working_dir
+
+- name: Set ISO path facts
+  set_fact:
+    remote_iso_path: "{{ remote_iso_dir_path }}/opnsense.iso"
+    local_iso_path: "{{ iso_working_dir.path }}/opnsense.iso"
+
+- name: Check if the ISO exists on the server
+  stat:
+    path: "{{ remote_iso_path }}"
+  delegate_to: localhost
+  register: remote_iso_stat
+
+- name: Check if the ISO already exists locally
+  stat:
+    path: "{{ local_iso_path }}"
+  delegate_to: localhost
+  when: not remote_iso_stat.stat.exists
+  register: local_iso_stat
+
+- name: Download and extract the ISO locally
+  block:
+    - name: Download OPNsense ISO locally
+      get_url:
+        url: https://mirrors.nycbug.org/pub/opnsense/releases/21.7/OPNsense-21.7.1-OpenSSL-dvd-amd64.iso.bz2
+        dest: "{{ iso_working_dir.path }}/opnsense.iso.bz2"
+      register: downloaded_file
+    - name: Extract the ISO
+      command: bunzip2 "{{ downloaded_file.dest }}"
+  delegate_to: localhost
+  when: not remote_iso_stat.stat.exists and not local_iso_stat.stat.exists
+
+- name: Upload the ISO to the server
+  copy:
+    src: "{{ local_iso_path }}"
+    dest: "{{ remote_iso_path }}"
+  when: not remote_iso_stat.stat.exists

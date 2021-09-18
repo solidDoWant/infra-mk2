@@ -1,0 +1,111 @@
+---
+- name: Get a list of current VMs
+  command: pvesh get /nodes/{{ ansible_hostname }}/qemu -o json
+  register: vm_list
+
+- name: Check if VM already exists
+  set_fact:
+    vm_exists: "{{ vm_list.stdout | from_json | json_query(query) != 0 }}"
+  vars:
+    query: "length([?name=='{{ vm_name }}'])"
+
+- name: Create and initialize the VM
+  block:
+    - name: Create the config disk
+      block:
+        - name: Create a temporary directory
+          tempfile:
+            state: directory
+          register: temp_dir
+        - name: Create the correct file structure
+          file:
+            state: directory
+            path: "{{ temp_dir.path }}/conf"
+        - name: Transfer the config file
+          copy:
+            src: config.xml
+            dest: "{{ temp_dir.path }}/conf/config.xml"
+        - name: Create the ISO
+          command: genisoimage -allow-lowercase -o "{{ remote_iso_dir_path }}/opnsense_config.iso" "{{ temp_dir.path }}/"
+        - name: Cleanup the temporary directory
+          file:
+            state: absent
+            path: "{{ temp_dir.path }}"
+    - name: Create the VM
+      command: >-
+        pvesh create /nodes/{{ ansible_hostname }}/qemu
+        --vmid {{ vm_id }}
+        --boot order=virtio1;ide2
+        --balloon {{ vm_memory }}
+        --cores {{ vm_cores }}
+        --cpu host,flags=+aes
+        --description "OPNsense router"
+        --ide1 local:iso/opnsense_config.iso,media=cdrom
+        --ide2 local:iso/opnsense.iso,media=cdrom
+        --memory {{ vm_memory }}
+        --name {{ vm_name }}
+        --net0 virtio=72:BF:8F:3A:40:42,bridge=vmbr0,firewall=0
+        --net1 virtio=C6:3A:F1:C2:FA:0D,bridge=vmbr1,firewall=0,tag=1000
+        --onboot true
+        --ostype other
+        --protection false
+        --scsihw virtio-scsi-pci
+        --smbios1 uuid={{ smbios_uuid }}
+        --virtio1 local-zfs:{{ vm_disk_size }}
+        --vmgenid {{ vmgenid_uuid }}
+      vars:
+        smbios_uuid: "{{ 9999999999999999999999 | random | to_uuid }}"
+        vmgenid_uuid: "{{ 9999999999999999999999 | random | to_uuid }}"
+      register: vm_output
+    - name: Start the VM
+      command: >-
+        pvesh create /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/status/start
+    - name: Wait for VM to create and boot
+      include: wait_for_restart.yaml
+    - name: Perform initial setup
+      include: sendkey_command.yaml
+      vars:
+        sendkey_file_path: install.txt
+    - name: Remove the install disk
+      command: >-
+        pvesh set /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/config
+        --delete ide2
+    - name: Stop the VM
+      command: >-
+        pvesh create /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/status/stop
+    - name: Wait for the VM to Stop
+      command: >-
+        pvesh get /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/status/current
+        -o json
+      register: vm_status
+      vars:
+        query: "uptime"
+      until: vm_status.stdout | from_json | json_query(query) == 0
+      delay: 3
+      retries: 10
+    - name: Start the VM
+      command: >-
+        pvesh create /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/status/start
+    - name: Wait for reboot
+      include: wait_for_restart.yaml
+    - name: Do initial config
+      include: sendkey_command.yaml
+      vars:
+        sendkey_file_path: config.txt
+    - name: Remove the config disk
+      command: >-
+        pvesh set /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/config
+        --delete ide1
+    - name: Reboot the VM
+      command: >-
+        pvesh create /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/status/reboot
+    - name: Wait for VM restart
+      wait_for:
+        host: 10.9.0.1
+        port: 443
+        state: started
+        timeout: "{{ vm_start_timeout }}"
+  when: not vm_exists
+
+# # - name: Update the VM
+# #   when: vm_exists

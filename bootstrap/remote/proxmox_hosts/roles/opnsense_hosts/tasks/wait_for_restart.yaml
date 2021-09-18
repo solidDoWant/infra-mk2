@@ -1,0 +1,11 @@
+---
+- name: Wait for VM start
+  command: >-
+    pvesh get /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/status/current
+    -o json
+  register: vm_status
+  vars:
+    query: "uptime"
+  until: vm_status.stdout | from_json | json_query(query) >= vm_start_timeout
+  delay: "{{ vm_check_delay }}"
+  retries: "{{ (vm_start_timeout / vm_check_delay + 3) | round(0, 'ceil') | int }}"

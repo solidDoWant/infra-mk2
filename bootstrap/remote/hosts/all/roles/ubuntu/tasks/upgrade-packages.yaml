@@ -1,0 +1,10 @@
+- name: Install core packages
+  apt:
+    name:
+      - curl
+      - htop
+      - nano
+      - net-tools
+    update_cache: true
+    autoclean: true
+    autoremove: true

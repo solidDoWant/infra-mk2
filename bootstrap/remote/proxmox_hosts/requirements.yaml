@@ -1,0 +1,3 @@
+- name: ansible-opnsense
+  src: https://github.com/naturalis/ansible-opnsense
+  version: origin/master

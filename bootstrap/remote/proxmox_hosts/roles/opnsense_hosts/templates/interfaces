@@ -1,0 +1,44 @@
+auto lo
+iface lo inet loopback
+# Loopback interface
+
+iface ens4f0 inet manual
+# 10G Base-T #1
+
+auto ens4f1
+iface ens4f1 inet manual
+	mtu 9000
+# LAN interface, 10G Base-T #2
+
+auto vmbr0
+iface vmbr0 inet manual
+	bridge-ports enp4s0f0
+	bridge-stp off
+	bridge-fd 0
+# WAN bridge
+
+auto vmbr1
+iface vmbr1 inet static
+	address {{ ansible_default_ipv4.address  }}
+	netmask {{ ansible_default_ipv4.netmask  }}
+	gateway {{ ansible_default_ipv4.gateway  }}
+	# mtu 9000
+	bridge-ports ens4f1
+	bridge-stp off
+	bridge-fd 0
+	post-up /usr/sbin/ip route add 10.0.0.0/8 via 10.1.0.2
+	pre-down /usr/sbin/ip route delete 10.0.0.0/8 via 10.1.0.2
+# Host traffic bridge
+
+auto enp4s0f0
+iface enp4s0f0 inet manual
+# WAN interface, 1000Base-T #1
+
+iface enp4s0f1 inet manual
+# 1000Base-T #2
+
+iface enp5s0f0 inet manual
+# 1000Base-T #3
+
+iface enp5s0f1 inet manual
+# 1000Base-T #4

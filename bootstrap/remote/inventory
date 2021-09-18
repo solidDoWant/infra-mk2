@@ -1,0 +1,11 @@
+# [hosts]
+# 10.1.1.128
+
+[proxmox_hosts:children]
+opnsense_hosts
+
+[opnsense_hosts]
+10.1.1.128
+
+[opnsense]
+10.9.0.1

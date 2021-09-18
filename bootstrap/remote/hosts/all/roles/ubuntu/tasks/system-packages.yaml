@@ -1,0 +1,31 @@
+---
+- name: Disable APT recommends and suggestions
+  blockinfile:
+    path: /etc/apt/apt.conf.d/02-norecommends
+    mode: 0644
+    create: true
+    block: |
+      APT::Install-Recommends "false";
+      APT::Install-Suggests "false";
+      APT::Get::Install-Recommends "false";
+      APT::Get::Install-Suggests "false";
+
+- name: Update system packages
+  apt:
+    update_cache: true
+    upgrade: dist
+    autoclean: true
+    autoremove: true
+
+- name: Install core packages
+  apt:
+    name:
+      - curl
+      - htop
+      - nano
+      - net-tools
+      - unattended-upgrades
+      - smartmontools
+    update_cache: true
+    autoclean: true
+    autoremove: true

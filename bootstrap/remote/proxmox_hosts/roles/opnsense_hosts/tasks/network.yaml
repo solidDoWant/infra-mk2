@@ -1,0 +1,7 @@
+---
+- name: Configure hypervisor interfaces and internal network
+  template:
+    src: interfaces
+    dest: /etc/network/interfaces
+- name: Reload the config
+  command: ifreload -a

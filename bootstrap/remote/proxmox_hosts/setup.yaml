@@ -1,0 +1,34 @@
+---
+- hosts: opnsense_hosts
+
+  roles:
+    - role: opnsense_hosts
+      when: ansible_user_id == "root"
+    - role: opnsense_hosts
+      become: true
+      when: ansible_user_id != "root"
+# ---
+# - hosts: opnsense
+#   roles:
+#     - role: ansible-opnsense
+#       vars:
+#         opn_gateways:
+#           - interface: LAN
+#             settings:
+#               - key: gateway
+#                 value: 10.9.0.2
+#               - key: name
+#                 value: internal_network_gateway
+#               - key: weight
+#                 value: 1
+#               - key: ipprotocol
+#                 value: inet
+#         opn_staticroutes:
+#           - desc: Internal network
+#             settings:
+#               - key: network
+#                 value: '10.0.0.0/8'
+#               - key: gateway
+#                 value: internal_network_gateway
+#               - key: disabled
+#                 value: 0

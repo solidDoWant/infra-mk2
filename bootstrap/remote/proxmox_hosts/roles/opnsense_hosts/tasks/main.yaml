@@ -1,0 +1,18 @@
+---
+- include: network.yaml
+  tags:
+    - network
+
+- include: storage.yaml
+  tags:
+    - storage
+
+- include: opnsense_iso.yaml
+  tags:
+    - opnsense
+    - opnsense_iso
+
+- include: opnsense_vm.yaml
+  tags:
+    - opnsense
+    - opnsense_vm

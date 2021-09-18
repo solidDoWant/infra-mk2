@@ -1,0 +1,5 @@
+---
+- name: Update storage config
+  copy:
+    src: storage.cfg
+    dest: /etc/pve/storage.cfg

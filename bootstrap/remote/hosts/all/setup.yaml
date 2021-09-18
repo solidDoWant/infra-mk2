@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - debug:
+        msg: bzzzz
+      when: ansible_distribution == "Ubuntu"
+
+  roles:
+    - role: ubuntu
+      when: ansible_distribution == "Ubuntu"
+#    - name: test
+#      role: ubuntu

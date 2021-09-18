@@ -1,0 +1,43 @@
+---
+- name: Create remote working directory
+  tempfile:
+    state: directory
+  register: temp_dir
+- name: Copy the sendkey file
+  copy:
+    src: "{{ sendkey_file_path }}"
+    dest: "{{ temp_dir.path }}/script.txt"
+  register: copied_file
+- name: Run the script
+  shell: 
+    cmd: |
+      SCREEN_TEXT=( $( \
+        cat {{ copied_file.dest }} | \
+        perl -pe 's/ /\\\{spc\}/g;' \
+          -pe 's/(\\\{.+?\}|[^ ])/\1 /g;' \
+          -pe 's/\n/\\\{ret\}/;' \
+          -pe 's/\./dot/g;' \
+          -pe 's/-/minus/g;' \
+          -pe 's/\//slash/g;' \
+          -pe 's/_/shift-minus/g;' \
+      ) )
+      for char in "${SCREEN_TEXT[@]}"; do
+        if (echo $char | egrep "\\\{.+\}" > /dev/null); then
+          key=${char#\\\{}
+          key=${key%\}}
+        else
+          key=$char
+        fi
+        echo $key
+
+        if [[ $key =~ "wait" ]]; then
+          sleep $(echo $key | sed 's/wait//')
+        else
+          pvesh set /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/sendkey --key $key
+        fi
+      done
+    executable: /usr/bin/bash
+- name: Cleanup the working directory
+  file:
+    state: absent
+    path: "{{ temp_dir.path }}"
