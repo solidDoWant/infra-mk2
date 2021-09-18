@@ -271,7 +271,7 @@ Used for providing Kubernetes compute and storage.
   &emsp;RAM:  
   &emsp;&emsp; Type: DDR3 ECC Registered  
   &emsp;&emsp; Total size: 72 GB  
-  &emsp;&emsp; Clock rate: 1333 MHz < TODO >  
+  &emsp;&emsp; Clock rate: 1333 MHz  
   &emsp;&emsp; Total DIMM slots: 24  
   &emsp;Storage:
   * Type: USB
