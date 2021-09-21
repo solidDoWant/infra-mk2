@@ -366,7 +366,55 @@ The enterprise-grade PCIe SSD is used by Ceph for read/write acceleration. The a
 All hosts except for k8s-host-01.echozulu.local have out of band management capabilities.
 
 ## Bootloader, OS, and install
-Hosts that do not support booting from the OS drive due to physical interface initially load [Clover Bootloader](https://github.com/CloverHackyColor/CloverBootloader) which in turn launches the OS.
+Hosts that do not support booting from the OS drive due to physical interface initially load [Clover Bootloader](https://github.com/CloverHackyColor/CloverBootloader) which in turn launches the OS. See [this](https://www.win-raid.com/t2375f50-Guide-NVMe-boot-without-modding-your-UEFI-BIOS-Clover-EFI-bootloader-method.html) for instructions.
+To install the OS:
+1. Create a Clover boot drive, being sure to copy the NVMe EFI driver from `EFI/CLOVER/drivers/off/NvmExpressDxe.efi` to `EFI/CLOVER/drivers/BIOS/` and `EFI/CLOVER/drivers/UEFI`.
+2. Prepare the OS install disk on another flash drive.
+3. Insert __only__ the Clover boot drive into the machine.
+4. Power the machine on and configure the BIOS/UEFI to always boot from the Clover boot drive.
+5. Boot to Clover.
+6. Insert the OS install disk and press `F3`.
+7. Select the boot drive from the menu and proceed with OS installation onto the NVMe drive.
+8. Reboot when finished with installation and boot to the OS.
+9. Mount the Clover boot drive in the OS.
+10. Edit the EFI/CLOVER/config.plist file to auto-boot the OS boot drive by adding the following section to `{"GUI": {"Custom":{"Entries":[]}}}`:
+```
+<dict>
+  <key>Path</key>
+  <string>{{ EFI APPLICATION PATH }}</string>
+  <key>Title</key>
+  <string>{{ OS NAME }}</string>
+  <key>Type</key>
+  <string>{{ OS TYPE }}</string>
+  <key>Volume</key>
+  <string>{{ BOOT PARTITION UUID }}</string>
+  <key>VolumeType</key>
+  <string>Internal</string>
+</dict>
+```
+
+&emsp;&emsp;For example, for Ubuntu:
+```
+<dict>
+  <key>Path</key>
+  <string>\EFI\ubuntu\grubx64.efi</string>
+  <key>Title</key>
+  <string>Ubuntu</string>
+  <key>Type</key>
+  <string>Linux</string>
+  <key>Volume</key>
+  <string>2A3948C5-C77B-4905-83AE-45372160456A</string>
+  <key>VolumeType</key>
+  <string>Internal</string>
+</dict>
+```
+11. Update `{"Boot": {"DefaultVolume": "<volume>"}}` the OS partition ID, i.e. for Ubuntu:
+```
+<dict>
+  <key>DefaultVolume</key>
+  <string>2A3948C5-C77B-4905-83AE-45372160456A</string>
+</dict>
+```
 
 BIOS and firmware updates are installed as needed.
 
