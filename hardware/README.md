@@ -563,13 +563,17 @@ Firewall rules/network ACLs will be completed via later steps.
 ### vm-host-01.echozulu.local
 iLO is configured with the following settings:  
 IP: 10.0.1.128/16  
-Gateway from DHCP: Enabled  
-DHCP Routes: Enabled  
-DNS from DHCP: Enabled  
+Default gateway: 10.0.0.2
+Extra routes:
+  - to: 0.0.0.0
+    via: 10.0.0.1
+DHCP: Disabled
+DNS servers:
+  - 10.0.0.1
 Domain Name: echozulu.local  
 DNS name: vm-host-1  
 Username: Administrator  
-Password: set to known value  
+Password: Set to known value  
 
 The host iLO interface is then connected to port 1/1/5 of the switch.
 
@@ -578,6 +582,48 @@ The latest version of [Proxmox](http://download.proxmox.com/iso/) is installed o
 The management interface is set to use the second port on the added NIC. It's network configuration is:  
 IP: 10.1.1.128/16  
 Gateway: 10.1.0.1  
-DNS server: 1.1.1.1  
+DNS server: 10.1.0.1  
 Hostname: vm-host-01.echozulu.local  
 The network settings will be changed in a later step. The interface is also connected to port 1/3/8 of the switch.
+
+### k8s-host-##.echozulu.local
+Out-of-band management is configured with the following settings where supported:
+IP: 10.0.1.##
+Default gateway: 10.0.0.1
+Extra routes:
+  - to: 0.0.0.0
+    via: 10.0.0.1
+DHCP: Disabled
+DNS servers:
+  - 10.0.0.1
+Domain Name: echozulu.local  
+DNS name: k8s-host-##  
+Username: < Default username depending on specific OOBM platform >  
+Password: Set to known value
+
+The OOBM interface is then connected to port 1/1/## of the switch. The host interface is connected to pport 1/3/## of the switch.
+
+The latest version of [Ubuntu LTS server](https://ubuntu.com/download/server) is installed on the host's SSD. OpenSSH is installed during OS setup. The default user is named `bootstrap`, with password `ansible`.
+
+The network netplan at `/etc/netplan/00-installer-config.yaml` is changed to configure a static IP on the used 10GbE fiber interface, as shown below:
+```
+network:
+  ethernets:
+    ens1f0:
+      addresses:
+        - 10.1.1.##/16
+      nameservers:
+        search:
+          - echozulu.local
+        addresses:
+          - 10.1.0.1
+      routes:
+        - to: 0.0.0.0/0
+          via: 10.1.0.1
+        - to: 10.0.0.0/8
+          via: 10.1.0.2
+      mtu: 9000
+```
+
+### All hosts
+After the OS is installed, Clover is updated (if used) to auto boot to the OS. Next, the ansible public key copied via `ssh-copy-id`, and the password is removed or changed.
