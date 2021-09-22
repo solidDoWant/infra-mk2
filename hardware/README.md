@@ -626,4 +626,4 @@ network:
 ```
 
 ### All hosts
-After the OS is installed, Clover is updated (if used) to auto boot to the OS. Next, the ansible public key copied via `ssh-copy-id`, and the password is removed or changed.
+After the OS is installed, Clover is updated (if used) to auto boot to the OS. Next, the ansible public key copied via `ssh-copy-id`, and the password is removed or changed. Lastly the `/etc/sudoers` file is updated to allow sudoers to run `sudo` without being prompted again for their password via `sudo sed -Ei 's/(%sudo\s+ALL=\(ALL:ALL\))/\1 NOPASSWD:/' /etc/sudoers`.
