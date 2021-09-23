@@ -19,12 +19,6 @@
     group: root
     mode: 0644
 
-# - name: Configure sendmail to use MSMTP
-#   lineinfile:
-#     path: /etc/mail.rc
-#     line: set sendmail="/usr/bin/msmtp -t"
-#     insertbefore: EOF
-
 - name: Create a log file for MSMTP
   copy:
     content: ""

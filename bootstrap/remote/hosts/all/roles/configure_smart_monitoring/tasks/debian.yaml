@@ -1,0 +1,16 @@
+---
+- name: Setup drive monitoring
+  copy:
+    src: smartd.conf
+    dest: /etc/smartd.conf
+    owner: root
+    group: root
+    mode: 0644
+  register: smartd_config
+
+- name: Restart the smartd service
+  systemd:
+    name: smartd
+    enabled: true
+    state: restarted
+  when: smartd_config.changed

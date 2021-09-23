@@ -22,9 +22,11 @@
       tags: configure_kexec
     - role: configure_mail
       tags: configure_mail
+    - role: configure_smart_monitoring
+      tags: configure_smart_monitoring
 
   post_tasks:
-    - name: Reboot
+    - name: Reboot physical nodes
       block:
         - name: Kexec reboot
           shell: nohup /usr/local/sbin/fast-reboot
@@ -37,9 +39,9 @@
             sleep: 1
             timeout: 30
       when: kexec_reboot_enabled
-        # - name: Normal reboot
-        #   reboot:
-        #     reboot_timeout: 180
-        #   when: not kexec_reboot_enabled
+    - name: Normal reboot
+      reboot:
+        reboot_timeout: 600
+      when: not kexec_reboot_enabled and ansible_virtualization_role != "guest"
       tags:
         - reboot
