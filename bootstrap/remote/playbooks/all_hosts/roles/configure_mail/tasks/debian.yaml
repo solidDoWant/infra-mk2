@@ -19,12 +19,17 @@
     group: root
     mode: 0644
 
+- name: Check if the MSMTP log file exists
+  stat:
+    path: "{{ msmtp_log_path }}"
+  register: msmtp_log
+
 - name: Create a log file for MSMTP
-  copy:
-    content: ""
+  file:
+    state: touch
     dest: "{{ msmtp_log_path }}"
-    force: no
     group: msmtp
     owner: msmtp
     mode: 0664
+  when: not msmtp_log.exists
   
