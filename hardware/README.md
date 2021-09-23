@@ -623,7 +623,8 @@ network:
         - to: 10.0.0.0/8
           via: 10.1.0.2
       mtu: 9000
-```
+```  
+All other interfaces are removed from the netplan to reduce boot time added by asking for DHCP leases on disconnected interfaces.
 
 ### All hosts
 After the OS is installed, Clover is updated (if used) to auto boot to the OS. Next, the ansible public key copied via `ssh-copy-id`, and the password is removed or changed. Lastly the `/etc/sudoers` file is updated to allow sudoers to run `sudo` without being prompted again for their password via `sudo sed -Ei 's/(%sudo\s+ALL=\(ALL:ALL\))/\1 NOPASSWD:/' /etc/sudoers`.

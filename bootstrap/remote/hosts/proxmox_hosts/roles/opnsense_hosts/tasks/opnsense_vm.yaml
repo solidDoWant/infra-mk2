@@ -22,9 +22,17 @@
             state: directory
             path: "{{ temp_dir.path }}/conf"
         - name: Transfer the config file
-          copy:
-            src: config.xml
-            dest: "{{ temp_dir.path }}/conf/config.xml"
+          block:
+            - name: Get the local hostname for the config SSH key
+              command: hostname
+              delegate_to: localhost
+              register: local_hostname
+            - name: Build and send the config file
+              template:
+                src: config.xml
+                dest: "{{ temp_dir.path }}/conf/config.xml"
+              vars:
+                ssh_key: "ssh-rsa {{ ansible_ssh_host_key_rsa_public }} {{ ansible_user_id }}@{{ local_hostname.stdout }}"
         - name: Create the ISO
           command: genisoimage -allow-lowercase -o "{{ remote_iso_dir_path }}/opnsense_config.iso" "{{ temp_dir.path }}/"
         - name: Cleanup the temporary directory
@@ -35,6 +43,7 @@
       command: >-
         pvesh create /nodes/{{ ansible_hostname }}/qemu
         --vmid {{ vm_id }}
+        --agent 1,fstrim_cloned_disks=1
         --boot order=virtio1;ide2
         --balloon {{ vm_memory }}
         --cores {{ vm_cores }}
@@ -101,11 +110,7 @@
         pvesh create /nodes/{{ ansible_hostname }}/qemu/{{ vm_id }}/status/reboot
     - name: Wait for VM restart
       wait_for:
-        host: 10.9.0.1
+        host: 10.0.0.1
         port: 443
         state: started
         timeout: "{{ vm_start_timeout }}"
-  when: not vm_exists
-
-# # - name: Update the VM
-# #   when: vm_exists

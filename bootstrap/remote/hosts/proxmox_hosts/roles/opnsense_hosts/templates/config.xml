@@ -229,6 +229,10 @@
       <groupname>admins</groupname>
       <password>$2y$10$YRVoF4SgskIsrXOvOQjGieB9XqHPRra9R7d80B3BZdbY/j21TwBfS</password>
       <uid>0</uid>
+      <expires/>
+      <authorizedkeys>{{ ssh_key | b64encode }}</authorizedkeys>
+      <ipsecpsk/>
+      <otp_seed/>
     </user>
     <nextuid>2000</nextuid>
     <nextgid>2000</nextgid>
@@ -580,9 +584,9 @@
     <column_count>2</column_count>
   </widgets>
   <revision>
-    <username>root@10.3.1.6</username>
-    <time>1631935405.8626</time>
-    <description>/services_dhcp.php made changes</description>
+    <username>root@10.3.2.4</username>
+    <time>1632362757.7886</time>
+    <description>user "root" changed</description>
   </revision>
   <OPNsense>
     <Firewall>
@@ -835,7 +839,7 @@
     <OpenVPNExport version="0.0.1">
       <servers/>
     </OpenVPNExport>
-    <proxy version="1.0.4">
+    <proxy version="1.0.5">
       <general>
         <enabled>0</enabled>
         <error_pages>opnsense</error_pages>
@@ -864,6 +868,8 @@
             <directory>/var/squid/cache</directory>
             <cache_mem>256</cache_mem>
             <maximum_object_size/>
+            <maximum_object_size_in_memory/>
+            <memory_cache_mode>always</memory_cache_mode>
             <size>100</size>
             <l1>16</l1>
             <l2>256</l2>
@@ -975,6 +981,13 @@
         <insecuredomain/>
       </miscellaneous>
     </unboundplus>
+    <QemuGuestAgent version="1.0.0">
+      <general>
+        <Enabled>1</Enabled>
+        <LogDebug>0</LogDebug>
+        <DisabledRPCs/>
+      </general>
+    </QemuGuestAgent>
   </OPNsense>
   <staticroutes/>
   <ca/>

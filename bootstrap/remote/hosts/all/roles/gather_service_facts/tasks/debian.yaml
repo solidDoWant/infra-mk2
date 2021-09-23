@@ -1,0 +1,10 @@
+---
+- name: Check if the host is running Proxmox
+  block:
+    - name: Check if 'pvesh' exists
+      shell: "$(command -v pvesh > /dev/null); echo $?"
+      register: proxmox_command_result
+      ignore_errors: true
+    - name: Set 'is_proxmox' fact
+      set_fact:
+        is_proxmox: "{{ proxmox_command_result.stdout == '0' }}"

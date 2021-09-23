@@ -1,0 +1,9 @@
+---
+- hosts: opnsense_hosts
+
+  roles:
+    - role: opnsense_hosts
+      when: ansible_user_id == "root"
+    - role: opnsense_hosts
+      become: true
+      when: ansible_user_id != "root"

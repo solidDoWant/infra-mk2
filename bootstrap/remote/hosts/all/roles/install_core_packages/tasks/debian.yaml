@@ -1,0 +1,26 @@
+---
+- name: Install core packages
+  apt:
+    name:
+      - curl
+      - htop
+      - nano
+      - net-tools
+      - unattended-upgrades
+      - smartmontools
+    state: latest
+    update_cache: true
+    autoclean: true
+    autoremove: true
+
+- name: Install QEMU guest agent
+  apt:
+    name: qemu-guest-agent
+    state: latest
+  when: ansible_virtualization_role == "guest" and ansible_virtualization_type == "kvm"
+
+- name: Install kexec for reboots on non-vm hosts
+  apt:
+    name: kexec-tools
+    state: latest
+  when: ansible_virtualization_role != "guest"

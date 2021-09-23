@@ -1,0 +1,16 @@
+---
+- name: Change Proxmox kexec facts
+  set_fact:
+    initrd_path: /boot/pve/initrd.img
+    vmlinuz_path: /boot/pve/vmlinuz
+- name: Copy the fast-reboot script to the server
+  template:
+    src: fast-reboot
+    dest: /usr/local/sbin/fast-reboot
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Set kexec_reboot_enabled fact
+  set_fact:
+    kexec_reboot_enabled: true

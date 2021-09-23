@@ -1,0 +1,6 @@
+---
+- name: Install QEMU guest agent
+  pkgng:
+    name: os-qemu-guest-agent
+    state: latest
+  when: ansible_virtualization_role == "guest" and ansible_virtualization_type == "kvm"

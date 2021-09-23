@@ -1,6 +1,6 @@
 ---
 - name: Configure unattended upgrades
-  ansible.builtin.blockinfile:
+  blockinfile:
     path: /etc/apt/apt.conf.d/20auto-upgrades
     mode: 0644
     create: true
@@ -17,6 +17,7 @@
           "${distro_id} ${distro_codename}-security";
           "${distro_id} ${distro_codename}-updates";
       };
+  register: unattended_upgrades_changes
 
 - name: Restart unattended-upgrades service
   service:
@@ -24,3 +25,4 @@
     daemon_reload: true
     enabled: true
     state: restarted
+  when: unattended_upgrades_changes.changed

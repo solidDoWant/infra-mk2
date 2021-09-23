@@ -1,0 +1,6 @@
+---
+- include: debian.yaml
+  when: ansible_os_family == "Debian"
+
+- include: freebsd.yaml
+  when: ansible_os_family == "FreeBSD"

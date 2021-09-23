@@ -1,0 +1,3 @@
+initrd_path: /boot/initrd.img
+vmlinuz_path: /boot/vmlinuz
+kexec_reboot_enabled: false

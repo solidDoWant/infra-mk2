@@ -1,0 +1,32 @@
+---
+- name: Disable APT recommends and suggestions
+  blockinfile:
+    path: /etc/apt/apt.conf.d/02-norecommends
+    mode: 0644
+    create: true
+    block: |
+      APT::Install-Recommends "false";
+      APT::Install-Suggests "false";
+      APT::Get::Install-Recommends "false";
+      APT::Get::Install-Suggests "false";
+
+- name: Configure Proxmox sources
+  block:
+    - name: Remove enterprise repository
+      apt_repository:
+        repo: "deb https://enterprise.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-enterprise"
+        state: absent
+        filename: pve-enterprise
+    - name: Add the no subscription repository
+      apt_repository:
+        repo: "deb http://download.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-no-subscription"
+        state: present
+        filename: pve-no-subscription
+        update_cache: false
+    - name: Add Ceph Pacific repository
+      apt_repository:
+        repo: "deb http://download.proxmox.com/debian/ceph-pacific {{ ansible_distribution_release }} main"
+        state: present
+        filename: ceph
+        update_cache: false
+  when: is_proxmox

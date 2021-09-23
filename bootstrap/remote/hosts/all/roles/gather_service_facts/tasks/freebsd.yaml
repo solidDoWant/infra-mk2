@@ -1,0 +1,10 @@
+---
+- name: Check if the host is running OPNsense
+  block:
+    - name: Check if 'opnsense-version' exists
+      shell: command -v opnsense-version > /dev/null
+      register: opnsense_command_result
+      ignore_errors: true
+    - name: Set 'is_opnsense' fact
+      set_fact:
+        is_opnsense: "{{ opnsense_command_result.rc == 0 }}"

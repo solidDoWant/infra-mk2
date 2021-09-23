@@ -1,0 +1,4 @@
+---
+- name: Update system packages
+  command: opnsense-update
+  when: is_opnsense
