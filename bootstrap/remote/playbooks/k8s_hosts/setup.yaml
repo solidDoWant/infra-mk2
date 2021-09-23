@@ -1,5 +1,5 @@
 ---
-- hosts: k8s_masters
+- hosts: k8s_hosts
   become: true
 
   roles:
