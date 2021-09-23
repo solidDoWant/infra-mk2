@@ -10,6 +10,8 @@
   roles:
     - role: gather_service_facts
       tags: always
+    - role: configure_hosts
+      tags: configure_hosts
     - role: configure_package_manager
       tags: configure_package_manager
     - role: install_updates

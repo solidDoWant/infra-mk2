@@ -1,0 +1,14 @@
+---
+- name: Load kernel modules
+  block:
+    - name: At runtime
+      modprobe:
+        name: rbd
+        state: present
+    - name: At boot
+      copy:
+        src: ceph.conf
+        dest: /etc/modules-load.d/ceph.conf
+        owner: root
+        group: root
+        mode: 0644
