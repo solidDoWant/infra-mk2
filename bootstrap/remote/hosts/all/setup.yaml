@@ -19,6 +19,7 @@
     - role: configure_unattended_upgrades
       tags: configure_unattended_upgrades
     - role: configure_kexec
+      when: ansible_virtualization_role != "guest"
       tags: configure_kexec
     - role: configure_mail
       tags: configure_mail
