@@ -2,6 +2,7 @@
 - name: Update system packages
   apt:
     update_cache: true
+    cache_valid_time: 600
     upgrade: dist
     autoclean: true
     autoremove: true

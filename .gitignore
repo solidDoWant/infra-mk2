@@ -9,3 +9,5 @@ kubeconfig
 .decrypted~*.yaml
 # Working directory
 working/
+# Vault password file
+bootstrap/remote/vault_password

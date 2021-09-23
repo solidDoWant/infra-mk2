@@ -20,6 +20,8 @@
       tags: configure_unattended_upgrades
     - role: configure_kexec
       tags: configure_kexec
+    - role: configure_mail
+      tags: configure_mail
 
   post_tasks:
     - name: Reboot

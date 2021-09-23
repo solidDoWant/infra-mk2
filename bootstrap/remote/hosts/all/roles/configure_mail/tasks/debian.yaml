@@ -1,0 +1,36 @@
+---
+- name: Install mail packages
+  apt:
+    name: 
+      - msmtp
+      - msmtp-mta
+      - bsd-mailx
+    state: latest
+    update_cache: true
+    cache_valid_time: 600
+    autoclean: true
+    autoremove: true
+
+- name: Create the default config
+  template:
+    src: msmtprc
+    dest: /etc/msmtprc
+    owner: root
+    group: root
+    mode: 0644
+
+# - name: Configure sendmail to use MSMTP
+#   lineinfile:
+#     path: /etc/mail.rc
+#     line: set sendmail="/usr/bin/msmtp -t"
+#     insertbefore: EOF
+
+- name: Create a log file for MSMTP
+  copy:
+    content: ""
+    dest: "{{ msmtp_log_path }}"
+    force: no
+    group: msmtp
+    owner: msmtp
+    mode: 0664
+  
