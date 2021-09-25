@@ -1,3 +1,4 @@
 ---
 roles:
   - xanmanning.k3s
+  - githubixx.kubectl

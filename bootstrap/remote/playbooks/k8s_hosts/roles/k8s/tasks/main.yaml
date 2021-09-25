@@ -1,65 +1,11 @@
 ---
-- name: Update max_user_watches
-  sysctl:
-    name: fs.inotify.max_user_watches
-    value: "65536"
-    state: present
-    sysctl_file: /etc/sysctl.d/98-k8s.conf
+- name: Prepare the node for Kubernetes installation
+  include: prepare_node.yaml
 
-- name: Disable swap
-  block:
-    - name: At runtime
-      command: swapoff -a
-      when: ansible_swaptotal_mb > 0
-    - name: At boot
-      mount:
-        name: "{{ item }}"
-        fstype: swap
-        state: absent
-      loop:
-        - swap
-        - none
+- name: Install Kubernetes
+  include: install_kubernetes.yaml
 
-- name: Load kernel modules
-  block:
-    - name: At runtime
-      modprobe:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - br_netfilter
-        - overlay
-    - name: At boot
-      copy:
-        src: k8s.conf
-        dest: /etc/modules-load.d/k8s.conf
-        owner: root
-        group: root
-        mode: 0644
-
-- name: Enable IP forwarding
-  sysctl:
-    name: "{{ item }}"
-    value: "1"
-    state: present
-    sysctl_file: /etc/sysctl.d/98-k8s.conf
-  loop:
-    - net.ipv4.ip_forward
-    - net.bridge.bridge-nf-call-iptables
-    - net.ipv6.conf.all.forwarding
-    - net.bridge.bridge-nf-call-ip6tables
-
-- name: Install k3s
-  include_role:
-    name: xanmanning.k3s
-  vars:
-    k3s_become_for_all: true
-    k3s_etcd_datastore: true
-    k3s_build_cluster: true
-    k3s_server:
-      cluster-cidr: 192.168.0.0/16
-      flannel-backend: 'none'
-      disable-network-policy: true
-      disable:
-        - traefik
-        - servicelb
+- name: Retrieve the cluster kubeconfig
+  include: get_kubeconfig.yaml
+  tags:
+    - test

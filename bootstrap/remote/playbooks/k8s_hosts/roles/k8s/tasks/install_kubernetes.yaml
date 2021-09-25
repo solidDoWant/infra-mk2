@@ -1,0 +1,16 @@
+---
+- name: Install k3s
+  include_role:
+    name: xanmanning.k3s
+    public: true
+  vars:
+    k3s_become_for_all: true
+    k3s_etcd_datastore: true
+    k3s_build_cluster: true
+    k3s_server:
+      cluster-cidr: 192.168.0.0/16
+      flannel-backend: 'none'
+      disable-network-policy: true
+      disable:
+        - traefik
+        - servicelb

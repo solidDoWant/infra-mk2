@@ -40,3 +40,16 @@
         autoremove: true
     - name: Start Docker
       command: service docker start
+
+  tags:
+    - docker
+
+# Install kubectl
+- hosts: localhost
+  become: true
+
+  roles:
+    - githubixx.kubectl
+
+  tags:
+    - kubectl
