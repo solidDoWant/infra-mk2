@@ -7,6 +7,7 @@ echo "
 Remaining tasks and next steps:
 1. Setup remote hosts - see ../../hardware/README.md for details
 2. Modify the ansible inventory file in the ../remote directory, adding each host to the \"hosts\" group along with any required connection options
-3. Run the makefile
+3. Populate the ../remote/vault_password
+4. Run the makefile
 "
 
