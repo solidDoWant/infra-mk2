@@ -1,7 +1,7 @@
 ---
 - name: Install mail packages
   apt:
-    name: 
+    name:
       - msmtp
       - msmtp-mta
       - bsd-mailx
@@ -32,4 +32,3 @@
     owner: msmtp
     mode: 0664
   when: not msmtp_log.exists
-  

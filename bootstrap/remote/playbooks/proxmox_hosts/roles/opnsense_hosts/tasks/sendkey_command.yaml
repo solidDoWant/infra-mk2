@@ -9,7 +9,7 @@
     dest: "{{ temp_dir.path }}/script.txt"
   register: copied_file
 - name: Run the script
-  shell: 
+  shell:
     cmd: |
       SCREEN_TEXT=( $( \
         cat {{ copied_file.dest }} | \

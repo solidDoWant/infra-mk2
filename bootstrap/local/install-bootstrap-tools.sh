@@ -10,4 +10,3 @@ Remaining tasks and next steps:
 3. Populate the ../remote/vault_password
 4. Run the makefile
 "
-
