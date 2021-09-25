@@ -3,11 +3,16 @@
   apt:
     name: kexec-tools
     state: latest
+    update_cache: true
+    cache_valid_time: 600
+    autoclean: true
+    autoremove: true
 
 - name: Change Proxmox kexec facts
   set_fact:
     initrd_path: /boot/pve/initrd.img
     vmlinuz_path: /boot/pve/vmlinuz
+  when: is_proxmox
 - name: Copy the fast-reboot script to the server
   template:
     src: fast-reboot

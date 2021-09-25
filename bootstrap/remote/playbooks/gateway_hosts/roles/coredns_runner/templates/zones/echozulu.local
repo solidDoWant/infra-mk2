@@ -1,0 +1,16 @@
+$ORIGIN echozulu.local.
+@	3600 IN	SOA {{ ansible_hostname }}.echozulu.local. nobody.echozulu.local. (
+				2017042745 ; serial
+				7200       ; refresh (2 hours)
+				3600       ; retry (1 hour)
+				1209600    ; expire (2 weeks)
+				3600       ; minimum (1 hour)
+				)
+
+	3600 IN NS {{ ansible_hostname }}.echozulu.local.
+
+www     IN A     127.0.0.1
+        IN AAAA  ::1
+{% for host in groups['all'] %}
+{{ hostvars[host]['ansible_hostname'] }}	IN A	{{ hostvars[host]['ansible_default_ipv4']['address'] }}
+{% endfor %}

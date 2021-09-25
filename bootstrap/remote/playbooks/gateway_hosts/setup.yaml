@@ -1,0 +1,16 @@
+---
+# Largely pulled from https://github.com/onedr0p/home-cluster/tree/main/ansible/playbooks/router
+# Building on release to include k8s_gateway
+- hosts: localhost
+  become: true
+
+  roles:
+    - role: coredns_builder
+      tags: coredns_builder
+
+- hosts: opnsense
+  become: true
+
+  roles:
+    - role: coredns_runner
+      tags: coredns_runner

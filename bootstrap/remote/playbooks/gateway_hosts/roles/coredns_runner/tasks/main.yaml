@@ -1,0 +1,136 @@
+---
+- name: Create config directory
+  file:
+    path: /usr/local/etc/coredns
+    state: directory
+    mode: 0755
+
+- name: Create zones directory
+  file:
+    path: /usr/local/etc/coredns/config.d
+    state: directory
+    mode: 0755
+
+- name: Create zonefiles directory
+  file:
+    path: /usr/local/etc/coredns/zones
+    state: directory
+    mode: 0755
+
+# - name: Copy kubeconfig to Opnsense
+#   copy:
+#     src: /tmp/kubeconfig-homedns
+#     dest: /usr/local/etc/coredns/kubeconfig
+#     mode: 0755
+
+- name: Gather facts on all hosts for DNS record creation
+  setup:
+  delegate_to: "{{ item }}"
+  delegate_facts: True
+  when: hostvars[item]['ansible_default_ipv4'] is not defined
+  with_items: "{{ groups['all'] }}"
+
+- name: Create Corefile
+  template:
+    src: Corefile
+    dest: /usr/local/etc/coredns/Corefile
+    mode: 0755
+  vars:
+    listening_addresses: "{{ ansible_interfaces | select('match', '^(lo\\d+|vtnet1\\S*)$') | join(' ') }}"
+
+- name: Create config files
+  template:
+    src: "{{ item }}"
+    dest: /usr/local/etc/coredns/config.d
+    mode: 0755
+  with_fileglob:
+    - ../templates/config.d/*
+
+- name: Create zone files
+  template:
+    src: "{{ item }}"
+    dest: /usr/local/etc/coredns/zones
+    mode: 0755
+  with_fileglob:
+    - ../templates/zones/*
+
+- name: Create CoreDNS rc.conf script
+  copy:
+    src: coredns-rc.conf
+    dest: /etc/rc.conf.d/coredns
+    mode: 0755
+
+- name: Create CoreDNS rc.d script
+  copy:
+    src: coredns-rc.d
+    dest: /usr/local/etc/rc.d/coredns
+    mode: 0755
+
+- name: Create CoreDNS action script
+  copy:
+    src: actions_coredns.conf
+    dest: /usr/local/opnsense/service/conf/actions.d/actions_coredns.conf
+    mode: 0755
+
+- name: Create CoreDNS start up script
+  copy:
+    src: 99-coredns
+    dest: /usr/local/etc/rc.syshook.d/start/99-coredns
+    mode: 0755
+
+- name: Create CoreDNS log rotation config
+  copy:
+    src: coredns-newsyslog.conf
+    dest: /etc/newsyslog.conf.d/coredns
+    mode: 0755
+
+- name: Stop running CoreDNS
+  shell: /usr/local/etc/rc.d/coredns stop
+  ignore_errors: true
+  register: coredns_stop
+
+- name: Copy CoreDNS
+  copy:
+    src: "{{ working_dir_path }}/coredns/coredns"
+    dest: /usr/local/sbin/coredns
+    mode: 0755
+
+- name: Disable Unbound DNS
+  block:
+    - name: Pull the current OPNsense config
+      fetch:
+        src: "{{ remote_config_path }}"
+        dest: "{{ local_config_path }}"
+        flat: true
+    - name: Disable Unbound
+      block:
+        - name: Remove /opnsense/unbound/enable
+          xml:
+            path: "{{ local_config_path }}"
+            xpath: /opnsense/unbound/enable
+            state: absent
+        - name: Remove /opnsense/OPNsense/unboundplus/service_enabled
+          xml:
+            path: "{{ local_config_path }}"
+            xpath: /opnsense/OPNsense/unboundplus/service_enabled
+            state: absent
+      delegate_to: localhost
+    - name: Copy the new OPNsense config
+      copy:
+        src: "{{ local_config_path }}"
+        dest: "{{ remote_config_path }}"
+        backup: true
+      register: return_config
+    - name: Reload OPNsense
+      command: "{{ item }}"
+      with_items:
+        - configctl service reload all
+        - configctl webgui restart
+      when: return_config.changed
+  vars:
+    local_config_path: "{{ working_dir_path }}/config.xml"
+    remote_config_path: "/conf/config.xml"
+  when: coredns_stop.rc != 0
+
+- name: Run CoreDNS
+  shell: /usr/local/etc/rc.d/coredns start

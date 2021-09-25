@@ -1,0 +1,37 @@
+---  
+- name: Build CoreDNS in Docker
+  docker_image:
+    name: coredns:build
+    source: build
+    state: present
+    build:
+      path: "{{ build_dir_path }}"
+      nocache: false
+
+- name: Create the coredns directory
+  file:
+    path: "{{ working_dir_path }}/coredns"
+    state: directory
+  register: coredns_directory
+
+- name: Create a build container and copy the CoreDNS binary from Docker image to the local coredns directory
+  docker_container:
+    name: coredns_build
+    image: coredns:build
+    container_default_behavior: no_defaults
+    mounts:
+      - source: "{{ coredns_directory.path }}"
+        target: /mnt/dist/bin
+        type: bind
+    command: cp /go/src/coredns/coredns /mnt/dist/bin
+
+- name: Remove CoreDNS container
+  docker_container:
+    name: coredns_build
+    state: absent
+    container_default_behavior: no_defaults
+
+- name: Remove CoreDNS build image
+  docker_image:
+    name: coredns:build
+    state: absent

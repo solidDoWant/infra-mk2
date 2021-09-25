@@ -1,0 +1,3 @@
+---
+working_dir_path: "{{ role_path }}/../../../../../../working"
+build_dir_path: "{{ role_path }}/files/build"

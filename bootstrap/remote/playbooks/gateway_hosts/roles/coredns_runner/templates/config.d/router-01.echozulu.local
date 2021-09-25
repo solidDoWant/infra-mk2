@@ -1,0 +1,11 @@
+# TODO figure out how to handle multihomed hosts like router-01
+#router-01.echozulu.local {
+#    import default_config
+#
+#    template IN A {
+#        answer "{% raw %}{{ .Name }}{% endraw %} 60 IN A 10.{% raw %}{{ (split "." .Remote)._1 }}{% endraw %}.0.1"
+#        answer "{% raw %}{{ .Name }}{% endraw %} 60 IN A {% raw %}{{ .Remote }}{% endraw %}"
+#        authority "echozulu.local. 3600 IN NS {% raw %}{{ .Name }}{% endraw %}"
+#        fallthrough
+#    }
+#}

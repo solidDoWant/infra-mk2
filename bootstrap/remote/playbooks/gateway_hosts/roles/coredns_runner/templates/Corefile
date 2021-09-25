@@ -1,0 +1,21 @@
+(default_config) {
+  bind {{ listening_addresses }}
+  root /usr/local/etc/coredns
+  errors
+  log
+  prometheus :9153
+}
+
+import ./config.d/*
+
+. {
+  import default_config
+
+  auto {
+    directory ./zones (.*) {1}
+  }
+
+  forward . tls://1.1.1.1 tls://1.0.0.1 {
+    tls_servername cloudflare-dns.com
+  }
+}

@@ -1,5 +1,7 @@
 VENV_PATH=$(realpath .)/../../working/venv
 
+ANSIBLE_LOCAL_PLAYBOOK=$(realpath . )/setup_playbook.yaml
+
 ANSIBLE_INVENTORY=$(realpath . )/../remote/inventory
 ANSIBLE_PLAYBOOK=$(realpath . )/../remote/ansible.yaml
 
@@ -11,6 +13,8 @@ build_venv:
 		pip install -U pip; \
 		pip install ansible; \
 		pip install -r requirements.txt; \
+		ansible-galaxy install -r requirements.yaml \
+		ansible-playbook -i localhost $(ANSIBLE_LOCAL_PLAYBOOK) \
 	)
 
 run_playbook: build_venv

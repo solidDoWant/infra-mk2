@@ -1,0 +1,16 @@
+$ORIGIN 10.in-addr.arpa.
+@	3600 IN	SOA {{ ansible_hostname }}.echozulu.local. nobody.echozulu.local. (
+				2017042745 ; serial
+				7200       ; refresh (2 hours)
+				3600       ; retry (1 hour)
+				1209600    ; expire (2 weeks)
+				3600       ; minimum (1 hour)
+				)
+
+	3600 IN NS {{ ansible_hostname }}.echozulu.local.
+
+{% for host in groups['all'] %}
+{% for ip in hostvars[host]['ansible_all_ipv4_addresses'] if ip.startswith('10.') %}
+{{ ip.split('.')[1:4] | reverse | join('.') }}	IN PTR	{{ hostvars[host]['ansible_hostname'] }}.echozulu.local.
+{% endfor %}
+{% endfor %}
