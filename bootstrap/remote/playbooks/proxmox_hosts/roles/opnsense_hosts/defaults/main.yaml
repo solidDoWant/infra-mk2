@@ -1,5 +1,4 @@
 ---
-working_dir_path: "{{ role_path }}../../../../../../working"
 remote_iso_dir_path: /var/lib/vz/template/iso/
 
 vm_name: router-01.echozulu.local
