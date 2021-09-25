@@ -7,5 +7,3 @@
 
 - name: Retrieve the cluster kubeconfig
   include: get_kubeconfig.yaml
-  tags:
-    - test
