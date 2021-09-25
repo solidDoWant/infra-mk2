@@ -102,6 +102,7 @@
         src: "{{ remote_config_path }}"
         dest: "{{ local_config_path }}"
         flat: true
+      register: downloaded_config
     - name: Disable Unbound
       block:
         - name: Remove /opnsense/unbound/enable
@@ -114,6 +115,7 @@
             path: "{{ local_config_path }}"
             xpath: /opnsense/OPNsense/unboundplus/service_enabled
             state: absent
+      when: downloaded_config.changed
       delegate_to: localhost
     - name: Copy the new OPNsense config
       copy:
@@ -121,12 +123,13 @@
         dest: "{{ remote_config_path }}"
         backup: true
       register: return_config
+      when: downloaded_config.changed
     - name: Reload OPNsense
       command: "{{ item }}"
       with_items:
         - configctl service reload all
         - configctl webgui restart
-      when: return_config.changed
+      when: downloaded_config.changed and return_config.changed
   vars:
     local_config_path: "{{ working_dir_path }}/config.xml"
     remote_config_path: "/conf/config.xml"
