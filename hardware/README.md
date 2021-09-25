@@ -330,7 +330,7 @@ Used for providing Kubernetes compute and storage.
 ## Storage
 All nodes use a solid state drive for the OS.
 
-### vm-host-01.echozulu.local 
+### vm-host-01.echozulu.local
 This host only contains one drive, a SATA-III SSD, for boot. SAS expander and RAID cache have been removed to reduce power consumption and failure points.
 
 ### k8s-host-01.echozulu.local

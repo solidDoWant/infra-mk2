@@ -12,18 +12,41 @@ repos:
     rev: v4.0.1
     hooks:
       - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+        exclude: |
+          (?x)(
+            bootstrap/remote/playbooks/proxmox_hosts/roles/opnsense_hosts/files/install\.txt
+          )
       - id: end-of-file-fixer
+        exclude: |
+          (?x)(
+            bootstrap/remote/playbooks/proxmox_hosts/roles/opnsense_hosts/files/install\.txt
+          )
       - id: mixed-line-ending
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.1.10
     hooks:
       - id: remove-crlf
       - id: remove-tabs
+        exclude: |
+          (?x)(
+            .*/templates/.*|
+            .*\.md|
+            bootstrap/remote/playbooks/proxmox_hosts/roles/opnsense_hosts/files/install\.txt
+          )
   - repo: https://github.com/sirosen/fix-smartquotes
     rev: 0.2.0
     hooks:
       - id: fix-smartquotes
+        exclude: |
+          (?x)(
+            .*\.md
+          )
   - repo: https://github.com/k8s-at-home/sops-pre-commit
     rev: v2.0.3
     hooks:
       - id: forbid-secrets
+        exclude: |
+          (?x)(
+            tmpl/.*
+          )

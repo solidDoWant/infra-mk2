@@ -18,7 +18,6 @@
       APT::Periodic::Download-Upgradeable-Packages "1";
       APT::Periodic::AutocleanInterval "7";
       APT::Periodic::Unattended-Upgrade "1";
-      
       Unattended-Upgrade::Automatic-Reboot "false";
       Unattended-Upgrade::Remove-Unused-Dependencies "true";
       Unattended-Upgrade::Allowed-Origins {

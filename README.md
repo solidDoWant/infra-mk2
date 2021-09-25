@@ -117,7 +117,7 @@ Very first step will be to create a new repository by clicking the **Use this te
 
 :round_pushpin: In these instructions you will be exporting several environment variables to your current shell env. Make sure you stay with in your current shell to not lose any exported variables.
 
-:round_pushpin: **All of the below commands** are run on your **local** workstation, **not** on any of your cluster nodes. 
+:round_pushpin: **All of the below commands** are run on your **local** workstation, **not** on any of your cluster nodes.
 
 ### :closed_lock_with_key:&nbsp; Setting up GnuPG keys
 
@@ -201,7 +201,7 @@ k3sup join \
 ```
 
 4. Verify the nodes are online
-   
+
 ```sh
 kubectl --kubeconfig=./kubeconfig get nodes
 # NAME           STATUS   ROLES                       AGE     VERSION

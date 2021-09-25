@@ -5,7 +5,7 @@
   pre_tasks:
     - name: Set timezone
       timezone:
-       name: "America/Chicago"
+        name: "America/Chicago"
 
   roles:
     - role: gather_service_facts

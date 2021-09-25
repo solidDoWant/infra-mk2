@@ -26,7 +26,7 @@
 - name: Gather facts on all hosts for DNS record creation
   setup:
   delegate_to: "{{ item }}"
-  delegate_facts: True
+  delegate_facts: true
   when: hostvars[item]['ansible_default_ipv4'] is not defined
   with_items: "{{ groups['all'] }}"
 
