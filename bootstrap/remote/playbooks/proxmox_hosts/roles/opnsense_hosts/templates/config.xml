@@ -209,6 +209,11 @@
       <tunable>net.local.dgram.maxdgram</tunable>
       <value>default</value>
     </item>
+    <item>
+      <tunable>virtio_console_load</tunable>
+      <value>YES</value>
+      <descr>Load the VirtIO console drive on boot so the QEMU guest agent can start</descr>
+    </item>
   </sysctl>
   <system>
     <optimization>normal</optimization>
