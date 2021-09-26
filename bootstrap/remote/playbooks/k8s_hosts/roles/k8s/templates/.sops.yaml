@@ -1,0 +1,6 @@
+---
+creation_rules:
+  - encrypted_regex: "^(data|stringData)$"
+    pgp: >-
+      {{ flux_gpg_fingerprint }},
+      {{ personal_gpg_fingerprint }}

@@ -53,3 +53,35 @@
 
   tags:
     - kubectl
+
+# Install SOPS
+- hosts: localhost
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Get the latest release data from GitHub
+      uri:
+        url: https://api.github.com/repos/mozilla/sops/releases/latest
+        method: GET
+        return_content: true
+        status_code: 200
+        body_format: json
+      register: github_sops_page
+    - name: Download the latest .deb to /tmp
+      get_url:
+        url: "{{ github_sops_page.json | json_query(query) | first}}"
+        dest: /tmp/sops.deb
+      vars:
+        query: "assets[?contains(name, '.deb')].browser_download_url"
+      register: downloaded_deb
+    - name: Install SOPS
+      apt:
+        deb: "{{ downloaded_deb.dest }}"
+    - name: Clean up /tmp
+      file:
+        path: "{{ downloaded_deb.dest }}"
+        state: absent
+
+  tags:
+    - sops

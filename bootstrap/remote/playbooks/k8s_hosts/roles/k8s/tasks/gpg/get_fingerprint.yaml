@@ -1,0 +1,9 @@
+---
+- name: Call GPG to get the key
+  shell: |
+    gpg --with-colons -a --fingerprint "{{ key_name }}" | awk -F: '$1 == "fpr" {print $10;}' | head -1
+  changed_when: false
+  register: gpg_fingerprint_output
+- name: Register the fingerprint
+  set_fact:
+    "{{ gpg_fingerprint_var_name }}": "{{ gpg_fingerprint_output.stdout }}"

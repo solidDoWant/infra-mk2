@@ -7,3 +7,10 @@
 
 - name: Retrieve the cluster kubeconfig
   include: get_kubeconfig.yaml
+
+- name: Install Flux
+  include: install_flux.yaml
+  run_once: true
+  delegate_to: localhost
+  tags:
+    - flux

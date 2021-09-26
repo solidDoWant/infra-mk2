@@ -15,6 +15,7 @@ build_venv:
         pip install -r requirements.txt; \
         ansible-galaxy install -r requirements.yaml \
         ansible-playbook -i localhost $(ANSIBLE_LOCAL_PLAYBOOK) \
+        curl -s https://fluxcd.io/install.sh | bash \
     )
 
 run_playbook: build_venv

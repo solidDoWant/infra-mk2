@@ -2,3 +2,6 @@
 roles:
   - xanmanning.k3s
   - githubixx.kubectl
+
+collections:
+  - community.kubernetes

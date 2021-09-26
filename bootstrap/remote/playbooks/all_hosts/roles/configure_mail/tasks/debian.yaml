@@ -27,7 +27,7 @@
 - name: Create a log file for MSMTP
   file:
     state: touch
-    dest: "{{ msmtp_log_path }}"
+    path: "{{ msmtp_log_path }}"
     group: msmtp
     owner: msmtp
     mode: 0664

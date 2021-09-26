@@ -1,0 +1,59 @@
+---
+
+- name: Create a GPG key for Flux
+  include: gpg/optional_create_key.yaml
+  vars:
+    key_name: "{{ flux_key_name }}"
+
+- name: Get the Flux GPG key fingerprint
+  include: gpg/get_fingerprint.yaml
+  vars:
+    key_name: "{{ flux_key_name }}"
+    gpg_fingerprint_var_name: flux_gpg_fingerprint
+
+- name: Get the user's personooal GPG key fingerprint
+  include: gpg/get_fingerprint.yaml
+  vars:
+    key_name: "{{ personal_key_name }}"
+    gpg_fingerprint_var_name: personal_gpg_fingerprint
+
+- name: Create the repo .sops.yaml file
+  template:
+    src: .sops.yaml
+    dest: "{{ repo_root_path }}/.sops.yaml"
+
+- name: Verify that Flux can be installed on the cluster
+  command: flux check --pre
+  changed_when: false
+
+- name: Create the Flux namespace
+  k8s:
+    name: flux-system
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: Get the Flux GPG private key
+  command: "gpg --export-secret-keys --armor {{ flux_gpg_fingerprint }}"
+  no_log: true
+  changed_when: false
+  register: flux_gpg_command
+
+- name: Create the Flux secret
+  k8s:
+    definition:
+      apiVersion: v1
+      kind: Secret
+      type: Opaque
+      metadata:
+        name: sops-gpg
+        namespace: flux-system
+      data:
+        sops.asc: "{{ flux_gpg_command.stdout | b64encode }}"
+    state: present
+  no_log: true
+
+- name: Install Flux
+  k8s:
+    definition: "{{ lookup('kustomize', dir=(repo_root_path + '/cluster/base/flux-system')) }}"
+    state: present

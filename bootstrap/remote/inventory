@@ -1,5 +1,6 @@
 [all:vars]
-working_dir_path="{{ role_path }}/../../../../../../working"
+repo_root_path="{{ role_path }}/../../../../../../"
+working_dir_path="{{ repo_root_path }}/working"
 
 [k8s_hosts:children]
 k8s_masters
