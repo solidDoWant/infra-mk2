@@ -56,7 +56,7 @@
 - name: Install Flux
   block:
     - name: First Flux install run (expected to error)
-      command: "{{ apply_command }} &> /dev/null"
+      command: "{{ apply_command }}"
       # kustomize lookup does not yet seem to be working
       # k8s:
       #   definition: "{{ lookup('kubernetes.core.kustomize', dir=(repo_root_path + '/cluster/base/flux-system')) }}"
