@@ -54,6 +54,18 @@
   no_log: true
 
 - name: Install Flux
-  k8s:
-    definition: "{{ lookup('kustomize', dir=(repo_root_path + '/cluster/base/flux-system')) }}"
-    state: present
+  block:
+    - name: First Flux install run (expected to error)
+      command: "{{ apply_command }} &> /dev/null"
+      # kustomize lookup does not yet seem to be working
+      # k8s:
+      #   definition: "{{ lookup('kubernetes.core.kustomize', dir=(repo_root_path + '/cluster/base/flux-system')) }}"
+      #   state: present
+      ignore_errors: true
+    - name: Second Flux install run
+      command: "{{ apply_command }}"
+      # k8s:
+      #   definition: "{{ lookup('kubernetes.core.kustomize', dir=(repo_root_path + '/cluster/base/flux-system')) }}"
+      #   state: present
+  vars:
+    apply_command: "kubectl apply --kustomize={{ repo_root_path }}/cluster/base/flux-system"

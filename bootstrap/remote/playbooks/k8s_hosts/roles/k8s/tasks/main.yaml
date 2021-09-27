@@ -1,12 +1,18 @@
 ---
 - name: Prepare the node for Kubernetes installation
   include: prepare_node.yaml
+  tags:
+    - prepare_node
 
 - name: Install Kubernetes
   include: install_kubernetes.yaml
+  tags:
+    - install_kubernetes
 
 - name: Retrieve the cluster kubeconfig
   include: get_kubeconfig.yaml
+  tags:
+    - get_kubeconfig
 
 - name: Install Flux
   include: install_flux.yaml
