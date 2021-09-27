@@ -1,0 +1,8 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: BGPPeer
+metadata:
+  name: brocade-switch
+spec:
+  peerIP: 10.2.0.2  # Brocade L3 switch/router
+  asNumber: 64512

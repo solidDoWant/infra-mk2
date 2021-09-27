@@ -544,6 +544,21 @@ port-name guests
 ip address 10.4.0.2/16
 ```
 
+#### Setup remote management
+```
+telnet server
+ip telnet source-interface ve 100
+```
+
+#### Setup BGP peering with k8s nodes
+```
+router bgp
+local-as 64512
+neighbor 10.2.1.1 remote-as 64513
+neighbor 10.2.1.2 remote-as 64513
+neighbor 10.2.1.3 remote-as 64513
+```
+
 #### Misc
 ```
 ! Set hostname

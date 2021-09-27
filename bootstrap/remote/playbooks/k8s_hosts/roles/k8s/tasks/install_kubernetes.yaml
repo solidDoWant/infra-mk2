@@ -1,17 +1,46 @@
 ---
+- name: Get a list of all manifests
+  find:
+    paths:
+      - "{{ role_path }}/templates/manifests/"
+    pattern: "*.yaml"
+    recurse: true
+  delegate_to: localhost
+  run_once: true
+  register: found_manifests
 - name: Install k3s
   include_role:
     name: xanmanning.k3s
     public: true
   vars:
+    k3s_state: installed
     k3s_become_for_all: true
     k3s_etcd_datastore: true
     k3s_build_cluster: true
+    k3s_install_hard_links: true
+    k3s_registration_address: 10.43.0.1
+    k3s_server_manifests_urls:
+      - url: https://docs.projectcalico.org/manifests/tigera-operator.yaml
+        filename: tigera-operator.yaml
+      - url: https://kube-vip.io/manifests/rbac.yaml
+        filename: kube-vip-rbac.yaml
+    k3s_server_manifests_templates: "{{ found_manifests | json_query('files[*].path') }}"
     k3s_server:
-      cluster-cidr: 192.168.0.0/16
+      cluster-cidr: 10.42.0.0/16
+      service-cidr: 10.43.0.0/16
       flannel-backend: 'none'
       disable-network-policy: true
+      cluster-domain: k3s.echozulu.local
+      tls-san:
+        - 10.43.0.1
+      disable-cloud-controller: true
       disable:
         - traefik
         - servicelb
         - metric-server
+        - local-storage
+      kubelet-arg:
+        - "feature-gates=GracefulNodeShutdown=true"
+        - "feature-gates=MixedProtocolLBService=true"
+      kube-apiserver-arg:
+        - "feature-gates=MixedProtocolLBService=true"

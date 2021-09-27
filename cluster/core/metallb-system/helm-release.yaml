@@ -16,9 +16,12 @@ spec:
         name: metallb-charts
         namespace: flux-system
   values:
+    speaker:
+      enabled: false
     configInline:
       address-pools:
         - name: default
           protocol: bgp
+          avoid-buggy-ips: true
           addresses:
             - "${METALLB_LB_RANGE}"

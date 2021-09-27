@@ -1,0 +1,13 @@
+---
+- name: Copy the VLAN netplan
+  template:
+    src: 99-calico.yaml
+    dest: /etc/netplan/99-calico.yaml
+    owner: root
+    group: root
+    mode: 0644
+  register: netplan_template
+
+- name: Reload the netplan
+  command: netplan apply
+  when: netplan_template.changed

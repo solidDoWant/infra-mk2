@@ -1,0 +1,13 @@
+---
+network:
+  vlans:
+    vlan300:
+      id: 300
+      link: {{ ansible_default_ipv4.interface }}
+      addresses:
+        - 10.2.1.{{ ansible_default_ipv4.address.split('.')[3] }}/16
+      nameservers:
+        addresses:
+          - 10.2.0.1
+      mtu: 9000
+  version: 2
