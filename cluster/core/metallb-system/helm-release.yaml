@@ -17,8 +17,12 @@ spec:
         namespace: flux-system
   values:
     speaker:
-      enabled: false
+      enabled: true
     configInline:
+      peers:
+        - peer-address: 10.1.0.2
+          peer-asn: 64512
+          my-asn: 64514
       address-pools:
         - name: default
           protocol: bgp
