@@ -85,3 +85,40 @@
 
   tags:
     - sops
+
+# Install Helm
+- hosts: localhost
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Install dependencies
+      apt:
+        name:
+          - apt-transport-https
+        state: latest
+        update_cache: true
+        autoclean: true
+        autoremove: true
+    - name: Add Helm GPG key
+      apt_key:
+        url: https://baltocdn.com/helm/signing.asc
+        id: 294AC4827C1A168A
+        state: present
+    - name: Add Helm repository
+      apt_repository:
+        repo: "deb https://baltocdn.com/helm/stable/{{ ansible_os_family | lower }}/ all main"
+        state: present
+        filename: helm
+        update_cache: false
+    - name: Install Helm
+      apt:
+        name:
+          - helm
+        state: latest
+        update_cache: true
+        cache_valid_time: 600
+        autoclean: true
+        autoremove: true
+  tags:
+    - helm
