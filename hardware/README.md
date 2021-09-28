@@ -557,6 +557,9 @@ local-as 64512
 neighbor 10.2.1.1 remote-as 64513
 neighbor 10.2.1.2 remote-as 64513
 neighbor 10.2.1.3 remote-as 64513
+neighbor 10.1.1.1 remote-as 64514
+neighbor 10.1.1.2 remote-as 64514
+neighbor 10.1.1.3 remote-as 64514
 ```
 
 #### Misc
