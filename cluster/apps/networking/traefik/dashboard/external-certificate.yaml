@@ -2,14 +2,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "${SECRET_DOMAIN/./-}"
+  name: "traefik-${SECRET_DOMAIN/./-}"
   namespace: networking
 spec:
-  secretName: "${SECRET_DOMAIN/./-}-tls"
+  secretName: "traefik-${SECRET_DOMAIN/./-}-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: "${SECRET_DOMAIN}"
+  commonName: "traefik.${SECRET_DOMAIN}"
   dnsNames:
-    - "${SECRET_DOMAIN}"
-    - "*.${SECRET_DOMAIN}"
+    - "traefik.${SECRET_DOMAIN}"
