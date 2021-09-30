@@ -21,7 +21,8 @@ spec:
               service:
                 name: rook-ceph-mgr-dashboard
                 port:
-                  name: http-dashboard
+                  name: https-dashboard
   tls:
     - hosts:
         - "rook.${SECRET_DOMAIN}"
+      secretName: "rook-${SECRET_DOMAIN/./-}-tls"

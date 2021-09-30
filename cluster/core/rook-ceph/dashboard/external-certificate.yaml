@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "rook-${SECRET_DOMAIN/./-}"
+  namespace: networking
+spec:
+  secretName: "rook-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "rook.${SECRET_DOMAIN}"
+  dnsNames:
+    - "rook.${SECRET_DOMAIN}"
