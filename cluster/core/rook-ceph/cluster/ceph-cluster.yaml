@@ -231,13 +231,15 @@ spec:
       - name: k8s-host-02
         osdsPerDevice: "1"
         devices:
-          - devicePathFilter: ^/dev/disk/by-id/scsi-SNETAPP_X423_[^-]+$
+          - name: fast-disks
+            devicePathFilter: ^/dev/disk/by-id/scsi-SNETAPP_X423_[^-]+$
             # config:
             #   metadataDevice: nvme1n1
       - name: k8s-host-03
         osdsPerDevice: "1"
         devices:
-          - devicePathFilter: ^/dev/disk/by-id/0HP_LOGICAL_VOLUME_[^-]+$
+          - name: fast-disks
+            devicePathFilter: ^/dev/disk/by-id/0HP_LOGICAL_VOLUME_[^-]+$
             # config:
             #   metadataDevice: nvme1n1
     #   - name: "172.17.4.201"
