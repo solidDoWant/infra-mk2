@@ -51,6 +51,8 @@ spec:
       # are already enabled by other settings in the cluster CR.
       - name: pg_autoscaler
         enabled: true
+      - name: orchestrator
+        enabled: true
       # - name: diskprediction_local
       #   enabled: true
       # - name: prometheus
@@ -59,8 +61,8 @@ spec:
       #   enabled: true
       # - name: insights
       #   enabled: true
-      # - name: rook
-      #   enabled: true
+      - name: rook
+        enabled: true
       # - name: nfs
       #   enabled: true
       # - name: progress
@@ -229,12 +231,12 @@ spec:
         devices:
           - devicePathFilter: ^/dev/disk/by-id/scsi-SNETAPP_X423_[^-]+$
             config:
-              metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPEDMW400G4_CVCQ5126005W400AGN
+              metadataDevice: nvme1n1
       - name: k8s-host-03
         devices:
           - devicePathFilter: ^/dev/disk/by-id/0HP_LOGICAL_VOLUME_[^-]+$
             config:
-              metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPE2MW400G4_CVCQ545100RM400CGN
+              metadataDevice: nvme1n1
     #   - name: "172.17.4.201"
     #     devices: # specific devices to use for storage can be specified for each node
     #       - name: "sdb"
