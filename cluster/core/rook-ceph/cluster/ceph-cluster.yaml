@@ -217,10 +217,10 @@ spec:
     useAllNodes: false
     useAllDevices: false
     # deviceFilter:
-    config:
+    # config:
     #   # crushRoot: "custom-root" # specify a non-default root label for the CRUSH map
     #   # metadataDevice: "md0" # specify a non-rotational storage so ceph-volume will use it as block db device of bluestore.
-      metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
+      # metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
     #   # databaseSizeMB: "1024" # uncomment if the disks are smaller than 100 GB
     #   # journalSizeMB: "1024"  # uncomment if the disks are 20 GB or smaller
     #   osdsPerDevice: "1" # this value can be overridden at the node or device level
@@ -232,13 +232,29 @@ spec:
         osdsPerDevice: "1"
         devices:
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy12-lun-0
+            config:
+              metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy13-lun-0
+            config:
+              metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy14-lun-0
+            config:
+              metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy15-lun-0
+            config:
+              metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy16-lun-0
+            config:
+              metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy17-lun-0
+            config:
+              metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy18-lun-0
+            config:
+              metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy19-lun-0
+            config:
+              metadataDevice: /dev/disk/by-path/pci-0000:42:00.0-nvme-1
             # devicePathFilter: ^/dev/disk/by-id/scsi-SNETAPP_X423_[^-]+$
             # deviceFilter: "^sd[i-p]$" # Hate doing this but if its the only thing that'll work...
             # devicePathFilter: ^/dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff.+$
