@@ -257,7 +257,7 @@ spec:
           #     metadataDevice: nvme1n1
             # devicePathFilter: ^/dev/disk/by-id/scsi-SNETAPP_X423_[^-]+$
             # deviceFilter: "^sd[i-p]$" # Hate doing this but if its the only thing that'll work...
-            devicePathFilter: ^/dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff.+$
+              devicePathFilter: ^/dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff.+$
             # config:
             #   metadataDevice: nvme1n1
       - name: k8s-host-03
