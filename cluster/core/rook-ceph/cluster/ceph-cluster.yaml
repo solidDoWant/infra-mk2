@@ -255,18 +255,33 @@ spec:
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy19-lun-0
             config:
               metadataDevice: nvme1n1
-            # devicePathFilter: ^/dev/disk/by-id/scsi-SNETAPP_X423_[^-]+$
-            # deviceFilter: "^sd[i-p]$" # Hate doing this but if its the only thing that'll work...
-              devicePathFilter: ^/dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff.+$
-            # config:
-            #   metadataDevice: nvme1n1
       - name: k8s-host-03
         osdsPerDevice: "1"
         devices:
-          - name: ^/dev/disk/by-id/0HP_LOGICAL_VOLUME_[^-]+$
-            devicePathFilter: ^/dev/disk/by-id/scsi-SNETAPP_X423_[^-]+$
-            # config:
-            #   metadataDevice: nvme1n1
+          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:0
+            config:
+              metadataDevice: nvme1n1
+          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:1
+            config:
+              metadataDevice: nvme1n1
+          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:2
+            config:
+              metadataDevice: nvme1n1
+          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:3
+            config:
+              metadataDevice: nvme1n1
+          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:4
+            config:
+              metadataDevice: nvme1n1
+          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:5
+            config:
+              metadataDevice: nvme1n1
+          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:6
+            config:
+              metadataDevice: nvme1n1
+          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:7
+            config:
+              metadataDevice: nvme1n1
     #   - name: "172.17.4.201"
     #     devices: # specific devices to use for storage can be specified for each node
     #       - name: "sdb"
