@@ -1,0 +1,14 @@
+---
+apiVersion: ceph.rook.io/v1
+kind: CephBlockPool
+metadata:
+  name: fast-rust-erasure
+  namespace: rook-ceph
+spec:
+  failureDomain: host # Tolerate a host failure
+  erasureCoded: # Basically raid 6 with 16 drives
+    dataChunks: 12
+    codingChunks: 4
+  parameters:
+    compression_mode: aggressive # TODO benchmark this
+    compression_algorithm: lz4
