@@ -6,9 +6,9 @@ metadata:
   namespace: rook-ceph
 spec:
   failureDomain: host # Tolerate a host failure
-  erasureCoded: # Basically raid 6 with 16 drives
-    dataChunks: 12
-    codingChunks: 4
+  erasureCoded: # Basically raid 6 with 8 drives
+    dataChunks: 6
+    codingChunks: 2
   parameters:
     compression_mode: aggressive # TODO benchmark this
     compression_algorithm: lz4
