@@ -1,0 +1,8 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: BGPPeer
+metadata:
+  name: opnsense-appliance
+spec:
+  peerIP: 10.2.0.1  # OPNsense network appliance
+  asNumber: 64515

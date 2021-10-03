@@ -1,0 +1,91 @@
+---
+- name: Install FRRouting plugin
+  command: pkg install -y os-frr
+
+- name: Configure the FRRouting plugin
+  block:
+    - name: Pull the current OPNsense config
+      fetch:
+        src: "{{ remote_config_path }}"
+        dest: "{{ local_config_path }}"
+        flat: true
+      register: downloaded_config
+    - name: Enable the plugin
+      xml:
+        path: "{{ local_config_path }}"
+        xpath: /opnsense/OPNsense/quagga/general/enabled
+        value: "1"
+      delegate_to: localhost
+    - name: Set initial BGP parameters
+      block:
+        - name: Enable BGP
+          xml:
+            path: "{{ local_config_path }}"
+            xpath: /opnsense/OPNsense/quagga/bgp/enabled
+            value: "1"
+        - name: Set ASN
+          xml:
+            path: "{{ local_config_path }}"
+            xpath: /opnsense/OPNsense/quagga/bgp/asnumber
+            value: "64515"
+        - name: Set router ID
+          xml:
+            path: "{{ local_config_path }}"
+            xpath: /opnsense/OPNsense/quagga/bgp/routerid
+        - name: Set 'graceful'
+          xml:
+            path: "{{ local_config_path }}"
+            xpath: /opnsense/OPNsense/quagga/bgp/graceful
+            value: "0"
+        - name: Set networks
+          xml:
+            path: "{{ local_config_path }}"
+            xpath: /opnsense/OPNsense/quagga/bgp/networks
+        - name: Set redistribute
+          xml:
+            path: "{{ local_config_path }}"
+            xpath: /opnsense/OPNsense/quagga/bgp/redistribute
+      delegate_to: localhost
+    - name: Get BGP neighbor facts
+      setup: {}
+      delegate_to: "{{ item }}"
+      delegate_facts: true
+      when: hostvars[item]['ansible_default_ipv4'] is not defined
+      with_items: "{{ groups['k8s_hosts'] }}"
+    - name: Configure metallb BGP neighbors
+      include: add-bgp-neighbors.yaml
+      vars:
+        bgp_source_ip: "{{ hostvars[item]['ansible_all_ipv4_addresses'] | select('match', '^10\\.1.+$') | first }}"
+        asn: 64514
+        name: metallb
+        interface: lan
+      loop: "{{ groups['k8s_hosts'] }}"
+      delegate_to: localhost
+    - name: Configure Calico BGP neighbors
+      include: add-bgp-neighbors.yaml
+      vars:
+        bgp_source_ip: "{{ hostvars[item]['ansible_all_ipv4_addresses'] | select('match', '^10\\.2.+$') | first }}"
+        asn: 64513
+        name: Calico
+        interface: opt2
+      loop: "{{ groups['k8s_hosts'] }}"
+      delegate_to: localhost
+
+    - name: Copy the new OPNsense config
+      copy:
+        src: "{{ local_config_path }}"
+        dest: "{{ remote_config_path }}"
+        backup: true
+      register: return_config
+      when: downloaded_config.changed
+    - name: Reload OPNsense
+      command: "{{ item }}"
+      with_items:
+        - configctl quagga stop
+        - configctl template reload OPNsense/Quagga
+        - configctl quagga start
+      when: downloaded_config.changed and return_config.changed
+
+  vars:
+    local_config_path: "{{ working_dir_path }}/config.xml"
+    remote_config_path: "/conf/config.xml"

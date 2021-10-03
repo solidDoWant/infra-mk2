@@ -23,6 +23,9 @@ spec:
         - peer-address: 10.1.0.2
           peer-asn: 64512
           my-asn: 64514
+        - peer-address: 10.1.0.1
+          peer-asn: 64515
+          my-asn: 64514
       address-pools:
         - name: default
           protocol: bgp
