@@ -26,13 +26,14 @@ spec:
         receivers:
           - name: "discord"
             slack_configs:
-              - channel: "${SECRET_ALERT_MANAGER_DISCORD_CHANNEL}"
+              - channel: "#${SECRET_ALERT_MANAGER_DISCORD_CHANNEL}"
                 icon_url: https://avatars3.githubusercontent.com/u/3380462
                 username: "${SECRET_ALERT_MANAGER_DISCORD_USERNAME}"
                 send_resolved: true
                 title: |-
-                  [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
+                  TEST [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
                 text: >-
+                  TEST
                   {{ range .Alerts -}}
                     **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
 
