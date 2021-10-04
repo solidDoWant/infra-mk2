@@ -6,3 +6,4 @@ resources:
   - metallb-system.yaml
   - networking.yaml
   - rook-ceph.yaml
+  - monitoring.yaml
