@@ -7,3 +7,4 @@ resources:
   - node-feature-discovery
   - descheduler
   - node-problem-detector
+  - kured
