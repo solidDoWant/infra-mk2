@@ -23,5 +23,5 @@ spec:
       endTime: "5am"
       rebootCommand: "/usr/local/sbin/fast-reboot"  # kexec reboot
       drainGracePeriod: 120
-    # metrics:
-    #   create: true
+    metrics:
+      create: true
