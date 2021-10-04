@@ -20,8 +20,6 @@ spec:
     args:
       - -shared-dev-num
       - "10"
-    nodeSelector:
-      node-role.kubernetes.io/worker: "true"
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
