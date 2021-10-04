@@ -126,6 +126,9 @@ spec:
         - 10.2.1.1
         - 10.2.1.2
         - 10.2.1.3
+      serviceMonitor:
+        https: true
+        insecureSkipVerify: true
       service:
         enabled: true
         port: 10257
