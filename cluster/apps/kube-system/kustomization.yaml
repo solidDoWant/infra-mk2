@@ -8,3 +8,4 @@ resources:
   - descheduler
   - node-problem-detector
   - kured
+  - reloader
