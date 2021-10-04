@@ -6,3 +6,4 @@ resources:
   - local-dns
   - node-feature-discovery
   - descheduler
+  - node-problem-detector
