@@ -1,0 +1,23 @@
+---
+- name: Copy kubeconfig to Opnsense
+  copy:
+    src: "{{ local_kubeconfig_path }}"
+    dest: /usr/local/etc/coredns/kubeconfig
+    mode: 0640
+    owner: root
+    group: wheel
+  register: copied_kubeconfig
+
+- name: Create the CoreDNS config for Kubernetes
+  template:
+    src: k8s_gateway_secret_domain
+    dest: "/usr/local/etc/coredns/root_config.d/k8s_gateway_{{ secret_domain }}"
+    owner: root
+    group: wheel
+    mode: 0755
+  when: copied_kubeconfig.changed
+
+- name: Restart CoreDNS
+  shell: |
+    /usr/local/etc/rc.d/coredns restart
+  when: copied_kubeconfig.changed

@@ -11,6 +11,8 @@ import ./config.d/*
 . {
   import default_config
 
+  import ./root_config.d/*
+
   auto {
     directory ./zones (.*) {1}
   }

@@ -11,20 +11,20 @@
     state: directory
     mode: 0755
 
+- name: Create root config directory
+  file:
+    path: /usr/local/etc/coredns/root_config.d
+    state: directory
+    mode: 0755
+
 - name: Create zonefiles directory
   file:
     path: /usr/local/etc/coredns/zones
     state: directory
     mode: 0755
 
-# - name: Copy kubeconfig to Opnsense
-#   copy:
-#     src: /tmp/kubeconfig-homedns
-#     dest: /usr/local/etc/coredns/kubeconfig
-#     mode: 0755
-
 - name: Gather facts on all hosts for DNS record creation
-  setup:
+  setup: {}
   delegate_to: "{{ item }}"
   delegate_facts: true
   when: hostvars[item]['ansible_default_ipv4'] is not defined

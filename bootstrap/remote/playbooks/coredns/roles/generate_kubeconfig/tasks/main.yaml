@@ -1,0 +1,37 @@
+---
+- name: Fetch the kube-vip service
+  set_fact:
+    kube_vip_ip_raw: "{{ lookup('community.kubernetes.k8s', namespace='default', kind='Service', resource_name='kubernetes') }}"
+
+- name: Extract the kube-vip service IP
+  set_fact:
+    kube_vip_ip: "{{ kube_vip_ip_raw | json_query(query) }}"
+  vars:
+    query: spec.clusterIP
+
+- name: Fetch service account for home-dns
+  set_fact:
+    DNSServiceAccountRaw: "{{ lookup('community.kubernetes.k8s', namespace='kube-system', kind='ServiceAccount', resource_name='home-dns') }}"
+
+- name: Extract service account token from service account
+  set_fact:
+    DNSServiceAccountToken: "{{ DNSServiceAccountRaw | json_query('secrets[*].name | [0]') }}"
+
+- name: Fetch CA
+  set_fact:
+    DNSCertificateAuthorityRaw: "{{ lookup('community.kubernetes.k8s', namespace='kube-system', kind='Secret', resource_name=DNSServiceAccountToken) }}"
+
+- name: Extract CA Cert from CA
+  set_fact:
+    DNSCertificateAuthority: '{{ DNSCertificateAuthorityRaw | json_query(''data."ca.crt"'') }}'
+
+- name: Extract CA Token from CA
+  set_fact:
+    DNSCertificateAuthorityToken: "{{ DNSCertificateAuthorityRaw | json_query('data.token') | b64decode }}"
+
+- name: Create kubeconfig
+  template:
+    src: kubeconfig.yaml
+    dest: "{{ local_kubeconfig_path }}"
+    mode: 0600
+  delegate_to: localhost

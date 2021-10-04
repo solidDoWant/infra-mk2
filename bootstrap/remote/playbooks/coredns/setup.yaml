@@ -1,0 +1,23 @@
+---
+- hosts: k8s_hosts
+  become: true
+  gather_facts: false
+  any_errors_fatal: true
+
+  roles:
+    - name: Generate the home-dns kubeconfig
+      role: generate_kubeconfig
+
+  run_once: true
+  vars:
+    local_kubeconfig_path: "{{ working_dir_path }}/kubeconfig.yaml"
+
+- hosts: opnsense
+  become: true
+
+  roles:
+    - name: Configure CoreDNS
+      role: configure_coredns
+
+  vars:
+    local_kubeconfig_path: "{{ working_dir_path }}/kubeconfig.yaml"
