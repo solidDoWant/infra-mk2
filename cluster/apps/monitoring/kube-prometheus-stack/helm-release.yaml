@@ -26,7 +26,7 @@ spec:
         receivers:
           - name: "discord"
             slack_configs:
-              - channel: "#${SECRET_ALERT_MANAGER_DISCORD_CHANNEL}"
+              - channel: "${SECRET_ALERT_MANAGER_DISCORD_CHANNEL}"
                 icon_url: https://avatars3.githubusercontent.com/u/3380462
                 username: "${SECRET_ALERT_MANAGER_DISCORD_USERNAME}"
                 send_resolved: true
