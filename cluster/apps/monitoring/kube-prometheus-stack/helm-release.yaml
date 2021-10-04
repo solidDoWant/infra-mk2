@@ -152,7 +152,7 @@ spec:
         - 10.1.1.2
         - 10.1.1.3
       serviceMonitor:
-        https: true
+        scheme: https
         insecureSkipVerify: true
     # Setting this option to 0 disabled CPU limits
     prometheusOperator:
