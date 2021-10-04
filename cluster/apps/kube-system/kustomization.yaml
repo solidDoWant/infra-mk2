@@ -9,3 +9,4 @@ resources:
   - node-problem-detector
   - kured
   - reloader
+  - intel-gpu-plugin
