@@ -1,0 +1,42 @@
+---
+- name: Install node_exporter plugin
+  command: pkg install -y os-node_exporter
+
+- name: Configure the node_exporter plugin
+  block:
+    - name: Pull the current OPNsense config
+      fetch:
+        src: "{{ remote_config_path }}"
+        dest: "{{ local_config_path }}"
+        flat: true
+      register: downloaded_config
+    - name: Enable the plugin
+      xml:
+        path: "{{ local_config_path }}"
+        xpath: /opnsense/OPNsense/NodeExporter/enabled
+        value: "1"
+      delegate_to: localhost
+    - name: Enable the ZFS statistics
+      xml:
+        path: "{{ local_config_path }}"
+        xpath: /opnsense/OPNsense/NodeExporter/zfs
+        value: "1"
+      delegate_to: localhost
+    - name: Copy the new OPNsense config
+      copy:
+        src: "{{ local_config_path }}"
+        dest: "{{ remote_config_path }}"
+        backup: true
+      register: return_config
+      when: downloaded_config.changed
+    - name: Reload OPNsense
+      command: "{{ item }}"
+      with_items:
+        - configctl NodeExporter stop
+        - configctl template reload OPNsense/NodeExporter
+        - configctl NodeExporter start
+      when: downloaded_config.changed and return_config.changed
+
+  vars:
+    local_config_path: "{{ working_dir_path }}/config.xml"
+    remote_config_path: "/conf/config.xml"

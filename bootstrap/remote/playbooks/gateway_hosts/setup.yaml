@@ -16,3 +16,5 @@
       tags: coredns_runner
     - role: setup_dynamic_routing
       tags: setup_dynamic_routing
+    - role: setup_node_exporter
+      tags: setup_node_exporter
