@@ -16,3 +16,20 @@ spec:
         name: node-feature-discovery-charts
         namespace: flux-system
       interval: 5m
+  values:
+    worker:
+      config: |-
+        sources:
+          custom:
+            - name: "intel-gpu"
+              matchOn:
+                - pciId:
+                    class: ["0300"]
+                    vendor: ["8086"]
+            - name: "amd-gpu"
+              matchOn:
+                - pciId:
+                    class:
+                      - "0300"
+                    vendor:
+                      - "1002"
