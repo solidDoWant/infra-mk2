@@ -32,6 +32,8 @@ spec:
                 send_resolved: true
                 http_config:
                   proxy_url: http://10.3.2.4:8080
+                  tls_config:
+                    insecure_skip_verify: true
                 # title: |-
                 #   TEST [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
                 # text: >-
