@@ -30,23 +30,18 @@ spec:
                 icon_url: https://avatars3.githubusercontent.com/u/3380462
                 username: "${SECRET_ALERT_MANAGER_DISCORD_USERNAME}"
                 send_resolved: true
-                http_config:
-                  proxy_url: http://10.3.2.4:8080
-                  tls_config:
-                    insecure_skip_verify: true
-                # title: |-
-                #   TEST [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
-                # text: >-
-                #   TEST
-                #   {{ range .Alerts -}}
-                #     **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+                title: |-
+                  [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
+                text: >-
+                  {{ range .Alerts -}}
+                    **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
 
-                #   **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
+                  **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
 
-                #   **Details:**
-                #     {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-                #     {{ end }}
-                #   {{ end }}
+                  **Details:**
+                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                    {{ end }}
+                  {{ end }}
         route:
           group_by: ["alertname", "job"]
           group_wait: 30s
