@@ -4,5 +4,3 @@ kind: Kustomization
 namespace: calico-system
 resources:
   - felix-metrics
-  # - typha-metrics
-  # - kube-controllers-metrics
