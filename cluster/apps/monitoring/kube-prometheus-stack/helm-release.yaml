@@ -100,17 +100,17 @@ spec:
           multicluster:
             etcd:
               enabled: true
-      ingress:
-        enabled: true
-        pathType: Prefix
-        ingressClassName: "traefik"
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hosts:
-          - "grafana.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - "grafana.${SECRET_DOMAIN}"
+      # ingress:
+      #   enabled: true
+      #   pathType: Prefix
+      #   ingressClassName: "traefik"
+      #   annotations:
+      #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      #   hosts:
+      #     - "grafana.${SECRET_DOMAIN}"
+      #   tls:
+      #     - hosts:
+      #         - "grafana.${SECRET_DOMAIN}"
     kubelet:
       enabled: true
       serviceMonitor:
