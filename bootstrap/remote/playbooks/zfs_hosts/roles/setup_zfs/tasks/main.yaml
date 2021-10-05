@@ -1,0 +1,60 @@
+---
+- name: Install ZFS
+  apt:
+    name: zfsutils-linux
+    state: latest
+    update_cache: true
+    cache_valid_time: 600
+    autoclean: true
+    autoremove: true
+
+- name: Check if the pool already exists
+  command: "zpool list {{ pool_name }}"
+  ignore_errors: true
+  register: zpool_list
+
+- name: Create the mount folder
+  file:
+    path: "/mnt/{{ pool_name }}"
+    state: directory
+  when: zpool_list.rc != 0
+
+- name: Create the zpool
+  command: >-
+    zpool create
+    -o ashift=12
+    -O acltype=posixacl
+    -O compression=lz4
+    -O dnodesize=auto
+    -O relatime=off
+    -O atime=off
+    -O xattr=sa
+    -O mountpoint=/mnt/{{ pool_name }}
+    {{ pool_name }}
+    raidz2
+    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy8-lun-0
+    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy9-lun-0
+    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy10-lun-0
+    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy11-lun-0
+    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy12-lun-0
+    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy13-lun-0
+    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy14-lun-0
+    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy15-lun-0
+  register: created_zpool
+  when: zpool_list.rc != 0
+
+- name: Install NFS sharing pppackages
+  apt:
+    name:
+      - nfs-kernel-server
+      - nfs-common
+    state: latest
+    update_cache: true
+    cache_valid_time: 600
+    autoclean: true
+    autoremove: true
+
+- name: Create group for NFS
+  group:
+    gid: 2000
+    name: nfs_anon

@@ -16,3 +16,6 @@ opnsense_hosts
 
 [opnsense]
 10.0.0.1 ansible_user="root" ansible_python_interpreter="/usr/local/bin/python3"
+
+[zfs_hosts]
+10.1.1.2

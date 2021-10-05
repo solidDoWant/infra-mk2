@@ -1,0 +1,20 @@
+---
+- hosts: zfs_hosts
+  become: true
+
+  vars:
+    pool_name: bulk-pool-01
+
+  roles:
+    - role: setup_multipath
+      tags: setup_multipath
+    - role: setup_zfs
+      tags: setup_zfs
+    - role: create_dataset
+      tags:
+        - create_dataset
+        - create_media_dataset
+      vars:
+        dataset_name: media
+        _async: true
+        nfs: true

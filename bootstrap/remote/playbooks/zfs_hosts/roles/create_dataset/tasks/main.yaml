@@ -1,0 +1,13 @@
+---
+- name: Check if the dataset already exists
+  command: zfs list {{ pool_name }}/{{ dataset_name }}
+  ignore_errors: true
+  register: zfs_list
+
+- name: Create the dataset
+  command: >-
+    zfs create
+    {{ pool_name }}/{{ dataset_name }}
+    {{ "-o sharenfs='all_squash,anonuid=0,anongid=1000,rw=@10.0.0.0/8'" if nfs is not defined or nfs }}
+    {{ "-o sync=disabled" if _async is defined and _async}}
+  when: zfs_list.rc != 0
