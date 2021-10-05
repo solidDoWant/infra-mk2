@@ -8,3 +8,4 @@ resources:
   - system-upgrade
   - monitoring
   - flux-system
+  - calico-system

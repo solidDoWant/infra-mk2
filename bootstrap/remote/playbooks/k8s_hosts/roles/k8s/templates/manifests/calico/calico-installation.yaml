@@ -19,3 +19,5 @@ spec:
     nodeAddressAutodetectionV4:
       firstFound: false
       interface: vlan300
+  nodeMetricsPort: 9091
+  typhaMetricsPort: 9093
