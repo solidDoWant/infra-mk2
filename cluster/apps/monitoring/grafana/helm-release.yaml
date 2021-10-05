@@ -88,7 +88,7 @@ spec:
         traefik:
           gnetId: 4475
           revision: 5
-          datasoource: Prometheus
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/12175
         calico-felix:
           gnetId: 12175
