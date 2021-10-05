@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "s3-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "s3-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "s3.${SECRET_DOMAIN}"
+  dnsNames:
+    - "s3.${SECRET_DOMAIN}"

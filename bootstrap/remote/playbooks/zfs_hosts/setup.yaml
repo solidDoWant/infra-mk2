@@ -18,3 +18,11 @@
         dataset_name: media
         _async: true
         nfs: true
+    - role: create_dataset
+      tags:
+        - create_dataset
+        - create_media_dataset
+      vars:
+        dataset_name: minio
+        _async: true
+        nfs: true
