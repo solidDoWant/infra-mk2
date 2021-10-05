@@ -79,6 +79,16 @@ spec:
           #   url: http://loki:3100
     dashboards:
       default:
+        # Ref: https://grafana.com/grafana/dashboards/11454
+        k8s-storage-volumes-cluster:
+          gnetId: 11454
+          revision: 14
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/4475
+        traefik:
+          gnetId: 4475
+          revision: 5
+          datasoource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/12175
         calico-felix:
           gnetId: 12175
