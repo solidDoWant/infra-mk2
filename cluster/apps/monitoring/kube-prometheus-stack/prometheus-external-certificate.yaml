@@ -3,7 +3,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: "prometheus-${SECRET_DOMAIN/./-}"
-  namespace: prometheus-ceph
+  namespace: monitoring
 spec:
   secretName: "prometheus-${SECRET_DOMAIN/./-}-tls"
   issuerRef:
