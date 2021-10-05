@@ -6,4 +6,3 @@ resources:
   - felix-metrics
   - typha-metrics
   - kube-controllers-metrics
-  - dashboards
