@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "grafana-${SECRET_DOMAIN/./-}"
+  namespace: monitoring
+spec:
+  secretName: "grafana-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "grafana.${SECRET_DOMAIN}"
+  dnsNames:
+    - "grafana.${SECRET_DOMAIN}"
