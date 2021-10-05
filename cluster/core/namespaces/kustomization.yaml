@@ -7,3 +7,4 @@ resources:
   - networking.yaml
   - rook-ceph.yaml
   - monitoring.yaml
+  - tools.yaml
