@@ -14,3 +14,6 @@ spec:
     - port: http-metrics
       path: /metrics
       interval: 15s
+  namespaceSelector:
+    matchNames:
+      - calico-system
