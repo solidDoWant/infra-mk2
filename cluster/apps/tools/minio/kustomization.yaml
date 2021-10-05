@@ -5,4 +5,4 @@ resources:
   - helm-release.yaml
   - minio-external-certificate.yaml
   - s3-external-certificate.yaml
-  - secrets.yaml
+  - secrets.sops.yaml
