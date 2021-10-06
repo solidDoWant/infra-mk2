@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: democratic-csi
 resources:
   - helm-release.yaml
+  - driver-config-secret.sops.yaml
