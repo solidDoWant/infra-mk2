@@ -9,3 +9,5 @@
       tags: calico
     - role: ceph
       tags: ceph
+    - role: democratic
+      tags: democratic

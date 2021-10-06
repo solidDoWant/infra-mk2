@@ -1,0 +1,35 @@
+---
+- name: Create the democratic-csi user
+  user:
+    name: democratic-csi
+    groups:
+      - sudo
+  register: created_user
+
+- name: Create the user's .ssh directory
+  file:
+    state: directory
+    path: "{{ created_user.home }}/.ssh"
+    owner: "{{ created_user.name }}"
+    group: "{{ created_user.group }}"
+    mode: 0700
+  when: created_user.changed
+
+- name: Add the SSH public key
+  lineinfile:
+    line: "ssh-rsa {{ key }} {{ created_user.name }}@k8s"
+    create: true
+    dest: "{{ created_user.home }}/.ssh/authorized_keys"
+    owner: "{{ created_user.name }}"
+    group: "{{ created_user.group }}"
+    mode: 0600
+  vars:
+    key: "\
+      AAAAB3NzaC1yc2EAAAABJQAAAQEAkkDxTmUtzwsx7qL9INb0eHPi4a0aIsC4pl\
+      fFkWW3+O++7e7YXHBAMb8kDW0S3aWCi+naIOPcuSi2/rwRozXUFKR8MVc79CPJ\
+      Gyl6s4LZrLo5InkDYV/cdROykHepARb2JCQHOqaEq6FkKUMvZ4/NLDAU9dV7Qz\
+      uVZ/BJQ8g+MQB5a0Czs1J0AYgdteX+vjp0lZrpB7KAyF/rldsIyNW8vkQp06Wj\
+      2q33NhYoSdaClullWfelNhRLs3Ysuj8Sr6KsIDbAeHXrGlaa8YuUy3JzNMYvGF\
+      nbH+FrEgFA0LM9TdizqS+6M6P306Qt8jYq8E/hJplxwdwhSEcFv4rU9ynOlw==\
+    "
+  when: created_user.changed

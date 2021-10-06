@@ -1,5 +1,4 @@
 ---
-
 - name: Create a GPG key for Flux
   include: gpg/optional_create_key.yaml
   vars:

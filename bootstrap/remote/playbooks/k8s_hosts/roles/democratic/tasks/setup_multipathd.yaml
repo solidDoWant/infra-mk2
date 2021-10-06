@@ -1,0 +1,23 @@
+---
+- name: Check if multipath is already configured with required settings
+  command: "egrep '^.+find_multipaths\\s+yes.*$' {{ multipath_conf_path }}"
+  ignore_errors: true
+  register: multipath_config_check
+
+- name: Configure multipath
+  copy:
+    src: multipath.conf
+    dest: "{{ multipath_conf_path }}"
+    owner: root
+    group: root
+    mode: 0644
+  register: multipath_config
+  when: multipath_config_check.rc != 0
+
+- name: Restart multipathd
+  service:
+    name: multipathd
+    state: restarted
+  when:
+    - multipath_config_check.rc != 0
+    - multipath_config.changed

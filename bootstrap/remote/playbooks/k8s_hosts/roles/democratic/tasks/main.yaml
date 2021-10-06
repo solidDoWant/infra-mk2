@@ -1,0 +1,15 @@
+---
+- name: Install packages
+  include: install_packages.yaml
+
+- name: Setup multipathd
+  include: setup_multipathd.yaml
+  vars:
+    multipath_conf_path: /etc/multipath.conf
+
+- name: Setup open-iscsi
+  include: setup_openiscsi.yaml
+
+- name: Sestup the democratic-csi user
+  include: setup_user.yaml
+  when: "'zfs_hosts' in group_names"

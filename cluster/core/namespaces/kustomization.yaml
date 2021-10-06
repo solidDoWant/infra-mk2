@@ -8,3 +8,4 @@ resources:
   - rook-ceph.yaml
   - monitoring.yaml
   - tools.yaml
+  - democratic-csi.yaml

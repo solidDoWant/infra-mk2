@@ -1,0 +1,5 @@
+---
+- name: Start open-iscsi
+  service:
+    name: open-iscsi
+    state: started

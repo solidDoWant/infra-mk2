@@ -7,3 +7,4 @@ resources:
   - cert-manager
   - system-upgrade
   - rook-ceph
+  - democratic-csi

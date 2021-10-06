@@ -1,0 +1,16 @@
+---
+- name: Install dependencies
+  apt:
+    name:
+      - open-iscsi
+      - lsscsi
+      - sg3-utils
+      - multipath-tools
+      - scsitools
+      - nfs-common
+      - targetcli-fb
+    state: latest
+    update_cache: true
+    cache_valid_time: 600
+    autoclean: true
+    autoremove: true

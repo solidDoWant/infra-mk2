@@ -21,8 +21,37 @@
     - role: create_dataset
       tags:
         - create_dataset
-        - create_media_dataset
+        - create_k8s_dataset
       vars:
-        dataset_name: minio
+        dataset_name: k8s
         _async: true
-        nfs: true
+        nfs: false
+    - role: create_dataset
+      tags:
+        - create_dataset
+        - create_k8s_dataset
+        - create_democratic_csi_dataset
+      vars:
+        dataset_name: k8s/democratic-csi
+        _async: true
+        nfs: false
+    - role: create_dataset
+      tags:
+        - create_dataset
+        - create_k8s_dataset
+        - create_democratic_csi_dataset
+        - create_pvcs_dataset
+      vars:
+        dataset_name: k8s/democratic-csi/pvcs
+        _async: true
+        nfs: false
+    - role: create_dataset
+      tags:
+        - create_dataset
+        - create_k8s_dataset
+        - create_democratic_csi_dataset
+        - create_snapshots_dataset
+      vars:
+        dataset_name: k8s/democratic-csi/snapshots
+        _async: true
+        nfs: false
