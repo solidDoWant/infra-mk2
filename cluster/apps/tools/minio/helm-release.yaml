@@ -16,4 +16,22 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    tenants: {}
+    mode: standalone
+    replicas: 1
+    persistence:
+      existingClaim: storage
+      storageClass: "-"
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-host-02
+    resources: {}
+    metrics:
+      serviceMonitor:
+        enabled: true

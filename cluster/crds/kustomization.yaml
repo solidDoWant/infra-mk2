@@ -6,5 +6,4 @@ resources:
   - traefik
   - rook-ceph
   - kube-prometheus-stack
-  - minio
   - democratic-csi
