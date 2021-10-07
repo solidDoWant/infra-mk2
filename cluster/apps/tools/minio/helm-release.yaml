@@ -16,4 +16,4 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    tenants: null
+    tenants: {}
