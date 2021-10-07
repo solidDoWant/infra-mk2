@@ -1,0 +1,27 @@
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: minio-console
+#   annotations:
+#     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+#   labels:
+#     # app.kubernetes.io/instance: rook-ceph-mgr-dashboard
+#     # app.kubernetes.io/name: rook-ceph-mgr-dashboard
+# spec:
+#   ingressClassName: "traefik"
+#   rules:
+#     - host: "minio-console.${SECRET_DOMAIN}"
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: rook-ceph-mgr-dashboard
+#                 port:
+#                   name: https-dashboard
+#   tls:
+#     - hosts:
+#         - "minio-console.${SECRET_DOMAIN}"
+#       secretName: "minio-console-${SECRET_DOMAIN/./-}-tls"
