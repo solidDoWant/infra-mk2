@@ -39,6 +39,17 @@ spec:
       repository: minio/mc
       tag: RELEASE.2021-10-07T04-19-58Z
       pullPolicy: IfNotPresent
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      ingressClassName: "traefik"
+      hosts:
+        - "s3.${SECRET_DOMAIN}"
+      tls:
+        - hosts:
+            - "s3.${SECRET_DOMAIN}"
+          secretName: "s3-${SECRET_DOMAIN/./-}-tls"
     consoleIngress:
       enabled: true
       annotations:

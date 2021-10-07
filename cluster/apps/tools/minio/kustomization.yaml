@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - pvc.yaml
-  # - minio-external-certificate.yaml
-  # - s3-external-certificate.yaml
+  - minio-external-certificate.yaml
+  - s3-external-certificate.yaml
   # - secrets.sops.yaml
-  # - ingress.yaml
