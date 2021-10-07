@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: loki-credentials
+  name: loki-chart
 type: Opaque
 stringData:
   values.yaml: |
