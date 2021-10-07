@@ -7,4 +7,3 @@ resources:
   - s3-external-certificate.yaml
   - secrets.sops.yaml
   - ingress.yaml
-  - default-tenant.yaml
