@@ -1,5 +1,5 @@
 ---
-apiVersion: minio.min.ioo/v2
+apiVersion: minio.min.io/v2
 kind: Tenant
 metadata:
   name: default
