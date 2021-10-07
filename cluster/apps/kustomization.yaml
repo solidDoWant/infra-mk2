@@ -9,4 +9,4 @@ resources:
   - monitoring
   - flux-system
   - calico-system
-  # - tools
+  - tools
