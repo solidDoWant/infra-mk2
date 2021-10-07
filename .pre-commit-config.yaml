@@ -48,5 +48,6 @@ repos:
       - id: forbid-secrets
         exclude: |
           (?x)(
-            tmpl/.*
+            tmpl/.*|
+            cluster/apps/monitoring/loki/loki-chart\.yaml
           )

@@ -3,6 +3,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - helm-release.yaml
-  - pvc.yaml
-  - minio-external-certificate.yaml
-  - s3-external-certificate.yaml
+  # - external-certificate.yaml
+  - loki-chart.yaml

@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - kube-prometheus-stack
   - grafana
+  - loki

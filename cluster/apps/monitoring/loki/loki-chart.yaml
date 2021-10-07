@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: loki-credentials
+type: Opaque
+stringData:
+  values.yaml: |
+    users:
+      - accessKey: ${SECRET_MINIO_ACCESS_KEY}
+        secretKey: ${SECRET_MINIO_SECRET_KEY}
+        policy: readwrite
+    buckets:
+      - name: loki
