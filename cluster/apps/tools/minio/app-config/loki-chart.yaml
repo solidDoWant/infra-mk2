@@ -12,3 +12,4 @@ stringData:
         policy: readwrite
     buckets:
       - name: loki
+        policy: none
