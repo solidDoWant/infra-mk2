@@ -20,7 +20,7 @@ spec:
               service:
                 name: console
                 port:
-                  name: https
+                  name: http
   tls:
     - hosts:
         - "minio.${SECRET_DOMAIN}"
