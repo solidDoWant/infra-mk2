@@ -1,0 +1,37 @@
+---
+apiVersion: minio.min.ioo/v2
+kind: Tenant
+metadata:
+  name: default
+  labels:
+    app: minio
+  annotations:
+    prometheus.io/path: /minio/v2/metrics/cluster
+    prometheus.io/port: 9000
+    prometheus.io/scrape: "true"
+spec:
+  credsSecret:
+    name: default-tenant-creds
+  pools:
+    - name: bulk-zfs-pool
+      servers: 1
+      volumesPerServer: 4
+      volumeClaimTemplate:
+        metadata:
+          name: minio-bulk-zfs-pool
+        spec:
+          storageClassName: zfs-iscsi-bulk-csi
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 25Gi
+      affinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-host-02
