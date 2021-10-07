@@ -36,3 +36,4 @@ spec:
                     operator: In
                     values:
                       - k8s-host-02
+      requestAutoCert: false
