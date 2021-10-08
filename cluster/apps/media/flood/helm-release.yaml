@@ -38,15 +38,14 @@ spec:
     env:
       TZ: "America/Chicago"
       FLOOD_OPTION_RUNDIR: /config
-      # FLOOD_OPTION_rundir: /config
-      FLOOD_OPTION_auth: none
-      FLOOD_OPTION_trurl: "http://transmission.media.svc.cluster.local:$(MEDIA_TRANSMISSION_SERVICE_PORT_HTTP)/transmission/rpc/"
-      FLOOD_OPTION_truser:
+      FLOOD_OPTION_AUTH: none
+      FLOOD_OPTION_TRURL: "http://transmission.media.svc.cluster.local:$(MEDIA_TRANSMISSION_SERVICE_PORT_HTTP)/transmission/rpc/"
+      FLOOD_OPTION_TRUSER:
         valueFrom:
           secretKeyRef:
             name: transmission-credentials
             key: username
-      FLOOD_OPTION_trpass:
+      FLOOD_OPTION_TRPASS:
         valueFrom:
           secretKeyRef:
             name: transmission-credentials
