@@ -23,7 +23,11 @@ spec:
         reject_old_samples: false
       storage_config:
         aws:
-          s3: s3://${SECRET_MINIO_ACCESS_KEY}:${SECRET_MINIO_SECRET_KEY}@minio.tools:9000/loki"
+          s3: s3://minio.tools:9000/loki"
+          bucketnames: loki
+          endpoint: minio.tools:9000
+          access_key_id: "${SECRET_MINIO_ACCESS_KEY}"
+          secret_access_key: "${SECRET_MINIO_SECRET_KEY}"
           s3forcepathstyle: true
           # insecure: true
         boltdb_shipper:
