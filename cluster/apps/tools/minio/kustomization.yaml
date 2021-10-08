@@ -7,4 +7,4 @@ resources:
   - minio-external-certificate.yaml
   - s3-external-certificate.yaml
   - app-config
-  - internal-certificate.yaml
+  # - internal-certificate.yaml

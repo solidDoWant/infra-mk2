@@ -64,8 +64,9 @@ spec:
         - hosts:
             - "minio.${SECRET_DOMAIN}"
           secretName: "minio-${SECRET_DOMAIN/./-}-tls"
-    tls:
-      enabled: true
-      certSecret: minio-tools-svc-cluster-local-tls
-      publicCrt: tls.crt
-      privateKey: tls.key
+    # Minio console doesn't trust cert despite x509 being placed in correct directory
+    # tls:
+    #   enabled: true
+    #   certSecret: minio-tools-svc-cluster-local-tls
+    #   publicCrt: tls.crt
+    #   privateKey: tls.key

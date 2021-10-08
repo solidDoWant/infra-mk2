@@ -29,9 +29,9 @@ spec:
           access_key_id: "${SECRET_MINIO_ACCESS_KEY}"
           secret_access_key: "${SECRET_MINIO_SECRET_KEY}"
           s3forcepathstyle: true
-          http_config:
-            insecure_skip_verify: true
-          # insecure: true
+          # http_config:
+          #   insecure_skip_verify: true
+          insecure: true
         boltdb_shipper:
           resync_interval: 5s
           shared_store: s3
