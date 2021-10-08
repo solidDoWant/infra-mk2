@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "transmission-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "transmission-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "transmission.${SECRET_DOMAIN}"
+  dnsNames:
+    - "transmission.${SECRET_DOMAIN}"

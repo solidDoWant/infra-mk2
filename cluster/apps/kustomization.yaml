@@ -10,3 +10,4 @@ resources:
   - flux-system
   - calico-system
   - tools
+  - media

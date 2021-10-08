@@ -9,3 +9,4 @@ resources:
   - monitoring.yaml
   - tools.yaml
   - democratic-csi.yaml
+  - media.yaml
