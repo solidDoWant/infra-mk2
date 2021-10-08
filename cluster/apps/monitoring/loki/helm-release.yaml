@@ -16,29 +16,16 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    # ingress:
-    #   enabled: true
-    #   annotations:
-    #     kubernetes.io/ingress.class: "traefik"
-    #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    #   hosts:
-    #     - host: "loki.${SECRET_DOMAIN}"
-    #       paths:
-    #         - /
-    #   tls:
-    #     - hosts:
-    #         - "loki.${SECRET_DOMAIN}"
     serviceMonitor:
       enabled: true
     config:
+      limits_config:
+        reject_old_samples: false
       storage_config:
         aws:
-          bucketnames: loki
-          endpoint: minio.tools:9000
-          access_key_id: "${SECRET_MINIO_ACCESS_KEY}"
-          secret_access_key: "${SECRET_MINIO_SECRET_KEY}"
+          s3: s3://${SECRET_MINIO_ACCESS_KEY}:${SECRET_MINIO_SECRET_KEY}@minio.tools:9000/loki"
           s3forcepathstyle: true
-          insecure: true
+          # insecure: true
         boltdb_shipper:
           resync_interval: 5s
           shared_store: s3
