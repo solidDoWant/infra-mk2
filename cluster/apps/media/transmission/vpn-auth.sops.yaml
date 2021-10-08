@@ -4,15 +4,15 @@ metadata:
     name: vpn-auth
 type: Opaque
 stringData:
-    values.yaml: ENC[AES256_GCM,data:q00JVO9Gbyls3FzZGJ746sI/JO8A5Q8Ve2cbmgmwEaUZ81HPxrRYPVaE+dsDlpQLzmDBUsU+zewObJFcxcM5Ga0He/YFPsvd3E4ocxYZ,iv:KlX3TQ0YqdrMVIecpRwZpA5EIZnePABrrPLDhgx6En0=,tag:gfiWp5A5ySnZe8riMAunxg==,type:str]
+    VPN_AUTH: ENC[AES256_GCM,data:3tdRlvnd+MjtMDJpzYHem7yjj/4=,iv:s6Q8wzgwguafYNS//2Y1fGosaPwu5Yjg0d19pB1F+2A=,tag:NrniKq40d3/gCH7gvgwUWg==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2021-10-08T19:44:45Z"
-    mac: ENC[AES256_GCM,data:rYZb28GZi5JvKd8kGHeIx3WXhD0n8rZwCX7p7KOl4WWpv282taOuu1FT1xB3YmBBUQoQDK9J3caKb9IypdhDiuRhkuPCP3aVr8KDCWVBSskA9dSOg2xL3V5X3V8NZz+SfphqvEQKSpY0uaIy9EmlDnvJWnL7HRDIe3Mtpw1/Ato=,iv:IHnJHGATg1TDYTrgh9nQyNs7PUxfKpmjKoKBYHcReAM=,tag:hZL6nGx/zUPQxYUsNaEvXg==,type:str]
+    lastmodified: "2021-10-08T20:38:02Z"
+    mac: ENC[AES256_GCM,data:NDsHMbbFmPEajOSmnagk3OzdpQH3UiwYWkyZP1rE5TDRgidkzp9bzb5agExQDebw5LOriGJdshOAaZdhtWBcuHA9OHPPSf225rKM2Y2bAOyhcfrsFPpZkMpviBJVOoLRuDg+0jOIdFiYzTaKk/kEBI4GRzqEwebTckhiDz8hYWw=,iv:gJaKJHkyC1HqGkr3Y2FONuom7Z5/HME2j/ZIKkNQGRI=,tag:aWXwCvH5IbevW6IzozlGSg==,type:str]
     pgp:
         - created_at: "2021-10-08T19:44:44Z"
           enc: |

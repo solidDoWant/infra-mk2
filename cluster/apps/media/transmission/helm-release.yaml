@@ -15,9 +15,6 @@ spec:
         name: k8s-at-home-charts
         namespace: flux-system
       interval: 5m
-  valuesFrom:
-    - kind: Secret
-      name: vpn-auth
   values:
     ingress:
       dashboard:
@@ -108,6 +105,7 @@ spec:
           FIREWALL: 'on'
           ROUTE: 10.0.0.0/8
         openvpn:
+          authSecret: vpn-auth
         scripts:
           up: |-
             #!/bin/bash
