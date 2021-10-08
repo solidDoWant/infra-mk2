@@ -114,7 +114,7 @@ spec:
           client
           dev tun
           proto udp
-          remote 70.39.81.134 1198
+          remote us-chicago.privacy.network 1198
           resolv-retry infinite
           nobind
           persist-key
