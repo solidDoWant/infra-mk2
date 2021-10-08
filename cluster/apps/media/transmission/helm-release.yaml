@@ -34,9 +34,7 @@ spec:
     additionalContainers:
       exporter:
         name: exporter
-        image:
-          repository: metalmatze/transmission-exporter
-          tag: master
+        image: "metalmatze/transmission-exporter:master"
         env:
           - name: WEB_ADDR
             value: ":9100"
