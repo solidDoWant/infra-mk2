@@ -50,7 +50,7 @@ spec:
                 key: password
         ports:
           - name: metrics
-            value: 9100
+            containerPort: 9100
     service:
       metrics:
         enabled: true
