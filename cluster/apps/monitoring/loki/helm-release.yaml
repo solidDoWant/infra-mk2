@@ -47,7 +47,8 @@ spec:
             store: inmemory
         enable_api: true
     persistence:
-      enabled: true
+      enabled: false
+      # enabled: true
       storageClassName: zfs-iscsi-bulk-csi
     alerting_groups:
       #
@@ -63,7 +64,7 @@ spec:
               severity: critical
               category: logs
             annotations:
-              summary: "SMART has reported failures a drive on {{ hostname }}"
+              summary: "SMART has reported failures a drive on {{ $hostname }}"
       # #
       # # *arr applications
       # #
