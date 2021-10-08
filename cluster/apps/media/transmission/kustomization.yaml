@@ -5,5 +5,5 @@ resources:
   - credentials.sops.yaml
   - vpn-auth.sops.yaml
   - helm-release.yaml
-  # - external-certificate.yaml
-  # - service-monitor.yaml
+  - external-certificate.yaml
+  - service-monitor.yaml

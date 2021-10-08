@@ -4,12 +4,12 @@ kind: ServiceMonitor
 metadata:
   name: transmission-metrics
   labels:
-    k8s-app: calico-node
+    app.kubernetes.io/name: transmission
 spec:
   selector:
     matchLabels:
-      k8s-app: calico-node
+      app.kubernetes.io/name: transmission
   endpoints:
-    - port: http-metrics
+    - port: metrics
       path: /metrics
       interval: 15s
