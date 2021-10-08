@@ -35,6 +35,15 @@ spec:
         boltdb_shipper:
           resync_interval: 5s
           shared_store: s3
+        filesystem: {}
+      schema_config:
+        - from: 2020-10-24
+          store: boltdb-shipper
+          object_store: aws
+          schema: v11
+          index:
+            prefix: index_
+            period: 24h
       ruler:
         storage:
           type: local
