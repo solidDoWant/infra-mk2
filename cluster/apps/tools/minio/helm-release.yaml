@@ -67,3 +67,5 @@ spec:
     tls:
       enabled: true
       certSecret: minio-tools-svc-cluster-local-tls
+      publicCrt: tls.crt
+      privateKey: tls.key
