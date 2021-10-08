@@ -37,7 +37,7 @@ spec:
           shared_store: s3
         filesystem: null
       schema_config:
-        config:
+        configs:
           - from: 2020-10-24
             store: boltdb-shipper
             object_store: aws
