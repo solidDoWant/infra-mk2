@@ -5,4 +5,5 @@ resources:
   - helm-release.yaml
   - letsencrypt-production.yaml
   - letsencrypt-staging.yaml
+  - selfsigned.yaml
   - secret.sops.yaml

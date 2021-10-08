@@ -64,3 +64,6 @@ spec:
         - hosts:
             - "minio.${SECRET_DOMAIN}"
           secretName: "minio-${SECRET_DOMAIN/./-}-tls"
+    tls:
+      enabled: true
+      certSecret: minio-tools-svc-cluster-local-tls

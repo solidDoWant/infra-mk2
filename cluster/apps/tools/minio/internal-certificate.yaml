@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "minio-tools-svc-cluster-local"
+spec:
+  secretName: "minio-tools-svc-cluster-local-tls"
+  issuerRef:
+    name: selfsigned
+    kind: ClusterIssuer
+  commonName: "minio.tools.svc.cluster.local"
+  dnsNames:
+    - minio.tools.svc.cluster.local"
