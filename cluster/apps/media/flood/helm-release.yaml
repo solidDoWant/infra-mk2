@@ -31,12 +31,13 @@ spec:
           - hosts:
               - "flood.${SECRET_DOMAIN}"
             secretName: flood-${SECRET_DOMAIN/./-}-tls
-    # persistence:
-    #   config:
-    #     enabled: true
-    #     mountPath: /config
+    persistence:
+      config:
+        enabled: true
+        mountPath: /config
     env:
       TZ: "America/Chicago"
+      FLOOD_OPTION_RUNDIR: /config
       # FLOOD_OPTION_rundir: /config
       FLOOD_OPTION_auth: none
       FLOOD_OPTION_trurl: "http://transmission.media.svc.cluster.local:$(MEDIA_TRANSMISSION_SERVICE_PORT_HTTP)/transmission/rpc/"
