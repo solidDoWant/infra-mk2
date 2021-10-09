@@ -6,4 +6,4 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      Authorization: "bnpiZ2V0OnRlZ2J6bjY3ODk="
+      Authorization: "Basic bnpiZ2V0OnRlZ2J6bjY3ODk="
