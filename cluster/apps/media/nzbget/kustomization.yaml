@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - no-auth-middleware.yaml
-  # - external-certificate.yaml
+  - external-certificate.yaml
