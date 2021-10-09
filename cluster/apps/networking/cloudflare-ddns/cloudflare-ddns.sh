@@ -24,7 +24,7 @@ update4=$(curl -s -X PUT \
 )
 
 if echo "$update4" | grep -q '\"success\":false'; then
-    printf "%s - Error - Updating IP Address '%s' has failed" "$(date -u)" "$ip4"
+    printf "%s - Error - Updating IP Address '%s' has failed due to response \"$update4\"" "$(date -u)" "$ip4"
     exit 1
 else
     printf "%s - Success - IP Address '%s' has been updated" "$(date -u)" "$ip4"
