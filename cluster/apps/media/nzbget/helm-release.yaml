@@ -22,7 +22,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: nzbget-no-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: media-nzbget-no-auth@kubernetescrd
         hosts:
           - host: "nzbget.${SECRET_DOMAIN}"
             paths:
