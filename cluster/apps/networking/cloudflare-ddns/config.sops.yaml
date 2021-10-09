@@ -5,15 +5,15 @@ metadata:
 type: Opaque
 stringData:
     CLOUDFLARE_ZONEID: ENC[AES256_GCM,data:0gp90co1GEIHfmHEX2/vS7cQn2MKVUv8is2Z6YFrsNg=,iv:eqUc90GzB3o8B6YAQeLCEgzh3eiZdGVxFhCFbFsUXuU=,tag:Q3uuXusBwMHalj640IRgVg==,type:str]
-    CLOUDFLARE_RECORD_NAME: ENC[AES256_GCM,data:sucwXwfi8jXa,iv:XKkB7YY1TSRKgLnzP6QYPXT6Cx4YYpsQmPy63jnFa7c=,tag:viMZEs+DXKvlvdyxYHxH1w==,type:str]
+    CLOUDFLARE_RECORD_NAME: ENC[AES256_GCM,data:xpvKxCeSCewDDHBGXNkZrsswRuNJeTCE,iv:zz1ScLwxwzmS/kZct/MdsEuoylwlaDGd1NsF6pUrDIc=,tag:BGCm5uA/ioI1YuQhzhYGGw==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2021-10-09T17:50:37Z"
-    mac: ENC[AES256_GCM,data:u1DkD3F/mU0wjS8Q0AqsGKwqQmp+UDm9arrW8tTu5aR0HRtQnQXlzn6w7bh3MlqsGW+YRdw2Vu4b9IGrMdgZEds+Kgnc+fLLNiiAqJp2HvER4l/WgiOAsJbVdTrGMzJRHbMsu41dLWvdpxSAf/32dhryYn3NV9QwmnZBkr1ZH5g=,iv:ABAr6+mTB2CQQxEntVEE6p+vKKh54mtPsLNkKSGNvIA=,tag:92iFKRD5dvTyYtDmZRu/Aw==,type:str]
+    lastmodified: "2021-10-09T18:21:45Z"
+    mac: ENC[AES256_GCM,data:sFUlW8HAZiJ36kv+55a3XZbS4mphi29c3CQphTLev1Na+c4uYQeVDY5bxMKR3Gk1QeqZiImU9L2M/slTvcsFvFKWzWhZYeSvGo2GdUtqIKnFANn03bZy+9+r8rCR2JAeXfmczB2bd1PNOk1Vz6UIsnTOCZD+ErVbHeNDonKuv2o=,iv:qOjvRxwNrcllMwQ214hsUBnpzzC0kQDRv2dk8E/TuIA=,tag:rPPJdlPk7TmBfBf8xly9aQ==,type:str]
     pgp:
         - created_at: "2021-10-09T17:50:36Z"
           enc: |
