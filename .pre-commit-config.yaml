@@ -49,5 +49,7 @@ repos:
         exclude: |
           (?x)(
             tmpl/.*|
-            cluster/apps/tools/minio/app-config/loki-chart\.yaml
+            cluster/apps/tools/minio/app-config/loki-chart\.yaml|
+            cluster/core/cert-manager/secret\.yaml|
+            cluster/apps/networking/cloudflare-ddns/credentials\.yaml
           )

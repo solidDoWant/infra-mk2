@@ -1,0 +1,43 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cloudflare-ddns
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: "Forbid"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      ttlSecondsAfterFinished: 300
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: cloudflare-ddns
+              image: alpine:3.13.6
+              envFrom:
+                - secretRef:
+                    name: cloudflare-ddns-credentials
+                - secretRef:
+                    name: cloudflare-ddns-config
+              command:
+                - "/bin/sh"
+                - "/app/cloudflare-ddns.sh"
+              volumeMounts:
+                - name: cloudflare-ddns
+                  mountPath: /app/cloudflare-ddns.sh
+                  subPath: cloudflare-ddns.sh
+                  readOnly: true
+          volumes:
+            - name: cloudflare-ddns
+              projected:
+                defaultMode: 0555
+                sources:
+                  - configMap:
+                      name: cloudflare-ddns
+                      items:
+                        - key: cloudflare-ddns.sh
+                          path: cloudflare-ddns.sh
