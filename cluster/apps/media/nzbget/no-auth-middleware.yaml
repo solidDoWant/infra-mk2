@@ -1,0 +1,9 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nzbget-no-auth
+spec:
+  headers:
+    customRequestHeaders:
+      Authorization: "bnpiZ2V0OnRlZ2J6bjY3ODk="
