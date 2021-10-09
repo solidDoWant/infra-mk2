@@ -6,4 +6,4 @@ resources:
   - letsencrypt-production.yaml
   - letsencrypt-staging.yaml
   - selfsigned.yaml
-  - secret.sops.yaml
+  - secret.yaml
