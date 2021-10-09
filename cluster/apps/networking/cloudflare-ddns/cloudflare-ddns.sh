@@ -5,8 +5,7 @@ set -o errexit
 ip4=$(curl -s https://ipv4.icanhazip.com/)
 record4=$(curl -s -X GET \
     "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONEID/dns_records?name=$CLOUDFLARE_RECORD_NAME&type=A" \
-    -H "X-Auth-Email: $CLOUDFLARE_EMAIL" \
-    -H "X-Auth-Key: $CLOUDFLARE_APIKEY" \
+    -H "Authorization: Bearer $CLOUDFLARE_TOKEN" \
     -H "Content-Type: application/json" \
 )
 
@@ -19,8 +18,7 @@ fi
 record4_identifier=$(echo "$record4" | sed -n 's/.*"id":"\([^"]*\).*/\1/p')
 update4=$(curl -s -X PUT \
     "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONEID/dns_records/$record4_identifier" \
-    -H "X-Auth-Email: $CLOUDFLARE_EMAIL" \
-    -H "X-Auth-Key: $CLOUDFLARE_APIKEY" \
+    -H "Authorization: Bearer $CLOUDFLARE_TOKEN" \
     -H "Content-Type: application/json" \
     --data "{\"id\":\"$CLOUDFLARE_ZONEID\",\"type\":\"A\",\"proxied\":true,\"name\":\"$CLOUDFLARE_RECORD_NAME\",\"content\":\"$ip4\"}" \
 )
