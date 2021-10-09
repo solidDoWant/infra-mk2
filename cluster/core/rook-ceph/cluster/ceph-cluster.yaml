@@ -142,8 +142,8 @@ spec:
   # To control where various services will be scheduled by kubernetes, use the placement configuration sections below.
   # The example under 'all' would have all services scheduled on kubernetes nodes labeled with 'role=storage-node' and
   # tolerate taints with a key of 'storage-node'.
-  placement:
-    all:
+  # placement:
+    # all:
 #      nodeAffinity:
 #        requiredDuringSchedulingIgnoredDuringExecution:
 #          nodeSelectorTerms:
@@ -155,9 +155,9 @@ spec:
 #      podAffinity:
 #      podAntiAffinity:
 #      topologySpreadConstraints:
-    tolerations:
+    # tolerations:
 #      - key: storage-node
-      operator: Exists
+      # operator: Exists
 # The above placement information can also be specified for mon, osd, and mgr components
 #    mon:
 # Monitor deployments may contain an anti-affinity rule for avoiding monitor
@@ -229,7 +229,7 @@ spec:
 # nodes below will be used as storage resources.  Each node's 'name' field should match their 'kubernetes.io/hostname' label.
     nodes:
       - name: k8s-host-02
-        osdsPerDevice: "1"
+        # osdsPerDevice: "1"
         devices:
           - name: /dev/disk/by-path/pci-0000:44:00.0-sas-exp0x500056b37789abff-phy12-lun-0
             config:
@@ -256,7 +256,7 @@ spec:
             config:
               metadataDevice: nvme1n1
       - name: k8s-host-03
-        osdsPerDevice: "1"
+        # osdsPerDevice: "1"
         devices:
           - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:0
             config:
