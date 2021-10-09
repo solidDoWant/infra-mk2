@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: networking
 resources:
   - cron-job.yaml
+  - credentials.yaml
+  - config.sops.yaml
 configMapGenerator:
   - name: cloudflare-ddns
     files:

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    name: cloudflare-ddns
+    name: cloudflare-ddns-config
 type: Opaque
 stringData:
     CLOUDFLARE_ZONEID: ENC[AES256_GCM,data:0gp90co1GEIHfmHEX2/vS7cQn2MKVUv8is2Z6YFrsNg=,iv:eqUc90GzB3o8B6YAQeLCEgzh3eiZdGVxFhCFbFsUXuU=,tag:Q3uuXusBwMHalj640IRgVg==,type:str]
