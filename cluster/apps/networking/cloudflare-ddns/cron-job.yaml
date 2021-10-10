@@ -20,7 +20,7 @@ spec:
               image: curlimages/curl:7.79.1
               envFrom:
                 - secretRef:
-                    name: cloudflare-ddns-credentials
+                    name: cloudflare-credentials
                 - secretRef:
                     name: cloudflare-ddns-config
               command:

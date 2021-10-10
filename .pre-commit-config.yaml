@@ -51,5 +51,5 @@ repos:
             tmpl/.*|
             cluster/apps/tools/minio/app-config/loki-chart\.yaml|
             cluster/core/cert-manager/secret\.yaml|
-            cluster/apps/networking/cloudflare-ddns/credentials\.yaml
+            cluster/apps/networking/cloudflare-credentials\.yaml
           )
