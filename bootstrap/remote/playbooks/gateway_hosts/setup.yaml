@@ -18,3 +18,9 @@
       tags: setup_dynamic_routing
     - role: setup_node_exporter
       tags: setup_node_exporter
+    - role: setup_ingress
+      tags: setup_ingress
+
+  vars:
+    local_config_path: "{{ working_dir_path }}/config.xml"
+    remote_config_path: "/conf/config.xml"

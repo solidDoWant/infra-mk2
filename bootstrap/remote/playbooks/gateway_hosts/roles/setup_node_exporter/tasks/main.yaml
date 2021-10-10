@@ -36,7 +36,3 @@
         - configctl template reload OPNsense/NodeExporter
         - configctl NodeExporter start
       when: downloaded_config.changed and return_config.changed
-
-  vars:
-    local_config_path: "{{ working_dir_path }}/config.xml"
-    remote_config_path: "/conf/config.xml"

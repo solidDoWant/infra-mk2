@@ -1,0 +1,6 @@
+---
+host: localhost
+gather_facts: false
+
+tasks:
+  - name: Configure Cloudflare to use Strict SSL mode

@@ -130,9 +130,6 @@
         - configctl service reload all
         - configctl webgui restart
       when: downloaded_config.changed and return_config.changed
-  vars:
-    local_config_path: "{{ working_dir_path }}/config.xml"
-    remote_config_path: "/conf/config.xml"
   when: coredns_stop.rc != 0
 
 - name: Run CoreDNS

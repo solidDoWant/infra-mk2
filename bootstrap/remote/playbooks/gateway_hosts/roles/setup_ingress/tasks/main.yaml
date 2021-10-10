@@ -1,0 +1,166 @@
+---
+- name: Get a list of Cloudflare's IPv4 addresses
+  set_fact:
+    cloudflare_ipv4_ranges: "{{ lookup('url', 'https://www.cloudflare.com/ips-v4', http_agent='infra_mk2', split_lines=false) }}"
+  run_once: true
+
+- name: Pull the current OPNsense config
+  fetch:
+    src: "{{ remote_config_path }}"
+    dest: "{{ local_config_path }}"
+    flat: true
+  register: downloaded_config
+
+- name: Create an alias for Cloudflare's IPv4 addresses
+  block:
+    - name: Check to see if the alias already exists
+      xml:
+        path: "{{ local_config_path }}"
+        xpath: "/opnsense/OPNsense/Firewall/Alias/aliases/alias[name='Cloudflare']"
+        count: true
+      delegate_to: localhost
+      register: alias_xml
+    - name: Add the alias
+      xml:
+        path: "{{ local_config_path }}"
+        xpath: /opnsense/OPNsense/Firewall/Alias/aliases
+        input_type: xml
+        add_children: |
+          <alias uuid="{{ lookup('password', '/dev/null chars=ascii_letters,digits') | to_uuid }}">
+            <enabled>1</enabled>
+            <name>Cloudflare</name>
+            <type>network</type>
+            <proto/>
+            <counters>0</counters>
+            <updatefreq/>
+            <content>190.93.240.0/20
+          188.114.96.0/20
+          197.234.240.0/22
+          198.41.128.0/17
+          162.158.0.0/15
+          104.16.0.0/13
+          104.24.0.0/14
+          172.64.0.0/13
+          131.0.72.0/22
+          173.245.48.0/20
+          103.21.244.0/22
+          103.22.200.0/22
+          103.31.4.0/22
+          141.101.64.0/18
+          108.162.192.0/18</content>
+            <description>Cloudflare IPv4 addresses</description>
+          </alias>
+      when: alias_xml.count == 0
+  delegate_to: localhost
+  when: downloaded_config.changed
+
+- name: Configure the webgui to not listen on WAN
+  xml:
+    path: "{{ local_config_path }}"
+    xpath: "/opnsense/system/webgui/interfaces"
+    value: "opt1,opt2,opt3,opt4,lan"
+  delegate_to: localhost
+  when: downloaded_config.changed
+
+- name: Create a firewall rule to allow HTTPS inbound to Traefik
+  block:
+    - name: Check to see if the alias already exists
+      xml:
+        path: "{{ local_config_path }}"
+        xpath: "/opnsense/filter/rule[interface='wan' and destination/port=443]"
+        count: true
+      delegate_to: localhost
+      register: firewall_rule_xml
+    - name: Add the rule
+      xml:
+        path: "{{ local_config_path }}"
+        xpath: /opnsense/filter
+        input_type: xml
+        add_children: |
+          <rule>
+            <source>
+              <address>Cloudflare</address>
+            </source>
+            <interface>wan</interface>
+            <statetype>keep state</statetype>
+            <protocol>tcp</protocol>
+            <ipprotocol>inet</ipprotocol>
+            <destination>
+              <address>10.44.0.1</address>
+              <port>443</port>
+            </destination>
+            <descr>HTTPS ingress from Cloudflare</descr>
+            <category/>
+            <associated-rule-id>nat_6161df2f77f599.81449507</associated-rule-id>
+            <created>
+              <username>root@10.3.2.4</username>
+              <time>1633804079.4914</time>
+              <description>/firewall_nat_edit.php made changes</description>
+            </created>
+          </rule>
+      when: firewall_rule_xml.count == 0
+  delegate_to: localhost
+  when: downloaded_config.changed
+
+- name: Create a port forward rule to allow HTTPS inbound to Traefik
+  block:
+    - name: Check to see if the alias already exists
+      xml:
+        path: "{{ local_config_path }}"
+        xpath: "/opnsense/nat/rule[interface='wan' and local:port='443']"
+        count: true
+      delegate_to: localhost
+      register: port_forward_rule_xml
+    - name: Add the rule
+      xml:
+        path: "{{ local_config_path }}"
+        xpath: /opnsense/nat
+        input_type: xml
+        add_children: |
+          <rule>
+            <protocol>tcp</protocol>
+            <interface>wan</interface>
+            <category/>
+            <ipprotocol>inet</ipprotocol>
+            <descr>HTTPS ingress from Cloudflare</descr>
+            <tag/>
+            <tagged/>
+            <poolopts/>
+            <associated-rule-id>nat_6161df2f77f599.81449507</associated-rule-id>
+            <target>10.44.0.1</target>
+            <local-port>443</local-port>
+            <source>
+              <address>Cloudflare</address>
+            </source>
+            <destination>
+              <any>1</any>
+              <port>443</port>
+            </destination>
+            <updated>
+              <username>root@10.3.2.4</username>
+              <time>1633812095.0994</time>
+              <description>/firewall_nat_edit.php made changes</description>
+            </updated>
+            <created>
+              <username>root@10.3.2.4</username>
+              <time>1633804079.4919</time>
+              <description>/firewall_nat_edit.php made changes</description>
+            </created>
+          </rule>
+      when: port_forward_rule_xml.count == 0
+  delegate_to: localhost
+
+- name: Copy the new OPNsense config
+  copy:
+    src: "{{ local_config_path }}"
+    dest: "{{ remote_config_path }}"
+    backup: true
+  register: return_config
+  when: downloaded_config.changed
+- name: Reload OPNsense
+  command: "{{ item }}"
+  with_items:
+    - configctl filter sync
+    - configctl service reload all
+    - configctl webgui restart
+  when: downloaded_config.changed and return_config.changed
