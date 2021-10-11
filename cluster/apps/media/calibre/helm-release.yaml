@@ -31,6 +31,9 @@ spec:
           - hosts:
               - "calibre-server.${SECRET_DOMAIN}"
             secretName: calibre-server-${SECRET_DOMAIN/./-}-tls
+    service:
+      webserver:
+        enabled: true
     persistence:
       config:
         enabled: true
