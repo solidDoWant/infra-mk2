@@ -1,0 +1,9 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: calibre-web-no-auth
+spec:
+  headers:
+    customRequestHeaders:
+      X-No-Auth-Username: "admin"
