@@ -12,3 +12,4 @@ resources:
   - lidarr
   - radarr
   - sonarr
+  - bazarr
