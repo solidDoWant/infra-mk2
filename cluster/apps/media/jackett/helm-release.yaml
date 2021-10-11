@@ -49,4 +49,4 @@ spec:
     env:
       TZ: "${TIMEZONE}"
       XDG_CONFIG_HOME: /config
-      XDG_DATA_HOME: /mnt/media/jackett/data
+      XDG_DATA_HOME: ${NFS_MEDIA_PATH}/jackett/data
