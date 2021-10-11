@@ -167,9 +167,9 @@ spec:
         lidarr:
           url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/lidarr.json
           datasource: Prometheus
-        # radarr:
-        #   url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/radarr.json
-        #   datasource: Prometheus
+        radarr:
+          url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/radarr.json
+          datasource: Prometheus
         # sonarr:
         #   url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/sonarr.json
         #   datasource: Prometheus

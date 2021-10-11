@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "radarr-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "radarr-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "radarr.${SECRET_DOMAIN}"
+  dnsNames:
+    - "radarr.${SECRET_DOMAIN}"
