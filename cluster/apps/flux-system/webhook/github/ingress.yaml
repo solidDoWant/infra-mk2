@@ -23,4 +23,4 @@ spec:
   tls:
     - hosts:
         - "github-flux-webhook.${SECRET_DOMAIN}"
-      secretName: transmission-${SECRET_DOMAIN/./-}-tls
+      secretName: github-flux-webhook-${SECRET_DOMAIN/./-}-tls
