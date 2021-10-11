@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "nzbhydra2-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "nzbhydra2-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "nzbhydra2.${SECRET_DOMAIN}"
+  dnsNames:
+    - "nzbhydra2.${SECRET_DOMAIN}"
