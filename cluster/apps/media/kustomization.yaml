@@ -10,3 +10,4 @@ resources:
   - jackett
   - nzbhydra2
   - lidarr
+  - radarr

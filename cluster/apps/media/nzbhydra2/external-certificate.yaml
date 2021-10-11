@@ -2,12 +2,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "lidarr-${SECRET_DOMAIN/./-}"
+  name: "nzbhydra2-${SECRET_DOMAIN/./-}"
 spec:
-  secretName: "lidarr-${SECRET_DOMAIN/./-}-tls"
+  secretName: "nzbhydra2-${SECRET_DOMAIN/./-}-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: "lidarr.${SECRET_DOMAIN}"
+  commonName: "nzbhydra2.${SECRET_DOMAIN}"
   dnsNames:
-    - "lidarr.${SECRET_DOMAIN}"
+    - "nzbhydra2.${SECRET_DOMAIN}"
