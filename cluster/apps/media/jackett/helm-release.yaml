@@ -45,7 +45,8 @@ spec:
             server: ${NFS_ADDRESS}
             path: ${NFS_MEDIA_PATH}
     podSecurityContext:
-      fsGroup: ${NFS_GROUP_ID}
+      runAsUser: ${NFS_USER_ID}
+      runAsGroup: ${NFS_GROUP_ID}
     env:
       TZ: "${TIMEZONE}"
       XDG_CONFIG_HOME: /config
