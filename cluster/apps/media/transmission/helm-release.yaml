@@ -98,6 +98,7 @@ spec:
       vpn:
         enabled: true
         type: openvpn
+        securityContext: {}
         env:
           FIREWALL: 'on'
           ROUTE: 10.0.0.0/8
