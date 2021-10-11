@@ -44,8 +44,7 @@ spec:
           nfs:
             server: ${NFS_ADDRESS}
             path: ${NFS_MEDIA_PATH}
-    securityContext:
-      runAsUser: ${NFS_USER_ID}
-      runAsGroup: ${NFS_GROUP_ID}
     env:
       TZ: "${TIMEZONE}"
+      UID: ${NFS_USER_ID}
+      GID: ${NFS_GROUP_ID}
