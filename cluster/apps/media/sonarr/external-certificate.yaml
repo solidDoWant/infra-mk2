@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "sonarr-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "sonarr-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "sonarr.${SECRET_DOMAIN}"
+  dnsNames:
+    - "sonarr.${SECRET_DOMAIN}"

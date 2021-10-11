@@ -11,3 +11,4 @@ resources:
   - nzbhydra2
   - lidarr
   - radarr
+  - sonarr
