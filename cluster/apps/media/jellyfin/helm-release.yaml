@@ -49,6 +49,9 @@ spec:
       runAsGroup: ${NFS_GROUP_ID}
     nodeSelector:
       feature.node.kubernetes.io/custom-intel-gpu: "true"
+    resources:
+      limits:
+        gpu.intel.com/i915: 1
     env:
       TZ: "${TIMEZONE}"
       JELLYFIN_DATA_DIR: /config/data
