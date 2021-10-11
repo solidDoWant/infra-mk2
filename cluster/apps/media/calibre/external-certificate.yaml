@@ -2,12 +2,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "calibre-${SECRET_DOMAIN/./-}"
+  name: "calibre-server-${SECRET_DOMAIN/./-}"
 spec:
-  secretName: "calibre-${SECRET_DOMAIN/./-}-tls"
+  secretName: "calibre-server-${SECRET_DOMAIN/./-}-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: "calibre.${SECRET_DOMAIN}"
+  commonName: "calibre-server.${SECRET_DOMAIN}"
   dnsNames:
-    - "calibre.${SECRET_DOMAIN}"
+    - "calibre-server.${SECRET_DOMAIN}"
