@@ -34,7 +34,7 @@ spec:
     persistence:
       config:
         enabled: true
-        mountPath: /config
+        mountPath: /app/appdata
       media:
         enabled: true
         type: custom
