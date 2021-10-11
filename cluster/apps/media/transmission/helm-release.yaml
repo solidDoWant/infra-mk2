@@ -91,14 +91,13 @@ spec:
           secretKeyRef:
             name: transmission-credentials
             key: password
-    podSecurityContext:
+    securityContext:
       runAsUser: ${NFS_USER_ID}
       runAsGroup: ${NFS_GROUP_ID}
     addons:
       vpn:
         enabled: true
         type: openvpn
-        securityContext: {}
         env:
           FIREWALL: 'on'
           ROUTE: 10.0.0.0/8
