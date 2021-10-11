@@ -14,3 +14,4 @@ resources:
   - sonarr
   - bazarr
   - readarr
+  - calibre
