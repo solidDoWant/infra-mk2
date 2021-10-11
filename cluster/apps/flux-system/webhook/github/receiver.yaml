@@ -15,10 +15,10 @@ spec:
       name: flux-system
     - kind: Kustomization
       name: apps
-      apiVersion: v1beta1
+      apiVersion: kustomize.config.k8s.io/v1beta2
     - kind: Kustomization
       name: core
-      apiVersion: v1beta1
+      apiVersion: kustomize.config.k8s.io/v1beta2
     - kind: Kustomization
       name: crds
-      apiVersion: v1beta1
+      apiVersion: kustomize.config.k8s.io/v1beta2
