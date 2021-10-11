@@ -18,7 +18,7 @@ spec:
       interval: 5m
   values:
     configuration:
-      timeZone: "America/Chicago"
+      timeZone: "${TIMEZONE}"
       startTime: "2am"
       endTime: "5am"
       rebootCommand: "/usr/local/sbin/fast-reboot"  # kexec reboot

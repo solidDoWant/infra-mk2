@@ -32,5 +32,5 @@ spec:
               - "flaresolverr.${SECRET_DOMAIN}"
             secretName: flaresolverr-${SECRET_DOMAIN/./-}-tls
     env:
-      TZ: "America/Chicago"
+      TZ: "${TIMEZONE}"
       CAPTCHA_SOLVER: hcaptcha-solver

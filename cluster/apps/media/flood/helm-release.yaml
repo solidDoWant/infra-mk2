@@ -36,7 +36,7 @@ spec:
         enabled: true
         mountPath: /config
     env:
-      TZ: "America/Chicago"
+      TZ: "${TIMEZONE}"
       FLOOD_OPTION_RUNDIR: /config
       FLOOD_OPTION_AUTH: "none"
       FLOOD_OPTION_TRURL: "http://transmission.media.svc.cluster.local:$(TRANSMISSION_SERVICE_PORT_HTTP)/transmission/rpc/"

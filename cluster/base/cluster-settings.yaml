@@ -11,3 +11,4 @@ data:
   NFS_ADDRESS: 10.2.1.2
   NFS_GROUP_ID: "2000"
   NFS_MEDIA_PATH: /mnt/bulk-pool-01/media
+  TIMEZONE: "America/Chicago"

@@ -73,7 +73,7 @@ spec:
             server: ${NFS_ADDRESS}
             path: ${NFS_MEDIA_PATH}
     env:
-      TZ: "America/Chicago"
+      TZ: "${TIMEZONE}"
       TRANSMISSION_DOWNLOAD_DIR: /mnt/media/transmission/downloads
       TRANSMISSION_INCOMPLETE_DIR: /mnt/media/transmission/incomplete
       TRANSMISSION_WATCH_DIR: /mnt/media/transmission/watch
