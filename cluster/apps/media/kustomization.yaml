@@ -18,3 +18,4 @@ resources:
   - calibre-web
   - mylarr
   - jellyfin
+  - ombi

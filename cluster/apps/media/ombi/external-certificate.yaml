@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "ombi-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "ombi-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "ombi.${SECRET_DOMAIN}"
+  dnsNames:
+    - "ombi.${SECRET_DOMAIN}"
