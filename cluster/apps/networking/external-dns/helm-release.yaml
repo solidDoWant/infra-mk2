@@ -16,15 +16,14 @@ spec:
         name: bitnami-charts
         namespace: flux-system
       interval: 5m
+  valuesFrom:
+    - kind: Secret
+      name: cloudflare-credentials
+      valuesKey: CLOUDFLARE_TOKEN
+      targetPath: cloudflare.apiToken
   values:
     logLevel: debug
     provider: cloudflare
-    env:
-      - name: CF_API_TOKEN
-        valueFrom:
-          secretKeyRef:
-            name: cloudflare-credentials
-            key: CLOUDFLARE_TOKEN
     annotationFilter: "external-dns/is-public in (true)"
     # extraArgs:
       # - --cloudflare-proxied
