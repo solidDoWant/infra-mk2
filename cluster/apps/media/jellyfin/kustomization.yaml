@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - external-certificate.yaml
+  - service-monitor.yaml
