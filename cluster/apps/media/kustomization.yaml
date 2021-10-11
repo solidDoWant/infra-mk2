@@ -9,3 +9,4 @@ resources:
   - nzbget
   - jackett
   - nzbhydra2
+  - lidarr
