@@ -49,3 +49,4 @@ spec:
       TZ: "${TIMEZONE}"
       PUID: ${NFS_USER_ID}
       PGID: ${NFS_GROUP_ID}
+      DOCKER_MODS: linuxserver/calibre-web:calibre
