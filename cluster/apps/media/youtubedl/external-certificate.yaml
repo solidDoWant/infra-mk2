@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "youtubedl-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "youtubedl-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "youtubedl.${SECRET_DOMAIN}"
+  dnsNames:
+    - "youtubedl.${SECRET_DOMAIN}"

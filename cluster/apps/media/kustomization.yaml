@@ -19,3 +19,4 @@ resources:
   - mylarr
   - jellyfin
   - ombi
+  - youtubedl

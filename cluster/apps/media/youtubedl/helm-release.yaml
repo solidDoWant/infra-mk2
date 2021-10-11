@@ -1,0 +1,51 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: youtubedl-material
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: youtubedl-material
+      version: 4.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    ingress:
+      dashboard:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: "youtubedl.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "youtubedl.${SECRET_DOMAIN}"
+            secretName: youtubedl-${SECRET_DOMAIN/./-}-tls
+    persistence:
+      config:
+        enabled: true
+        mountPath: /config
+      media:
+        enabled: true
+        type: custom
+        accessMode: ReadWriteMany
+        mountPath: /mnt/media
+        volumeSpec:
+          nfs:
+            server: ${NFS_ADDRESS}
+            path: ${NFS_MEDIA_PATH}
+    securityContext:
+      runAsUser: ${NFS_USER_ID}
+      runAsGroup: ${NFS_GROUP_ID}
+    env:
+      TZ: "${TIMEZONE}"
