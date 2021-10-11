@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "mylar-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "mylar-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "mylar.${SECRET_DOMAIN}"
+  dnsNames:
+    - "mylar.${SECRET_DOMAIN}"
