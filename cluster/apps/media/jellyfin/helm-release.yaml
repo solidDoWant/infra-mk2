@@ -35,6 +35,7 @@ spec:
       config:
         enabled: true
         mountPath: /config
+        size: 25Gi
       media:
         enabled: true
         type: custom
