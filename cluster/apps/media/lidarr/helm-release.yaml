@@ -45,9 +45,9 @@ spec:
             server: ${NFS_ADDRESS}
             path: ${NFS_MEDIA_PATH}
     podSecurityContext:
-      fsGroup: ${FS_GROUP_ID}
+      fsGroup: ${NFS_GROUP_ID}
       supplementalGroups:
-        - ${FS_GROUP_ID}
+        - ${NFS_GROUP_ID}
     env:
       TZ: "${TIMEZONE}"
     metrics:

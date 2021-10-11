@@ -92,7 +92,7 @@ spec:
             name: transmission-credentials
             key: password
     podSecurityContext:
-      fsGroup: ${FS_GROUP_ID}
+      fsGroup: ${NFS_GROUP_ID}
     addons:
       vpn:
         enabled: true
