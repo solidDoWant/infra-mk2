@@ -47,6 +47,8 @@ spec:
     securityContext:
       runAsUser: ${NFS_USER_ID}
       runAsGroup: ${NFS_GROUP_ID}
+    nodeSelector:
+      feature.node.kubernetes.io/custom-intel-gpu: true
     env:
       TZ: "${TIMEZONE}"
       JELLYFIN_DATA_DIR: /config/data
