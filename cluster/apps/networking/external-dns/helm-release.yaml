@@ -22,6 +22,7 @@ spec:
       valuesKey: CLOUDFLARE_TOKEN
       targetPath: cloudflare.apiToken
   values:
+    interval: 5m
     logLevel: debug
     provider: cloudflare
     annotationFilter: "external-dns/is-public in (true)"

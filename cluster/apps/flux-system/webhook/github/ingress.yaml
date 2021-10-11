@@ -19,7 +19,7 @@ spec:
               service:
                 name: webhook-receiver
                 port:
-                  name: http-webhook
+                  number: 80
   tls:
     - hosts:
         - "github-flux-webhook.${SECRET_DOMAIN}"
