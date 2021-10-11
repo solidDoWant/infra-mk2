@@ -46,6 +46,8 @@ spec:
             path: ${NFS_MEDIA_PATH}
     podSecurityContext:
       fsGroup: ${FS_GROUP_ID}
+      supplementalGroups:
+        - ${FS_GROUP_ID}
     env:
       TZ: "${TIMEZONE}"
     metrics:
