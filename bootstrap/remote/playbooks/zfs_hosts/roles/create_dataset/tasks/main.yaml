@@ -8,6 +8,6 @@
   command: >-
     zfs create
     {{ pool_name }}/{{ dataset_name }}
-    {{ "-o sharenfs='all_squash,anonuid=0,anongid=2000,rw=@10.0.0.0/8'" if nfs is not defined or nfs }}
+    {{ "-o sharenfs='all_squash,anonuid=2000,anongid=2000,rw=@10.0.0.0/8'" if nfs is not defined or nfs }}
     {{ "-o sync=disabled" if _async is defined and _async }}
   when: zfs_list.rc != 0

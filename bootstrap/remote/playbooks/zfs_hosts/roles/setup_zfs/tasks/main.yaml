@@ -54,7 +54,8 @@
     autoclean: true
     autoremove: true
 
-- name: Create group for NFS
-  group:
+- name: Create user for NFS
+  user:
+    uid: 2000
     gid: 2000
     name: nfs_anon
