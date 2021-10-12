@@ -36,7 +36,5 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
       hosts:
-        core:
-          - harbor.echozulu.games
-        notary:
-          - notary-harbor.echozulu.games
+        core: harbor.echozulu.games
+        notary: notary-harbor.echozulu.games
