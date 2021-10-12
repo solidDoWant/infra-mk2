@@ -94,6 +94,13 @@ spec:
     securityContext:
       runAsUser: ${NFS_USER_ID}
       runAsGroup: ${NFS_GROUP_ID}
+    resources:
+      limits:
+        cpu: 250m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 64Mi
     addons:
       vpn:
         enabled: true
