@@ -21,8 +21,6 @@ spec:
       valuesKey: HARBOR_ADMIN_PASSWORD
       targetPath: harborAdminPassword
   values:
-    trivy:
-      ignoreUnfixed: true
     global:
       storageClass: rook-fast-rust-block
     externalURL: https://harbor.echozulu.games
@@ -38,3 +36,25 @@ spec:
       hosts:
         core: harbor.echozulu.games
         notary: notary-harbor.echozulu.games
+    portal:
+      updateStrategy:
+        type: Recreate
+    core:
+      updateStrategy:
+        type: Recreate
+    jobservice:
+      updateStrategy:
+        type: Recreate
+    registry:
+      updateStrategy:
+        type: Recreate
+    chartmuseum:
+      updateStrategy:
+        type: Recreate
+    notary:
+      updateStrategy:
+        type: Recreate
+    trivy:
+      ignoreUnfixed: true
+      updateStrategy:
+        type: Recreate
