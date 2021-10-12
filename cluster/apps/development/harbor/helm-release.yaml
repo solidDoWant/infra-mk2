@@ -25,7 +25,13 @@ spec:
       type: Ingress
       tls:
         existingSecret: harbor-${SECRET_DOMAIN/./-}-tls
+        # notaryExistingSecret:
     ingress:
       enabled: true
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      hosts:
+        core:
+          - harbor.echozulu.games
+        notary:
+          - notary-harbor.echozulu.games
