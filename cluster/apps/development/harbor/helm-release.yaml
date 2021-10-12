@@ -15,6 +15,11 @@ spec:
         name: bitnami-charts
         namespace: flux-system
       interval: 5m
+  valuesFrom:
+    - kind: Secret
+      name: harbor-admin-password
+      valuesKey: HARBOR_ADMIN_PASSWORD
+      targetKey: harborAdminPassword
   values:
     trivy:
       ignoreUnfixed: true
