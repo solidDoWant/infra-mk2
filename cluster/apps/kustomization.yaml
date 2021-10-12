@@ -11,3 +11,4 @@ resources:
   - calico-system
   - tools
   - media
+  - development
