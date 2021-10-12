@@ -7,3 +7,5 @@ spec:
   headers:
     customRequestHeaders:
       X-No-Auth-Username: "admin"
+    customResponseHeaders:
+      X-Frame-Options: ""
