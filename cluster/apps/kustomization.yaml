@@ -12,4 +12,4 @@ resources:
   - tools
   - media
   - development
-  - istio-system
+  - istio-operator
