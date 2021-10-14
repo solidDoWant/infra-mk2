@@ -13,3 +13,4 @@ resources:
   - media
   - development
   - istio-operator
+  - istio-system
