@@ -9,12 +9,11 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://istio-release.storage.googleapis.com/charts
-      chart: istio-operator
-      version: 1.7.0
+      chart: ./manifests/charts/istio-operator
       sourceRef:
-        kind: HelmRepository
-        name: itsio-operator-chart
+        kind: GitRepository
+        name: istio-source
         namespace: flux-system
-      interval: 5m
+      interval: 1h
   values:
     enableCRDTemplates: false

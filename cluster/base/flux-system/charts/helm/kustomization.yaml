@@ -23,4 +23,3 @@ resources:
   - stakater-charts.yaml
   - traefik-charts.yaml
   - weaveworks-kured-charts.yaml
-  - istio-operator-chart.yaml
