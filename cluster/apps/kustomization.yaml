@@ -12,3 +12,4 @@ resources:
   - tools
   - media
   - development
+  # - istio-system

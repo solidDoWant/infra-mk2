@@ -11,3 +11,4 @@ resources:
   - democratic-csi.yaml
   - media.yaml
   - development.yaml
+  - istio-system

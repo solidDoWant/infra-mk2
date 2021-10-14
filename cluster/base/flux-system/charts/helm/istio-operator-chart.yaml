@@ -1,0 +1,12 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmChart
+metadata:
+  name: itsio-operator-chart
+  namespace: flux-system
+spec:
+  chart: ./manifests/charts/istio-operator
+  sourceRef:
+    name: istio-source
+    kind: GitRepository
+  interval: 1h
