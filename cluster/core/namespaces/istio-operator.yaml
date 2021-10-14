@@ -3,7 +3,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: istio-operator
-  annotations:
+  labels:
     app.kubernetes.io/managed-by: Helm
+  annotations:
     meta.helm.sh/release-name: istio-operator
     meta.helm.sh/release-namespace: istio-operator
