@@ -23,3 +23,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
           - gocd.echozulu.games
+        tls:
+          - secretName: gocd-${SECRET_DOMAIN/./-}-tls
+            hosts:
+              - gocd.echozulu.games
