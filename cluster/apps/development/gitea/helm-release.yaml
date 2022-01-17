@@ -17,7 +17,7 @@ spec:
       interval: 5m
   valuesFrom:
     - kind: Secret
-      name: gitea-admin-credientials
+      name: gitea-admin-credentials
       targetPath: gitea.admin
   values:
     gitea:
