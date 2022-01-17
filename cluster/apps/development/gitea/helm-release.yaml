@@ -15,10 +15,6 @@ spec:
         name: gitea-charts
         namespace: flux-system
       interval: 5m
-  valuesFrom:
-    - kind: Secret
-      name: gitea-admin-credentials
-      targetPath: gitea.admin
   values:
     gitea:
       admin:
