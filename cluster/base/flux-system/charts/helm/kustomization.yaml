@@ -8,6 +8,7 @@ resources:
   - democratic-csi.yaml
   - descheduler-charts.yaml
   - external-dns-charts.yaml
+  - gitea-charts.yaml
   - gocd-charts.yaml
   - grafana-charts.yaml
   - hajimari-charts.yaml

@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "gitea-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "gitea-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "gitea.${SECRET_DOMAIN}"
+  dnsNames:
+    - "gitea.${SECRET_DOMAIN}"
+    - "git.${SECRET_DOMAIN}"
