@@ -29,4 +29,10 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
       hosts:
         - host: gitea.echozulu.games
+          paths:
+            - path: /
+              pathType: Prefix
         - host: git.echozulu.games
+          paths:
+            - path: /
+              pathType: Prefix
