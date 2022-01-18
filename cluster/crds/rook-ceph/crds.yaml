@@ -42,7 +42,7 @@ spec:
       name: cephfilesystems.ceph.rook.io
     - apiVersion: apiextensions.k8s.io/v1
       kind: CustomResourceDefinition
-      name: cephfilesystemsubvolumegroup.ceph.rook.io
+      name: cephfilesystemsubvolumegroups.ceph.rook.io
     - apiVersion: apiextensions.k8s.io/v1
       kind: CustomResourceDefinition
       name: cephnfses.ceph.rook.io
