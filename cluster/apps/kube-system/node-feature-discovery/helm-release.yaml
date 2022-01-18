@@ -18,7 +18,7 @@ spec:
       interval: 5m
   values:
     worker:
-      config: |-
+      config:
         sources:
           custom:
             - name: "intel-gpu"
