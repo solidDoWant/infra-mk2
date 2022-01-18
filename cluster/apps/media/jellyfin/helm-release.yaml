@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: linuxserver/jellyfin
-      tag: 2021.12.16
+      tag: 10.7.7
     ingress:
       dashboard:
         enabled: true
@@ -53,9 +53,6 @@ spec:
     resources:
       limits:
         gpu.intel.com/i915: 1
-    # Log show that Jellyfin is bugged and not pulling the JELLYFIN_CONFIG_DIR var specifically so this is a workaround
-    args:
-      - --configdir /config/config
     env:
       TZ: "${TIMEZONE}"
       JELLYFIN_DATA_DIR: /config/data
