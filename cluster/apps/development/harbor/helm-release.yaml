@@ -57,4 +57,4 @@ spec:
     trivy:
       ignoreUnfixed: true
       updateStrategy:
-        type: Recreate
+        type: RollingUpdate
