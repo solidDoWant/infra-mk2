@@ -8,6 +8,6 @@ spec:
     - valheim-1
   routes:
     - services:
-        - name: valheim-1
+        - name: valheim
           port: 2456
           weight: 0
