@@ -67,6 +67,11 @@ spec:
         port: 8082
         expose: true
         exposedPort: 8082
+      valheim-1:
+        port: 2456
+        expose: true
+        exposedPort: 2456
+        protocol: UDP
     tlsOptions:
       default:
         minVersion: VersionTLS12

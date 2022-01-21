@@ -1,0 +1,13 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: valheim-1
+spec:
+  entryPoints:
+    - valheim-1
+  routes:
+    - services:
+        - name: valheim-1
+          port: 2456
+          weight: 0
