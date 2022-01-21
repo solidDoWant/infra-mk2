@@ -121,13 +121,14 @@ spec:
       service:
         enabled: true
         port: 10257
-        targetPort: 10257
     kubeScheduler:
       enabled: true
       endpoints:
         - 10.2.1.1
         - 10.2.1.2
         - 10.2.1.3
+      service:
+        port: 10259
     kubeProxy:
       enabled: true
       endpoints:
@@ -136,7 +137,6 @@ spec:
         - 10.2.1.3
       service:
         port: 10249
-        targetPort: 10249
     kubeEtcd:
       enabled: true
       endpoints:
@@ -146,7 +146,6 @@ spec:
       service:
         enabled: true
         port: 2381
-        targetPort: 2381
     # Setting this option to 0 disabled CPU limits
     prometheusOperator:
       configReloaderCpu: 0
