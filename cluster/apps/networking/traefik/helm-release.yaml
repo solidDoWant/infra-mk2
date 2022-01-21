@@ -27,6 +27,8 @@ spec:
       replicas: 1
     service:
       enabled: true
+      annotations:
+        metallb.universe.tf/allow-shared-ip: "primary-shared-ip"
       type: LoadBalancer
       spec:
         loadBalancerIP: "${SVC_TRAEFIK_ADDR}"
