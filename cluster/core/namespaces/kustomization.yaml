@@ -9,6 +9,7 @@ resources:
   - monitoring.yaml
   - tools.yaml
   - democratic-csi.yaml
+  - games.yaml
   - media.yaml
   - development.yaml
   - istio-operator.yaml
