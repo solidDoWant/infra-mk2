@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteUDP
 metadata:
-  name: valheim-1
+  name: minecraft-1
 spec:
   entryPoints:
     - minecraft-1
