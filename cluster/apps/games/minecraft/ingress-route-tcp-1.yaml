@@ -1,6 +1,6 @@
 ---
 apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRouteUDP
+kind: IngressRouteTCP
 metadata:
   name: minecraft-1
 spec:
