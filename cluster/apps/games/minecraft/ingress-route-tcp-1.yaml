@@ -7,7 +7,8 @@ spec:
   entryPoints:
     - minecraft-1
   routes:
-    - services:
+    - match: HostSNI(`*`)
+      services:
         - name: minecraft
           port: 25565
           weight: 0
