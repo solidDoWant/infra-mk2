@@ -23,20 +23,20 @@ spec:
   values:
     global:
       storageClass: rook-fast-rust-block
-    externalURL: https://harbor.echozulu.games
+    externalURL: https://harbor.${SECRET_DOMAIN/./-}
     exposureType: ingress
     ingress:
       core:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hostname: harbor.echozulu.games
+        hostname: harbor.${SECRET_DOMAIN/./-}
         tls: true
         secrets:
           - harbor-${SECRET_DOMAIN/./-}-tls
       notary:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hostname: notary-harbor.echozulu.games
+        hostname: notary-harbor.${SECRET_DOMAIN/./-}
         secrets:
           - notary-harbor-${SECRET_DOMAIN/./-}-tls
         tls: true

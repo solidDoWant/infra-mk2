@@ -29,16 +29,16 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
       hosts:
-        - host: gitea.echozulu.games
+        - host: gitea.${SECRET_DOMAIN/./-}
           paths:
             - path: /
               pathType: Prefix
-        - host: git.echozulu.games
+        - host: git.${SECRET_DOMAIN/./-}
           paths:
             - path: /
               pathType: Prefix
       tls:
         - secretName: gitea-${SECRET_DOMAIN/./-}-tls
           hosts:
-            - gitea.echozulu.games
-            - git.echozulu.games
+            - gitea.${SECRET_DOMAIN/./-}
+            - git.${SECRET_DOMAIN/./-}
