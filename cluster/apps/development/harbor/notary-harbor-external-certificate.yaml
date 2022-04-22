@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "notary-harbor-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "notary-harbor-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "notary-harbor.${SECRET_DOMAIN}"
+  dnsNames:
+    - "notary-harbor.${SECRET_DOMAIN}"

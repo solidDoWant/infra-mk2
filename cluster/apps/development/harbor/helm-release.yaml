@@ -24,18 +24,22 @@ spec:
     global:
       storageClass: rook-fast-rust-block
     externalURL: https://harbor.echozulu.games
-    service:
-      type: Ingress
-      tls:
-        existingSecret: harbor-${SECRET_DOMAIN/./-}-tls
-        # notaryExistingSecret:
+    exposureType: ingress
     ingress:
-      enabled: true
-      annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-      hosts:
-        core: harbor.echozulu.games
-        notary: notary-harbor.echozulu.games
+      core:
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hostname: harbor.echozulu.games
+        tls: true
+        secrets:
+          - harbor-${SECRET_DOMAIN/./-}-tls
+      notary:
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hostname: notary-harbor.echozulu.games
+        secrets:
+          - notary-harbor-${SECRET_DOMAIN/./-}-tls
+        tls: true
     portal:
       updateStrategy:
         type: Recreate
