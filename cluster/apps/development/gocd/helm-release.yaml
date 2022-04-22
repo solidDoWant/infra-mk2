@@ -22,8 +22,8 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
-          - gocd.${SECRET_DOMAIN/./-}
+          - gocd.${SECRET_DOMAIN}
         tls:
           - secretName: gocd-${SECRET_DOMAIN/./-}-tls
             hosts:
-              - gocd.${SECRET_DOMAIN/./-}
+              - gocd.${SECRET_DOMAIN}
