@@ -32,18 +32,18 @@ spec:
         hostname: harbor.${SECRET_DOMAIN}
         tls: false
         extraTls:
-          secretName: harbor-${SECRET_DOMAIN/./-}-tls
-          hosts:
-            - harbor.${SECRET_DOMAIN}
+          - secretName: harbor-${SECRET_DOMAIN/./-}-tls
+            hosts:
+              - harbor.${SECRET_DOMAIN}
       notary:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hostname: notary-harbor.${SECRET_DOMAIN}
         tls: false
         extraTls:
-          secretName: notary-harbor-${SECRET_DOMAIN/./-}-tls
-          hosts:
-            - notary-harbor.${SECRET_DOMAIN}
+          - secretName: notary-harbor-${SECRET_DOMAIN/./-}-tls
+            hosts:
+              - notary-harbor.${SECRET_DOMAIN}
     portal:
       updateStrategy:
         type: Recreate
