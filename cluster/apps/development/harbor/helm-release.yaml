@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: harbor
-      version: 12.3.6
+      version: 12.3.7
       sourceRef:
         kind: HelmRepository
         name: bitnami-charts
