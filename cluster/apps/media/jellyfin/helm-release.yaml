@@ -20,8 +20,11 @@ spec:
       repository: linuxserver/jellyfin
       tag: latest
     command:
-      - ln /dev/dri/card1 /dev/dri/card0
-      - ln /dev/dri/RenderD129 /dev/dri/RenderD128
+      - /bin/bash
+    args:
+      - -c
+      - ln /dev/dri/card1 /dev/dri/card0;
+      - ln /dev/dri/RenderD129 /dev/dri/RenderD128;
       - /usr/bin/jellyfin --ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg --webdir=/usr/share/jellyfin/web
     ingress:
       dashboard:
