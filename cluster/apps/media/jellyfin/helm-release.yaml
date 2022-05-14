@@ -18,7 +18,6 @@ spec:
   values:
     image:
       repository: linuxserver/jellyfin
-      tag: latest
     command:
       - /bin/bash
     args:
