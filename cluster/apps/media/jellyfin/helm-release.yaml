@@ -23,9 +23,10 @@ spec:
       - /bin/bash
     args:
       - -c
-      - ln /dev/dri/card1 /dev/dri/card0;
-      - ln /dev/dri/RenderD129 /dev/dri/RenderD128;
-      - /usr/bin/jellyfin --ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg --webdir=/usr/share/jellyfin/web
+      - >-
+        ln /dev/dri/card1 /dev/dri/card0;
+        ln /dev/dri/renderD129 /dev/dri/renderD128;
+        /usr/bin/jellyfin --ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg --webdir=/usr/share/jellyfin/web
     ingress:
       dashboard:
         enabled: true
