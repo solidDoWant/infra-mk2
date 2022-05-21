@@ -45,6 +45,8 @@ spec:
                       - kiali.${SECRET_DOMAIN}
                     secretName: "kiali-${SECRET_DOMAIN/./-}-tls"
         external_services:
+          istio:
+            root_namespace: istio-system
           prometheus:
             url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
           grafana:
