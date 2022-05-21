@@ -24,6 +24,7 @@ spec:
           view_only_mode: true
           ingress:
             enabled: true
+            class_name: traefik
             override_yaml:
               spec:
                 tls:
