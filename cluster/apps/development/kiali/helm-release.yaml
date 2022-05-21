@@ -1,0 +1,60 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kiali
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://kiali.org/helm-charts
+      chart: kiali-operator
+      version: 1.50.0
+      sourceRef:
+        kind: HelmRepository
+        name: kiali-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    onlyViewOnlyMode: true
+    cr:
+      create: true
+      spec:
+        deployment:
+          ingress:
+            enabled: true
+            override_yaml:
+              spec:
+                tls:
+                  - hosts:
+                      - harbor.${SECRET_DOMAIN}
+                    secretName: "kiali-${SECRET_DOMAIN/./-}-tls"
+        external_services:
+          prometheus:
+            url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
+          grafana:
+            dashboards:
+              # - name: "Istio Service Dashboard"
+              #   variables:
+              #     namespace: "var-namespace"
+              #     service: "var-service"
+              # - name: "Istio Workload Dashboard"
+              #   variables:
+              #     namespace: "var-namespace"
+              #     workload: "var-workload"
+              - name: "Istio Mesh Dashboard"
+              - name: "Istio Control Plane Dashboard"
+              - name: "Istio Performance Dashboard"
+              - name: "Istio Wasm Extension Dashboard"
+            auth:
+              username: "admin"
+              password: "password" # TODO temporary integrate with IdP after setup
+            enabled: true
+            in_cluster_url: http://grafana.monitoring.svc.cluster.local:80
+            url: https://harbor.${SECRET_DOMAIN}
+        kiali_feature_flags:
+          certificates_information_indicators:
+            enabled: true
+            secrets:
+              - "cacerts"
+              - "istio-ca-secret"

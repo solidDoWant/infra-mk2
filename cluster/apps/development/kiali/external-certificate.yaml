@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "kiali-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "kiali-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "kiali.${SECRET_DOMAIN}"
+  dnsNames:
+    - "kiali.${SECRET_DOMAIN}"
