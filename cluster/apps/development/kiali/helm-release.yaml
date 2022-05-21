@@ -27,9 +27,20 @@ spec:
             class_name: traefik
             override_yaml:
               spec:
+                rules:
+                  - host: kiali.${SECRET_DOMAIN}
+                    http:
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                          backend:
+                            service:
+                              name: "kiali"
+                              port:
+                                number: 20001
                 tls:
                   - hosts:
-                      - harbor.${SECRET_DOMAIN}
+                      - kiali.${SECRET_DOMAIN}
                     secretName: "kiali-${SECRET_DOMAIN/./-}-tls"
         external_services:
           prometheus:
@@ -53,7 +64,7 @@ spec:
               password: "password" # TODO temporary integrate with IdP after setup
             enabled: true
             in_cluster_url: http://grafana.monitoring.svc.cluster.local:80
-            url: https://harbor.${SECRET_DOMAIN}
+            url: https://grafana.${SECRET_DOMAIN}
         kiali_feature_flags:
           certificates_information_indicators:
             enabled: true
