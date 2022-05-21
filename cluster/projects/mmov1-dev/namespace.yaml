@@ -5,3 +5,4 @@ metadata:
   name: mmov1-dev
   labels:
     istio-discovery: enabled
+    istio-injection: enabled
