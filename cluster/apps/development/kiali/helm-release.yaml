@@ -64,6 +64,7 @@ spec:
               - name: "Istio Performance Dashboard"
               - name: "Istio Wasm Extension Dashboard"
             auth:
+              type: basic
               username: "admin"
               password: "password" # TODO temporary integrate with IdP after setup
             enabled: true
