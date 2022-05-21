@@ -17,3 +17,4 @@ spec:
   values:
     enableCRDTemplates: false
     hub: gcr.io/istio-release
+    tag: 1.13.4
