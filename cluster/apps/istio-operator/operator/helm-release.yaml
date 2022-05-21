@@ -16,3 +16,4 @@ spec:
       interval: 1h
   values:
     enableCRDTemplates: false
+    hub: gcr.io/istio-release
