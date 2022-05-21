@@ -20,6 +20,8 @@ spec:
     cr:
       create: true
       spec:
+        auth:
+          strategy: anonymous
         deployment:
           view_only_mode: true
           ingress:
