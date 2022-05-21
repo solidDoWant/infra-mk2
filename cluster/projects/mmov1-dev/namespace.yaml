@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mmov1-dev
+  labels:
+    istio-discovery: enabled
