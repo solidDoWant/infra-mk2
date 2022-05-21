@@ -21,6 +21,7 @@ spec:
       create: true
       spec:
         deployment:
+          view_only_mode: true
           ingress:
             enabled: true
             override_yaml:
