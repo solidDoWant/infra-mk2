@@ -19,7 +19,7 @@ spec:
     - kind: Secret
       name: harbor-admin-password
       valuesKey: HARBOR_ADMIN_PASSWORD
-      targetPath: harborAdminPassword
+      targetPath: adminPassword
   values:
     global:
       storageClass: rook-fast-rust-block
