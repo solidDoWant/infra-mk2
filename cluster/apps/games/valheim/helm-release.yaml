@@ -19,6 +19,7 @@ spec:
     service:
       main:
         type: ClusterIP
+        externalTrafficPolicy: null
     persistence:
       config:
         enabled: true
