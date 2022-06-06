@@ -15,3 +15,4 @@ resources:
   - development
   - istio-operator
   - istio-system
+  - keycloak
