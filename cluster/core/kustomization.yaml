@@ -8,3 +8,4 @@ resources:
   - system-upgrade
   - rook-ceph
   - democratic-csi
+  - keycloak

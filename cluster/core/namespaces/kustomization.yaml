@@ -14,3 +14,4 @@ resources:
   - development.yaml
   - istio-operator.yaml
   - istio-system.yaml
+  - keycloak.yaml
