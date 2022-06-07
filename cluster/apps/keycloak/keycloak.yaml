@@ -7,7 +7,8 @@ spec:
   instances: 1
   hostname: "keycloak.${SECRET_DOMAIN}"
   tlsSecret: "keycloak-${SECRET_DOMAIN/./-}-tls"
-  defaultIngressDisabled: true
+  # Doesn't work due to a CRD/controller mismatch
+  # defaultIngressDisabled: true
   serverConfiguration:
     - name: db
       value: postgres
