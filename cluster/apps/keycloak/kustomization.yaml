@@ -7,3 +7,4 @@ resources:
   - external-certificate.yaml
   - postgresql-helm-release.yaml
   - secrets.sops.yaml
+  - ingress.yaml
