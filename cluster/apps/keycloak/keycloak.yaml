@@ -22,3 +22,5 @@ spec:
       secret:
         name: keycloak-postgresql
         key: postgresql-password
+    - name: proxy
+      value: reencrypt
