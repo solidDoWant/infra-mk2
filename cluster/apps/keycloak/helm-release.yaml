@@ -27,6 +27,7 @@ spec:
       type: ClusterIP
       externalTrafficPolicy: null
     ingress:
+      enabled: true
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
       hostname: keycloak.${SECRET_DOMAIN}
