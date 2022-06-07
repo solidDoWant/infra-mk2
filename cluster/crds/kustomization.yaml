@@ -5,6 +5,5 @@ resources:
   - cert-manager
   - traefik
   - rook-ceph
-  - keycloak
   - kube-prometheus-stack
   - istio-system
