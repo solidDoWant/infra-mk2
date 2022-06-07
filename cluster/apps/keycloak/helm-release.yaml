@@ -21,6 +21,7 @@ spec:
         name: keycloak-credentials
         keyMapping:
           admin-password: admin-password
+          management-password: management-password
     proxy: reencrypt
     service:
       type: ClusterIP
