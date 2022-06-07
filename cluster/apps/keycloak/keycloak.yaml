@@ -7,7 +7,7 @@ spec:
   instances: 1
   hostname: "keycloak.${SECRET_DOMAIN}"
   tlsSecret: "keycloak-${SECRET_DOMAIN/./-}-tls"
-  disableDefaultIngress: true
+  defaultIngressDisabled: true
   serverConfiguration:
     - name: db
       value: postgres
