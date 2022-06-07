@@ -7,3 +7,16 @@ spec:
   instances: 1
   hostname: "keycloak.${SECRET_DOMAIN}"
   tlsSecret: "keycloak-${SECRET_DOMAIN/./-}-tls"
+  serverConfiguration:
+    - name: db
+      value: postgres
+    - name: db-url-host
+      value: keycloak-postgresql
+    - name: db-username
+      secret:
+        name: keycloak-database-credentials
+        key: postgres-user
+    - name: db-password
+      secret:
+        name: keycloak-database-credentials
+        key: postgres-password
