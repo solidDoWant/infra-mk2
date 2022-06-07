@@ -18,5 +18,5 @@ spec:
         key: postgres-user
     - name: db-password
       secret:
-        name: keycloak-database-credentials
-        key: postgres-password
+        name: keycloak-postgresql
+        key: postgresql-password
