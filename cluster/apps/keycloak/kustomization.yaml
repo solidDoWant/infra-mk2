@@ -4,3 +4,5 @@ kind: Kustomization
 namespace: keycloak
 resources:
   - external-certificate.yaml
+  - helm-release.yaml
+  - secrets.sops.yaml

@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: keycloak
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
+      chart: keycloak
+      version: 6.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    auth:
+      existingSecret:
+        name: keycloak-credentials
+        keyMapping:
+          admin-password: admin-password
+    proxy: reencrypt
+    service:
+      type: ClusterIP
+      externalTrafficPolicy: null
+    ingress:
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      hostname: keycloak.${SECRET_DOMAIN}
+      tls: false
+      extraTls:
+        - secretName: keycloak-${SECRET_DOMAIN/./-}-tls
+          hosts:
+            - keycloak.${SECRET_DOMAIN}
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+    cache:
+      enabled: true
