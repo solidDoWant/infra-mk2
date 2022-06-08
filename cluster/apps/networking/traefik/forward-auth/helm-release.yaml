@@ -41,5 +41,7 @@ spec:
       AUTH_HOST: "auth.${SECRET_DOMAIN}"
       URL_PATH: "/_oauth"
       DEFAULT_PROVIDER: oidc
+      LOG_LEVEL: info
+      LOG_FORMAT: pretty
     middleware:
       enabled: true
