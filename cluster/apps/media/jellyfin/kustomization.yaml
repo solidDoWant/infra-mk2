@@ -5,3 +5,4 @@ resources:
   - helm-release.yaml
   - external-certificate.yaml
   - service-monitor.yaml
+  - redirect-auth-middleware.yaml
