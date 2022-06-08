@@ -1,0 +1,10 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nzbget-chain
+spec:
+  chain:
+    middlewares:
+      - name: networking-traefik-forward-auth@kubernetescrd
+      - name: media-nzbget-no-auth@kubernetescrd

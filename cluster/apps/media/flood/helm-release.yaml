@@ -22,6 +22,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-forward-auth@kubernetescrd
         hosts:
           - host: "flood.${SECRET_DOMAIN}"
             paths:
