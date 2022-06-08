@@ -6,3 +6,4 @@ resources:
   - external-certificate.yaml
   - service-monitor.yaml
   - redirect-auth-middleware.yaml
+  - config-map.yaml

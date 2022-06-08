@@ -57,6 +57,14 @@ spec:
           nfs:
             server: ${NFS_ADDRESS}
             path: ${NFS_MEDIA_PATH}
+      redirect-js:
+        enabled: true
+        type: configMap
+        name: redirect-js
+        subPath: redirect.js
+        mountPath: /usr/share/jellyfin/web/redirect.js
+        readOnly: true
+
     nodeSelector:
       feature.node.kubernetes.io/custom-intel-gpu: "true"
     resources:
