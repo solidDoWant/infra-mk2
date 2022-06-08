@@ -1,0 +1,40 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: local-auth-organizr
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+  labels:
+    app.kubernetes.io/instance: traefik-forward-auth
+    app.kubernetes.io/name: traefik-forward-auth
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: "local.media.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik-forward-auth
+                port:
+                  name: http
+    - host: "local.organizr.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik-forward-auth
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - "local.media.${SECRET_DOMAIN}"
+      secretName: "local-media-${SECRET_DOMAIN/./-}-tls"
+    - hosts:
+        - "local.organizr.${SECRET_DOMAIN}"
+      secretName: "local-organizr-${SECRET_DOMAIN/./-}-tls"

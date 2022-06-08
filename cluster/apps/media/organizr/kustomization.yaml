@@ -4,5 +4,8 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - organizr-external-certificate.yaml
+  - local-auth-organizr-ingress.yaml
+  - local-media-external-certificate.yaml
+  - local-organizr-external-certificate.yaml
   - media-external-certificate.yaml
-  - no-auth-middleware.yaml
+  # - no-auth-middleware.yaml
