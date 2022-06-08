@@ -5,6 +5,7 @@ metadata:
   name: auth
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-forward-auth@kubernetescrd
   labels:
     app.kubernetes.io/instance: traefik-forward-auth
     app.kubernetes.io/name: traefik-forward-auth
