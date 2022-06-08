@@ -22,7 +22,8 @@ spec:
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: media-organizr-web-no-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-forward-auth@kubernetescrd
+          # traefik.ingress.kubernetes.io/router.middlewares: media-organizr-web-no-auth@kubernetescrd
         hosts:
           - host: "organizr.${SECRET_DOMAIN}"
             paths:
