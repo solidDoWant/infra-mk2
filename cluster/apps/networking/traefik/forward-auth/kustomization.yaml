@@ -2,7 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  # - external-certificate.yaml
   - helm-release.yaml
-  - dashboard
-  - monitoring
-  - forward-auth
+  - secrets.sops.yaml
