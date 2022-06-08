@@ -18,6 +18,7 @@ spec:
   values:
     image:
       repository: linuxserver/jellyfin
+      tag: nightly
     command:
       - /bin/bash
     args:
@@ -32,6 +33,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: media-jellyfin-redirect-auth@kubernetescrd
         hosts:
           - host: "jellyfin.${SECRET_DOMAIN}"
             paths:

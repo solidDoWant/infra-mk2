@@ -1,0 +1,9 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: jellyfin-redirect-auth
+spec:
+  redirectRegex:
+    regex: "login\\.html"
+    replacement: https://jellyfin.echozulu.games/sso/OID/p/Keycloak
