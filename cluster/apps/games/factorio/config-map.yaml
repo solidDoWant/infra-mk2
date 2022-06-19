@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: factorio-mod-list
+dataString:
+  mod-list.json: |
+    {
+      "mods":
+      [
+        {
+          "name": "base",
+          "enabled": true
+        },
+        {
+          "name": "AutoDeconstruct",
+          "enabled": true
+        },
+        {
+          "name": "clock",
+          "enabled": true
+        },
+        {
+          "name": "EvoGUI",
+          "enabled": true
+        },
+        {
+          "name": "Fill4Me",
+          "enabled": true
+        },
+        {
+          "name": "Flare Stack",
+          "enabled": true
+        },
+        {
+          "name": "FARL",
+          "enabled": true
+        },
+        {
+          "name": "Squeak Through",
+          "enabled": true
+        },
+        {
+          "name": "YARM",
+          "enabled": true
+        }
+      ]
+    }
