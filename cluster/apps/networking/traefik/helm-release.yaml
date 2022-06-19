@@ -75,6 +75,11 @@ spec:
         expose: true
         exposedPort: 2456
         protocol: UDP
+      factorio:
+        port: 34197
+        expose: true
+        exposedPort: 34197
+        protocol: UDP
       minecraft-1:
         port: 25565
         expose: true
