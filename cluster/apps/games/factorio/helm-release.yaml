@@ -54,6 +54,7 @@ spec:
         ignore_player_limit_for_returning_players: true
         visibility:
           public: true
+        require_user_verification: true
       map_gen_settings:
         cliff_settings:
           cliff_elevation_interval: 0
