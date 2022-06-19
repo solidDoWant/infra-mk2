@@ -35,13 +35,13 @@ spec:
     persistence:
       config:
         enabled: true
-      mod-list:
-        enabled: true
-        type: configMap
-        name: factorio-mod-list
-        subPath: mod-list.json
-        mountPath: /factorio/mods/mod-list.json
-        readOnly: false
+      # mod-list:
+      #   enabled: true
+      #   type: configMap
+      #   name: factorio-mod-list
+      #   subPath: mod-list.json
+      #   mountPath: /factorio/mods/mod-list.json
+      #   readOnly: false
     config:
       factorio_server:
         save_name: LegoOfMe
