@@ -55,6 +55,8 @@ spec:
         visibility:
           public: true
         require_user_verification: true
+        token: ${SECRET_FACTORIO_TOKEN}
+        username: ${SECRET_FACTORIO_USERNAME}
       map_gen_settings:
         cliff_settings:
           cliff_elevation_interval: 0
