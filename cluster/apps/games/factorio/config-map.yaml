@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: factorio-mod-list
-dataString:
+stringData:
   mod-list.json: |
     {
       "mods":
