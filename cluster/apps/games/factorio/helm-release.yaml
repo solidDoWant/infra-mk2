@@ -46,7 +46,6 @@ spec:
         name: LegoOfMe
         description: "Don't step on it"
         game_password: ${SECRET_FACTORIO_SERVER_PASSWORD}
-        password: ${SECRET_FACTORIO_SERVER_PASSWORD}
         non_blocking_saving: true
         afk_autokick_interval: 60
         auto_pause: true
