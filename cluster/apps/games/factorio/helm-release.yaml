@@ -41,7 +41,7 @@ spec:
         name: factorio-mod-list
         subPath: mod-list.json
         mountPath: /factorio/mods/mod-list.json
-        readOnly: true
+        readOnly: false
     config:
       factorio_server:
         save_name: LegoOfMe
