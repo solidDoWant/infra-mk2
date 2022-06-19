@@ -1,0 +1,64 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: valheim
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: factorio
+      version: 1.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      tag: 1.1.59
+    env:
+      TZ: ${TZ}
+    # This host has the newest/fastest CPU and RAM
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-host-01
+    persistence:
+      config:
+        enabled: true
+    config:
+      factorio_server:
+        save_name: LegoOfMe
+        generate_new_save: false
+        update_mods_on_start: true
+        load_latest_save: true
+        token: ${SECRET_FACTORIO_TOKEN}
+        username: ${SECRET_FACTORIO_USERNAME}
+      server_settings:
+        name: LegoOfMe
+        description: "Don't step on it"
+        game_password: ${SECRET_FACTORIO_SERVER_PASSWORD}
+        non_blocking_saving: true
+        afk_autokick_interval: 60
+        auto_pause: true
+        autosave_interval: 5
+        autosave_slots: 20
+        ignore_player_limit_for_returning_players: true
+        visibility:
+          public: true
+      map_gen_settings:
+        cliff_settings:
+          cliff_elevation_interval: 0
+          richness: 0
+    # service:
+    #   main:
+    #     type: ClusterIP
+    #     externalTrafficPolicy: null
