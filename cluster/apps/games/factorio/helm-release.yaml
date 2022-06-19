@@ -20,6 +20,7 @@ spec:
       tag: 1.1.59
     env:
       TZ: ${TZ}
+      UPDATE_MODS_ON_START: true
     # This host has the newest/fastest CPU and RAM
     affinity:
       nodeAffinity:
@@ -61,7 +62,3 @@ spec:
         cliff_settings:
           cliff_elevation_interval: 0
           richness: 0
-    # service:
-    #   main:
-    #     type: ClusterIP
-    #     externalTrafficPolicy: null
