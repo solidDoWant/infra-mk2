@@ -16,19 +16,16 @@ spec:
         name: metallb-charts
         namespace: flux-system
   values:
+    crds:
+      enabled: true
     speaker:
       enabled: true
-    configInline:
-      peers:
-        - peer-address: 10.1.0.2
-          peer-asn: 64512
-          my-asn: 64514
-        - peer-address: 10.1.0.1
-          peer-asn: 64515
-          my-asn: 64514
-      address-pools:
-        - name: default
-          protocol: bgp
-          avoid-buggy-ips: true
-          addresses:
-            - "${METALLB_LB_RANGE}"
+      frr:
+        enabled: true
+    prometheus:
+      serviceAccount: kube-prometheus-stack-prometheus
+      namespace: monitoring
+      podMonitor:
+        enabled: true
+      prometheusRule:
+        enabled: true

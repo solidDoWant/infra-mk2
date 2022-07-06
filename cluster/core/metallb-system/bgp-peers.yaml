@@ -1,0 +1,20 @@
+---
+apiVersion: metallb.io/v1beta2
+kind: BGPPeer
+metadata:
+  name: gateway
+spec:
+  peerAddress: 10.1.0.1
+  peerASN: 64515
+  myASN: 64514
+  holdTime: 1m30s
+---
+apiVersion: metallb.io/v1beta2
+kind: BGPPeer
+metadata:
+  name: core-switch
+spec:
+  peerAddress: 10.1.0.2
+  peerASN: 64512
+  myASN: 64514
+  holdTime: 1m30s
