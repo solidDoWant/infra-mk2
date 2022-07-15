@@ -45,6 +45,7 @@ spec:
     persistence:
       config:
         enabled: true
+        size: 10Gi
       mod-list:
         enabled: true
         type: configMap
