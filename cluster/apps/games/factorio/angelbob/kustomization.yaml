@@ -1,7 +1,7 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: games
 resources:
-  - vanilla
-  - angelbob
+  - config-map.yaml
+  - helm-release.yaml
+  - ingress-route-udp.yaml

@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: factorio
+  name: factorio-angelbob
 spec:
   interval: 5m
   chart:
@@ -35,23 +35,40 @@ spec:
     persistence:
       config:
         enabled: true
-      # mod-list:
-      #   enabled: true
-      #   type: configMap
-      #   name: factorio-mod-list
-      #   subPath: mod-list.json
-      #   mountPath: /factorio/mods/mod-list.json
-      #   readOnly: false
+      mod-list:
+        enabled: true
+        type: configMap
+        name: factorio-mod-list
+        subPath: mod-list.json
+        mountPath: /helmconfig/mod-list.json
+        readOnly: true
+    initContainers:
+      copy-modlist:
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+          - "sh"
+          - "-c"
+          - |
+            mkdir -p /factorio/mods
+            cp -vL /helmconfig/mod-settings.json /factorio/mods/mod-settings.json
+        volumeMounts:
+          - name: mod-list
+            mountPath: /helmconfig/
+          - name: config
+            mountPath: /factorio/
+        securityContext:
+          runAsUser: 0
     config:
       factorio_server:
-        save_name: LegoOfMe
+        save_name: ${SECRET_DOMAIN}-AngelBob
         generate_new_save: false
         update_mods_on_start: true
         load_latest_save: true
         token: ${SECRET_FACTORIO_TOKEN}
         username: ${SECRET_FACTORIO_USERNAME}
       server_settings:
-        name: LegoOfMe
+        name: ${SECRET_DOMAIN}-AngelBob
         description: "Don't step on it"
         game_password: ${SECRET_FACTORIO_PASSWORD}
         non_blocking_saving: true
@@ -65,6 +82,8 @@ spec:
         require_user_verification: true
         token: ${SECRET_FACTORIO_TOKEN}
         username: ${SECRET_FACTORIO_USERNAME}
+        admins:
+          - ${SECRET_FACTORIO_USERNAME}
       map_gen_settings:
         cliff_settings:
           cliff_elevation_interval: 0

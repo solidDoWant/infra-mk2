@@ -8,6 +8,6 @@ spec:
     - factorio
   routes:
     - services:
-        - name: factorio
-          port: 34197
+        - name: factorio-angelbob
+          port: 34198
           weight: 0
