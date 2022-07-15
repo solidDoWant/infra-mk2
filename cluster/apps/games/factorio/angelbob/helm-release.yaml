@@ -38,7 +38,7 @@ spec:
       mod-list:
         enabled: true
         type: configMap
-        name: factorio-mod-list
+        name: factorio-angelbob-mod-list
         subPath: mod-list.json
         mountPath: /helmconfig/mod-list.json
         readOnly: true
