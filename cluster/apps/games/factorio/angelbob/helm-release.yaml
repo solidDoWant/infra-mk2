@@ -51,7 +51,7 @@ spec:
           - "-c"
           - |
             mkdir -p /factorio/mods
-            cp -vL /helmconfig/mod-settings.json /factorio/mods/mod-settings.json
+            cp -vL /helmconfig/mod-list.json /factorio/mods/mod-list.json
         volumeMounts:
           - name: mod-list
             mountPath: /helmconfig/
