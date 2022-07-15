@@ -38,7 +38,7 @@ spec:
       # mod-list:
       #   enabled: true
       #   type: configMap
-      #   name: factorio-mod-list
+      #   name: factorio-vanilla-mod-list
       #   subPath: mod-list.json
       #   mountPath: /factorio/mods/mod-list.json
       #   readOnly: false

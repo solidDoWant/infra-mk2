@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: factorio-angelbob-mod-list
+  name: factorio-vanilla-mod-list
 data:
   mod-list.json: |
     {
