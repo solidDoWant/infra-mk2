@@ -32,6 +32,16 @@ spec:
                   operator: In
                   values:
                     - k8s-host-01
+    probes:
+      startup:
+        custom: true
+        spec:
+          tcpSocket:
+            port: 27015
+          timeoutSeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 150
     persistence:
       config:
         enabled: true
@@ -60,6 +70,8 @@ spec:
         securityContext:
           runAsUser: 0
     config:
+      admin_list:
+        - ${SECRET_FACTORIO_USERNAME}
       factorio_server:
         save_name: ${SECRET_DOMAIN}-AngelBob
         generate_new_save: false
