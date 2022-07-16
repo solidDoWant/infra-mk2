@@ -5291,6 +5291,7 @@ spec:
         - --log-level=info
         - --log-encoding=json
         - --enable-leader-election
+        - --requeue-dependency=5s
         env:
         - name: RUNTIME_NAMESPACE
           valueFrom:
