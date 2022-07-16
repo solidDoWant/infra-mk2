@@ -5,9 +5,9 @@ metadata:
   name: factorio-angelbob
 spec:
   entryPoints:
-    - factorio
+    - factorio-angelbob
   routes:
     - services:
         - name: factorio-angelbob
-          port: 34198
+          port: 34197
           weight: 0
