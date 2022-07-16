@@ -75,12 +75,12 @@ spec:
         expose: true
         exposedPort: 2456
         protocol: UDP
-      factorio-vanilla:
+      factorio-v:
         port: 34197
         expose: true
         exposedPort: 34197
         protocol: UDP
-      factorio-angelbob:
+      factorio-ab:
         port: 34198
         expose: true
         exposedPort: 34198

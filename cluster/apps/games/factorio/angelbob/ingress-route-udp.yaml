@@ -5,7 +5,7 @@ metadata:
   name: factorio-angelbob
 spec:
   entryPoints:
-    - factorio-angelbob
+    - factorio-ab
   routes:
     - services:
         - name: factorio-angelbob

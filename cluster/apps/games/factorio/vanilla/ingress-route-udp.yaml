@@ -5,7 +5,7 @@ metadata:
   name: factorio-vanilla
 spec:
   entryPoints:
-    - factorio-vanilla
+    - factorio-v
   routes:
     - services:
         - name: factorio-vanilla
