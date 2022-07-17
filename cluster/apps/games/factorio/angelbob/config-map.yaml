@@ -5,12 +5,18 @@ metadata:
   name: factorio-angelbob-mod-list
 data:
   mod-list.json: |
+
     {
       "mods":
       [
 
         {
           "name": "base",
+          "enabled": true
+        },
+
+        {
+          "name": "aai-containers",
           "enabled": true
         },
 
@@ -56,6 +62,11 @@ data:
 
         {
           "name": "aai-vehicles-hauler",
+          "enabled": true
+        },
+
+        {
+          "name": "aai-vehicles-ironclad",
           "enabled": true
         },
 
@@ -290,6 +301,11 @@ data:
         },
 
         {
+          "name": "Deadlock-AAII-bridge",
+          "enabled": true
+        },
+
+        {
           "name": "deadlock-beltboxes-loaders",
           "enabled": true
         },
@@ -390,7 +406,17 @@ data:
         },
 
         {
+          "name": "logistic-cargo-wagon",
+          "enabled": true
+        },
+
+        {
           "name": "LogisticTrainNetwork",
+          "enabled": true
+        },
+
+        {
+          "name": "LtnManager",
           "enabled": true
         },
 
@@ -405,7 +431,17 @@ data:
         },
 
         {
+          "name": "MaxRateCalculator",
+          "enabled": true
+        },
+
+        {
           "name": "miniloader",
+          "enabled": true
+        },
+
+        {
+          "name": "miningdrones_aaiminer",
           "enabled": true
         },
 
@@ -430,7 +466,17 @@ data:
         },
 
         {
+          "name": "Nanobots",
+          "enabled": true
+        },
+
+        {
           "name": "Natural_Evolution_Buildings2",
+          "enabled": true
+        },
+
+        {
+          "name": "nicefill",
           "enabled": true
         },
 
@@ -480,6 +526,16 @@ data:
         },
 
         {
+          "name": "Reactor Interface",
+          "enabled": true
+        },
+
+        {
+          "name": "Repair_Turret",
+          "enabled": true
+        },
+
+        {
           "name": "reskins-angels",
           "enabled": true
         },
@@ -510,6 +566,11 @@ data:
         },
 
         {
+          "name": "rso-mod",
+          "enabled": true
+        },
+
+        {
           "name": "rusty-locale",
           "enabled": true
         },
@@ -530,7 +591,17 @@ data:
         },
 
         {
+          "name": "shield-projector",
+          "enabled": true
+        },
+
+        {
           "name": "simhelper",
+          "enabled": true
+        },
+
+        {
+          "name": "spidertron-extended",
           "enabled": true
         },
 
@@ -546,6 +617,11 @@ data:
 
         {
           "name": "stdlib",
+          "enabled": true
+        },
+
+        {
+          "name": "Teleporters",
           "enabled": true
         },
 
@@ -581,6 +657,16 @@ data:
 
         {
           "name": "WideChests",
+          "enabled": true
+        },
+
+        {
+          "name": "WideChests-aai-reskin",
+          "enabled": true
+        },
+
+        {
+          "name": "xcompat_bobvehicleequipment",
           "enabled": true
         },
 
