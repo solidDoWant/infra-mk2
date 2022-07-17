@@ -23,14 +23,13 @@ spec:
       UPDATE_MODS_ON_START: true
     service:
       main:
+        type: LoadBalancer
+        loadBalancerIP: "10.44.0.4"
+        annotations:
+          metallb.universe.tf/allow-shared-ip: factorio
         ports:
           server:
-            type: LoadBalancer
-            loadBalancerIP: "10.44.0.4"
-            annotations:
-              metallb.universe.tf/allow-shared-ip: factorio
             port: 34198
-            targetPort: 34197
     # This host has the newest/fastest CPU and RAM
     affinity:
       nodeAffinity:
@@ -111,3 +110,8 @@ spec:
         cliff_settings:
           cliff_elevation_interval: 0
           richness: 0
+        autoplace_controls:
+          iron-ore: null
+          copper-ore: null
+          uranium-ore: null
+          stone: null
