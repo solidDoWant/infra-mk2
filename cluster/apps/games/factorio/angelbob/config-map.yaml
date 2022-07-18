@@ -536,10 +536,6 @@ data:
           "enabled":true
         },
         {
-          "name":"mapshot",
-          "enabled":true
-        },
-        {
           "name":"miniloader",
           "enabled":true
         },
