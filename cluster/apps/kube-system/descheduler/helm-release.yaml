@@ -36,3 +36,4 @@ spec:
         RemovePodsHavingTooManyRestarts:
           enabled: true
           podRestartThreshold: 20
+          includingInitContainers: true
