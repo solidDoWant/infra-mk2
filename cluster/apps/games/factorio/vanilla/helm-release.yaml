@@ -21,6 +21,19 @@ spec:
     env:
       TZ: ${TZ}
       UPDATE_MODS_ON_START: true
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: "10.44.0.4"
+        annotations:
+          metallb.universe.tf/allow-shared-ip: factorio
+        ports:
+          server:
+            port: 34197
+            targetPort: 34197
+          rcon:
+            port: 27015
+            targetPort: 27015
     # This host has the newest/fastest CPU and RAM
     affinity:
       nodeAffinity:

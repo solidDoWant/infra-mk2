@@ -32,8 +32,8 @@ spec:
             port: 34198
             targetPort: 34198
           rcon:
-            port: 27015
-            targetPort: 27015
+            port: 27016
+            targetPort: 27016
     # This host has the newest/fastest CPU and RAM
     affinity:
       nodeAffinity:
