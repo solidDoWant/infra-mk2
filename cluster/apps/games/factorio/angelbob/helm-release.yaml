@@ -50,7 +50,7 @@ spec:
         custom: true
         spec:
           tcpSocket:
-            port: 27015
+            port: 27016
           timeoutSeconds: 1
           periodSeconds: 5
           successThreshold: 1
