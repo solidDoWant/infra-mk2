@@ -5,4 +5,5 @@ metadata:
   name: keycloak-iframe
 spec:
   headers:
-    accessControlAllowOrigin: "origin-list-or-null"
+    accessControlAllowOriginListRegex:
+      - "^(?:\\S+\\.)?${SECRET_DOMAIN/./\\.}$"
