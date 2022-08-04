@@ -1,0 +1,8 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: keycloak-iframe
+spec:
+  headers:
+    accessControlAllowOrigin: "origin-list-or-null"

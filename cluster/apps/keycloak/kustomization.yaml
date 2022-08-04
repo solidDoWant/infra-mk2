@@ -5,4 +5,5 @@ namespace: keycloak
 resources:
   - external-certificate.yaml
   - helm-release.yaml
+  - iframe-middleware.yaml
   - secrets.sops.yaml
