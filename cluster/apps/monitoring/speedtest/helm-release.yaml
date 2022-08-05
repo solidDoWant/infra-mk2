@@ -23,4 +23,5 @@ spec:
         interval: 60m
         scrapeTimeout: 1m
       prometheusRule:
+        pingLimit: 40
         enabled: true
