@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "gow-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "gow-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "gow.${SECRET_DOMAIN}"
+  dnsNames:
+    - "gow.${SECRET_DOMAIN}"
