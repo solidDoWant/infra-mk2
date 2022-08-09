@@ -20,5 +20,6 @@ spec:
       home:
         type: pvc
         accessMode: ReadWriteOnce
+        size: 10Gi
     graphic_resources:
       gpu.intel.com/i915: 1
