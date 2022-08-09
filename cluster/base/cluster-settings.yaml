@@ -13,3 +13,4 @@ data:
   NFS_GROUP_ID: "2000"
   NFS_MEDIA_PATH: /mnt/bulk-pool-01/media
   TIMEZONE: "America/Chicago"
+  K3S_CHANNEL: "https://update.k3s.io/v1-release/channels/stable"
