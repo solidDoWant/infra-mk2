@@ -49,3 +49,7 @@ spec:
           - secretName: gow-${SECRET_DOMAIN/./-}-tls
             hosts:
               - gow.${SECRET_DOMAIN}
+    firefox:
+      enabled: false
+    steam:
+      enabled: false
