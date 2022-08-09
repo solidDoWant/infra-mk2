@@ -19,5 +19,6 @@ spec:
     persistence:
       home:
         type: pvc
+        accessMode: ReadWriteOnce
     graphic_resources:
       gpu.intel.com/i915: 1
