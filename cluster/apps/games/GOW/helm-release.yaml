@@ -23,6 +23,17 @@ spec:
         size: 10Gi
     graphic_resources:
       gpu.intel.com/i915: 1
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: "10.44.0.5"
+        annotations:
+          metallb.universe.tf/allow-shared-ip: GOW
+      udp:
+        type: LoadBalancer
+        loadBalancerIP: "10.44.0.5"
+        annotations:
+          metallb.universe.tf/allow-shared-ip: GOW
     ingress:
       main:
         enabled: true
