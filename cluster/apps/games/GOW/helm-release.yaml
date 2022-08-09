@@ -23,3 +23,18 @@ spec:
         size: 10Gi
     graphic_resources:
       gpu.intel.com/i915: 1
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: gow.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: gow-${SECRET_DOMAIN/./-}-tls
+            hosts:
+              - gow.${SECRET_DOMAIN}
