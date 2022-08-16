@@ -23,6 +23,8 @@ spec:
       repository: gitea/gitea
       tag: 1.17.0
     gitea:
+      config:
+        ROOT_URL: https://${SECRET_DOMAIN}/
       metrics:
         enabled: true
         serviceMonitor:
