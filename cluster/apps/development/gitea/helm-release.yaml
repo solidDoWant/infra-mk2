@@ -21,7 +21,7 @@ spec:
   values:
     image:
       repository: gitea/gitea
-      tag: v1.17.0
+      tag: 1.17.0
     gitea:
       metrics:
         enabled: true
