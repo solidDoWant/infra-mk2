@@ -25,7 +25,7 @@ spec:
     gitea:
       config:
         server:
-          PROTOCOL: https
+          ROOT_URL: https://gitea.${SECRET_DOMAIN}/
       metrics:
         enabled: true
         serviceMonitor:
