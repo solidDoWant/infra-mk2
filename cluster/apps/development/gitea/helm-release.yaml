@@ -24,7 +24,8 @@ spec:
       tag: 1.17.0
     gitea:
       config:
-        ROOT_URL: https://${SECRET_DOMAIN}/
+        server:
+          PROTOCOL: https
       metrics:
         enabled: true
         serviceMonitor:
