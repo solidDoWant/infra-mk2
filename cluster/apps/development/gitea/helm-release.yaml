@@ -19,6 +19,9 @@ spec:
     - kind: Secret
       name: gitea-admin-credentials
   values:
+    image:
+      repository: gitea/gitea
+      tag: v1.17.0
     gitea:
       metrics:
         enabled: true
