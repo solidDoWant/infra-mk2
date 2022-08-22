@@ -17,6 +17,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      tag: v0.8.10 # See https://github.com/kubernetes/node-problem-detector/issues/692 for details
     metrics:
       enabled: true
       serviceMonitor:
