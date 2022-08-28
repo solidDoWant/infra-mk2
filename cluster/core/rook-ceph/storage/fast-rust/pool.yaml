@@ -7,7 +7,7 @@ metadata:
 spec:
   compressionMode: aggressive # TODO benchmark this
   failureDomain: host # Tolerate a host failure
-  replicated: # Replicate on 2 hosts
-    size: 2
+  replicated: # Replicate on 3 hosts
+    size: 3
   parameters:
     compression_algorithm: lz4
