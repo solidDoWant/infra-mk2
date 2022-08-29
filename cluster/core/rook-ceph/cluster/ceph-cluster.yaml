@@ -231,9 +231,9 @@ spec:
     nodes:
       - name: k8s-host-01
         devices:
-          - name: /dev/disk/by-path/pci-0000:02:00.0-nvme-1
+          - name: /dev/disk/by-id/nvme-KINGSTON_SKC3000D2048G_50026B7685DC2C35
             config:
-              metadataDevice: /dev/disk/by-path/pci-0000:01:00.0-nvme-1
+              metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPEDMW012T4_CVCQ546600UW1P2BGN
       - name: k8s-host-02
         # osdsPerDevice: "1"
         devices:
