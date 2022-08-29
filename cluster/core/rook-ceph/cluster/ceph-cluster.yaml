@@ -234,12 +234,12 @@ spec:
           - name: /dev/disk/by-path/pci-0000:02:00.0-nvme-1
             config:
               metadataDevice: /dev/disk/by-path/pci-0000:01:00.0-nvme-1
-      # - name: k8s-host-02
-      #   # osdsPerDevice: "1"
-      #   devices:
-      #     - name: /dev/disk/by-id/nvme-KINGSTON_SKC3000D2048G_50026B7685DC2C59
-      #       config:
-      #         metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPEDMW400G4_CVCQ5126005W400AGN
+      - name: k8s-host-02
+        # osdsPerDevice: "1"
+        devices:
+          - name: /dev/disk/by-id/nvme-KINGSTON_SKC3000D2048G_50026B7685DC2C59
+            config:
+              metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPEDMW400G4_CVCQ5126005W400AGN
       - name: k8s-host-03
         # osdsPerDevice: "1"
         devices:
