@@ -157,6 +157,18 @@ Used for providing Kubernetes compute and storage.
   Interface: NVMe  
   Location: Internal, M.2 slot 2  
   Count: 1
+  * Type: SSD  
+  Capacity: 2 TB  
+  Model: Kingston KC3000  
+  Interface: NVMe  
+  Location: Internal, M.2 slot 3  
+  Count: 1
+  * Type: SSD  
+  Capacity: 1.2 TB  
+  Model: Intel Series 750  
+  Interface: 4x PCIe 3  
+  Location: Internal, PCIe  
+  Count: 1
   * Type: HDD  
   Capacity: 512 GB  
   Model: Seagate
@@ -171,17 +183,11 @@ Used for providing Kubernetes compute and storage.
   &emsp;&emsp;Max MTU: 9000 bytes  
   &emsp;&emsp;Offload suppport: OpenOnload, TCO, LSO, LRO, GSO, RSS  
   &emsp;&emsp;Interface: 8x PCIe 2  
-  &emsp;Graphics card:  
-  &emsp;&emsp;Model: XFX R9 280X  
-  &emsp;&emsp;VRAM: 3GB 384 bit GDDR5 @ 6000 MHz  
-  &emsp;&emsp;Processors: 2048  
-  &emsp;&emsp;Core clock: 850 MHz  
-  &emsp;&emsp;Interface: 16x PCIe 3  
-  &emsp;&emsp;TDP: 250W  
   &emsp;Power supply:  
   &emsp;&emsp;Max power out: 600 W  
   &emsp;&emsp;Count: 1  
   &emsp;&emsp;Hot swapable: No  
+
 ### k8s-host-02.echozulu.local
 Used for providing Kubernetes compute and storage.
 
@@ -214,25 +220,17 @@ Used for providing Kubernetes compute and storage.
   Location: Internal, PCIe to M.2 NVMe card  
   Count: 1
   * Type: SSD  
-  Capacity: 512 GB  
+  Capacity: 2 TB  
+  Model: Kingston KC3000  
+  Interface: NVMe  
+  Location: Internal, PCIe to M.2 NVMe card  
+  Count: 1
+  * Type: SSD  
+  Capacity: 400 GB  
   Model: Intel Series 750  
   Interface: U.2  
   Location: Internal, PCIe to U.2 card  
   Count: 1
-  * Type: HDD  
-  Capacity: 900 GB  
-  Model: Seagate  
-  Interface: SAS-II  
-  Rotational speed: 10k RPM  
-  Location: External, first four bays to LSI SAS 9207-8i  
-  Count: 4
-  * Type: HDD  
-  Capacity: 146 GB  
-  Model: HP  
-  Interface: SAS-II  
-  Rotational speed: 10k RPM  
-  Location: External, second 4 bays to LSI SAS 9207-8i  
-  Count: 4
 
   &emsp;NIC:  
   &emsp;&emsp;Model: Dell C63DV  
@@ -260,7 +258,7 @@ Used for providing Kubernetes compute and storage.
 
 ### Hardware:
 * Server:  
-  &emsp;Model: HPE DL380 G7  
+  &emsp;Model: HPE DL380 G7 (decommissioned)  
   &emsp;CPU:  
   &emsp;&emsp;Model: Xeon X5680  
   &emsp;&emsp;Clock frequency: 3.3 GHz  
@@ -285,12 +283,6 @@ Used for providing Kubernetes compute and storage.
   Model: Inland Premium  
   Interface: NVMe  
   Location: Internal, PCIe to M.2 NVMe card  
-  Count: 1
-  * Type: SSD  
-  Capacity: 512 GB  
-  Model: Intel Series 750  
-  Interface: U.2  
-  Location: Internal, PCIe to U.2 card  
   Count: 1
   * Type: HDD  
   Capacity: 900 GB  
@@ -327,6 +319,66 @@ Used for providing Kubernetes compute and storage.
   &emsp;&emsp;License: Advanced  
   &emsp;&emsp;Default username on reset: Administrator
 
+### k8s-host-04.echozulu.local
+Used for providing Kubernetes compute and storage.
+
+### Hardware:
+* Server:  
+  &emsp;Model: Dell R730xd  
+  &emsp;CPU:  
+  &emsp;&emsp;Model: Xeon E5-2667v4
+  &emsp;&emsp;Clock frequency: 3.2 GHz  
+  &emsp;&emsp;Core/thread count: 8/16  
+  &emsp;&emsp;Socket: LGA 2011-v3  
+  &emsp;&emsp;Count: 2  
+  &emsp;&emsp;TDP: 135W
+  &emsp;RAM:  
+  &emsp;&emsp; Type: DDR4 ECC Registered  
+  &emsp;&emsp; Total size: 256 GB  
+  &emsp;&emsp; Clock rate: 2400 MHz  
+  &emsp;&emsp; Total DIMM slots: 24  
+  &emsp;Storage:
+  * Type: USB
+  Capacity: 32 GB
+  Model: Generic
+  Interface: USB 3.0
+  Location: Internal USB 2
+  Count: 1
+  * Type: SSD  
+  Capacity: 1 TB  
+  Model: Kingston KC3000  
+  Interface: NVMe  
+  Location: Internal, PCIe to M.2 NVMe card  
+  Count: 1
+  * Type: SSD  
+  Capacity: 2 TB  
+  Model: Kingston KC3000  
+  Interface: NVMe  
+  Location: Internal, PCIe to M.2 NVMe card  
+  Count: 1
+  * Type: SSD  
+  Capacity: 400 GB  
+  Model: Intel Series 750  
+  Interface: U.2  
+  Location: Internal, PCIe to U.2 card  
+  Count: 1
+
+  &emsp;NIC:  
+  &emsp;&emsp;Model: Dell C63DV  
+  &emsp;&emsp;Ports: 2x SFP+, 2x 1Gbps RJ-45  
+  &emsp;&emsp;Max MTU: 9000 bytes  
+  &emsp;&emsp;Offload suppport: TCO, LSO  
+  &emsp;&emsp;Interface: Network mezzanine  
+
+  &emsp;Power supply:  
+  &emsp;&emsp;Max power out: 900 W  
+  &emsp;&emsp;Count: 2  
+  &emsp;&emsp;Hot swapable: Yes  
+  &emsp;Out of band management:  
+  &emsp;&emsp;Model: iDRAC
+  &emsp;&emsp;License: Enterprise  
+  &emsp;&emsp;Default username on reset: root
+
 ## Storage
 All nodes use a solid state drive for the OS.
 
@@ -334,19 +386,26 @@ All nodes use a solid state drive for the OS.
 This host only contains one drive, a SATA-III SSD, for boot. SAS expander and RAID cache have been removed to reduce power consumption and failure points.
 
 ### k8s-host-01.echozulu.local
-This host boots off the NVMe drive in M.2 slot 2. The additional HDDs are passed through to the OS for < TODO purpose >
+This host boots off the 512 GB NVMe drive in M.2 slot 2. The additional HDDs are passed through to the OS for < TODO purpose >.
+
+The enterprise-grade PCIe SSD is used by Ceph for read/write acceleration. The additional 2TB NVMe SSD is managed by the host for storage shared over the network.
 
 ### k8s-host-02.echozulu.local
-Because the host does not support boot fron NVMe, this host boots off the USB flash drive, which in turn loads the OS from the NVMe drive.
+Because the host does not support boot fron NVMe, this host boots off the USB flash drive, which in turn loads the OS from the 512 GB NVMe drive.
 
-The enterprise-grade PCIe SSD is used by Ceph for read/write acceleration. The additional drives are manged by the host for storage shared over the network.
+The enterprise-grade PCIe SSD is used by Ceph for read/write acceleration. The additional 2TB NVMe SSD is managed by the host for storage shared over the network.
 
 Attached to the host for additional storage is a NetApp DS4246 diskshelf. The shelf is attached via DAC cables to a HBA.
 
-### k8s-host-03.echozulu.local
-Because the host does not support boot fron NVMe, this host boots off the USB flash drive, which in turn loads the OS from the NVMe drive.
+### ~~k8s-host-03.echozulu.local~~
+This host has now been decommissioned.
 
-The enterprise-grade PCIe SSD is used by Ceph for read/write acceleration. The additional drives are manged by the host for storage shared over the network. The additional drives are passed through to the OS via single drive RAID groups.
+Because the host does not support boot fron NVMe, this host boots off the USB flash drive, which in turn loads the OS from the 512 GB NVMe drive.
+
+### k8s-host-04.echozulu.local
+Because the host does not support boot fron NVMe, this host boots off the USB flash drive, which in turn loads the OS from the 1TB NVMe drive.
+
+The enterprise-grade PCIe SSD is used by Ceph for read/write acceleration. The additional 2TB NVMe SSD is managed by the host for storage shared over the network.
 
 ### Hardware
 * Disk shelf:  
@@ -557,9 +616,11 @@ local-as 64512
 neighbor 10.2.1.1 remote-as 64513
 neighbor 10.2.1.2 remote-as 64513
 neighbor 10.2.1.3 remote-as 64513
+neighbor 10.2.1.4 remote-as 64513
 neighbor 10.1.1.1 remote-as 64514
 neighbor 10.1.1.2 remote-as 64514
 neighbor 10.1.1.3 remote-as 64514
+neighbor 10.1.1.4 remote-as 64514
 ```
 
 #### Misc
@@ -606,7 +667,7 @@ The network settings will be changed in a later step. The interface is also conn
 
 ### k8s-host-##.echozulu.local
 Out-of-band management is configured with the following settings where supported:
-IP: 10.0.1.##
+IP: 10.0.1.##/16
 Default gateway: 10.0.0.1
 Extra routes:
   - to: 0.0.0.0
