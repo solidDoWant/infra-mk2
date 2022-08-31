@@ -235,38 +235,10 @@ spec:
             config:
               metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPEDMW012T4_CVCQ546600UW1P2BGN
       - name: k8s-host-02
-        # osdsPerDevice: "1"
         devices:
           - name: /dev/disk/by-id/nvme-KINGSTON_SKC3000D2048G_50026B7685DC2C59
             config:
               metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPEDMW400G4_CVCQ5126005W400AGN
-      - name: k8s-host-03
-        # osdsPerDevice: "1"
-        devices:
-          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:0
-            config:
-              metadataDevice: nvme1n1
-          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:1
-            config:
-              metadataDevice: nvme1n1
-          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:2
-            config:
-              metadataDevice: nvme1n1
-          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:3
-            config:
-              metadataDevice: nvme1n1
-          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:4
-            config:
-              metadataDevice: nvme1n1
-          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:5
-            config:
-              metadataDevice: nvme1n1
-          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:6
-            config:
-              metadataDevice: nvme1n1
-          - name: /dev/disk/by-path/pci-0000:05:00.0-scsi-0:1:0:7
-            config:
-              metadataDevice: nvme1n1
     #   - name: "172.17.4.201"
     #     devices: # specific devices to use for storage can be specified for each node
     #       - name: "sdb"
