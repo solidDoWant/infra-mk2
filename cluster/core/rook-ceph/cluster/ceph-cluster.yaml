@@ -233,12 +233,17 @@ spec:
         devices:
           - name: /dev/disk/by-id/nvme-KINGSTON_SKC3000D2048G_50026B7685DC2C35
             config:
-              metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPEDMW012T4_CVCQ546600UW1P2BGN
+              metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPE2MW400G4_CVCQ545100RM400CGN
       - name: k8s-host-02
         devices:
           - name: /dev/disk/by-id/nvme-KINGSTON_SKC3000D2048G_50026B7685DC2C59
             config:
               metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPEDMW400G4_CVCQ5126005W400AGN
+      - name: k8s-host-04
+        devices:
+          - name: /dev/disk/by-id/nvme-KINGSTON_SKC3000D2048G_50026B7685DC2C38
+            config:
+              metadataDevice: /dev/disk/by-id/nvme-INTEL_SSDPEDMW012T4_CVCQ546600UW1P2BGN
     #   - name: "172.17.4.201"
     #     devices: # specific devices to use for storage can be specified for each node
     #       - name: "sdb"
