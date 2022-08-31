@@ -10,8 +10,6 @@
   roles:
     - role: gather_service_facts
       tags: always
-    - role: configure_hosts
-      tags: configure_hosts
     - role: configure_package_manager
       tags: configure_package_manager
     - role: install_updates
@@ -27,9 +25,11 @@
       tags: configure_mail
     - role: configure_smart_monitoring
       tags: configure_smart_monitoring
+    - role: configure_sshd
+      tags: configure_sshd
 
   post_tasks:
-    - name: Reboot physical nodes
+    - name: Kexec reboot supported nodes
       block:
         - name: Kexec reboot
           shell: nohup /usr/local/sbin/fast-reboot
@@ -42,7 +42,7 @@
             sleep: 1
             timeout: 30
       when: kexec_reboot_enabled
-    - name: Normal reboot
+    - name: Normal reboot kexec unsupported nodes
       reboot:
         reboot_timeout: 600
       when: not kexec_reboot_enabled and ansible_virtualization_role != "guest"

@@ -5,6 +5,7 @@
       shell: "$(command -v pvesh > /dev/null); echo $?"
       register: proxmox_command_result
       ignore_errors: true
+      changed_when: false
     - name: Set 'is_proxmox' fact
       set_fact:
         is_proxmox: "{{ proxmox_command_result.stdout == '0' }}"

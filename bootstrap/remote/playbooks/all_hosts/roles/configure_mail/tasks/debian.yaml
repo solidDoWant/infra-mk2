@@ -31,4 +31,4 @@
     group: msmtp
     owner: msmtp
     mode: 0664
-  when: not msmtp_log.exists
+  when: not msmtp_log.stat.exists

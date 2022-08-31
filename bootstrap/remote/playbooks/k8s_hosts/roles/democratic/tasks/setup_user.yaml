@@ -31,5 +31,5 @@
       uVZ/BJQ8g+MQB5a0Czs1J0AYgdteX+vjp0lZrpB7KAyF/rldsIyNW8vkQp06Wj\
       2q33NhYoSdaClullWfelNhRLs3Ysuj8Sr6KsIDbAeHXrGlaa8YuUy3JzNMYvGF\
       nbH+FrEgFA0LM9TdizqS+6M6P306Qt8jYq8E/hJplxwdwhSEcFv4rU9ynOlw==\
-    "
+      "
   when: created_user.changed

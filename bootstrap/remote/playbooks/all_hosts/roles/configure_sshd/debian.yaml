@@ -1,0 +1,17 @@
+---
+- name: Configure sshd pubkey accepted key types
+  blockinfile:
+    path: /etc/ssh/sshd_config.d/pakt.conf
+    mode: 0644
+    create: true
+    block: |
+      PubkeyAcceptedKeyTypes +ssh-rsa
+  register: pakt_changes
+
+- name: Restart sshd service
+  service:
+    name: sshd.service
+    daemon_reload: true
+    enabled: true
+    state: restarted
+  when: pakt_changes.changed

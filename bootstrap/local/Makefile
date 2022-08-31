@@ -3,6 +3,7 @@ VENV_PATH=$(realpath .)/../../working/venv
 ANSIBLE_LOCAL_PLAYBOOK=$(realpath . )/setup_playbook.yaml
 
 ANSIBLE_INVENTORY=$(realpath . )/../remote/inventory
+ANSIBLE_VAULT_PASSWORD_FILE=$(realpath . )/../remote/vault_password
 ANSIBLE_PLAYBOOK=$(realpath . )/../remote/ansible.yaml
 
 build_venv:
@@ -21,5 +22,5 @@ build_venv:
 run_playbook: build_venv
     ( \
         . $(VENV_PATH)/bin/activate; \
-        ansible-playbook -i $(ANSIBLE_INVENTORY) $(ANSIBLE_PLAYBOOK); \
+        ansible-playbook -i $(ANSIBLE_INVENTORY) --vault-password-file $(ANSIBLE_VAULT_PASSWORD_FILE) $(ANSIBLE_PLAYBOOK); \
     )
