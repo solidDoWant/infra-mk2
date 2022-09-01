@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - default
   - games
+  - home-monitoring
   - kube-system
   - networking
   - system-upgrade

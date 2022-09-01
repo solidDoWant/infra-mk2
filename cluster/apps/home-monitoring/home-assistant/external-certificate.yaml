@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "home-assistant-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "home-assistant-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "home-assistant.${SECRET_DOMAIN}"
+  dnsNames:
+    - "home-assistant.${SECRET_DOMAIN}"
+    - "ha.${SECRET_DOMAIN}"
