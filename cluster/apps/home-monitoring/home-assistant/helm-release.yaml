@@ -20,3 +20,22 @@ spec:
       TZ: "${TIMEZONE}"
     metrics:
       enabled: true
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: home-assistant.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+          - host: ha.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: home-assistant-${SECRET_DOMAIN/./-}-tls
+            hosts:
+              - home-assistant.${SECRET_DOMAIN}
+              - ha.${SECRET_DOMAIN}
