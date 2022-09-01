@@ -12,6 +12,7 @@ resources:
   - games.yaml
   - media.yaml
   - development.yaml
+  - home-monitoring.yaml
   - istio-operator.yaml
   - istio-system.yaml
   - keycloak.yaml
