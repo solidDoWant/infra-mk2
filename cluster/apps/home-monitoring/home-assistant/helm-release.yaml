@@ -21,7 +21,9 @@ spec:
     metrics:
       enabled: true
     persistence:
-      configuration:
+      config:
+        enabled: true
+      ha-configuration:
         enabled: true
         type: configMap
         name: ha-configuration
