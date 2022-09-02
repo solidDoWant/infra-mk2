@@ -27,8 +27,7 @@ spec:
         enabled: true
         type: configMap
         name: ha-configuration
-        subPath: configuration.yaml
-        mountPath: /helmconfig/configuration.yaml
+        mountPath: /init_config/
         readOnly: true
     initContainers:
       load-configuration:
@@ -37,13 +36,16 @@ spec:
         command:
           - "sh"
           - "-c"
-          - cat "/helmconfig/configuration.yaml" >> "/config/configuration.yaml"
-        volumeMounts:
-          - name: ha-configuration
-            mountPath: /helmconfig/
-            subPath: configuration.yaml
-          - name: config
-            mountPath: /config/
+          - |
+            HA_CONFIG_FILE="/config/configuration.yaml"
+            if ! grep -q "#START_MARKER" "$HA_CONFIG_FILE"
+            then
+              # If not marker not found
+              echo "#START_MARKER" >> "$HA_CONFIG_FILE"
+              echo "#END_MARKER" >> "$HA_CONFIG_FILE"
+            fi
+            # Replace the content between the markers with a HA load command
+            sed -ni '/#START_MARKER/{p;:a;N;/#END_MARKER/!ba;s/.*\n/!include_dir_named init_config\/\n/};p' "$HA_CONFIG_FILE"
         securityContext:
           runAsUser: 0
     ingress:
