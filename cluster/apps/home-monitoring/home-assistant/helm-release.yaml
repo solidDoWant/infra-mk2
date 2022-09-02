@@ -48,7 +48,7 @@ spec:
             fi
             # Replace the content between the markers with a HA load command
             echo "Updating config to include init_config directory..."
-            sed -ni '/#START_MARKER/{p;:a;N;/#END_MARKER/!ba;s/.*\n/!include_dir_named init_config\/\n/};p' "$HA_CONFIG_FILE"
+            sed -ni '/#START_MARKER/{p;:a;N;/#END_MARKER/!ba;s/.*\n/!include_dir_named init_config\\/\n/};p' "$HA_CONFIG_FILE"
             echo "Home-Assistant config updated"
         volumeMounts:
           - name: config
