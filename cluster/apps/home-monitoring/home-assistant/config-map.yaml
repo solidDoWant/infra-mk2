@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ha-configuration
+data:
+  configure.yaml: |
+    http:
+      server_host: 0.0.0.0
+      ip_ban_enabled: true
+      login_attempts_threshold: 5
+      use_x_forwarded_for: true
+      trusted_proxies:
+      # Pod CIDR
+      - 10.69.0.0/16
+      # Node CIDR
+      - 192.168.42.0/24

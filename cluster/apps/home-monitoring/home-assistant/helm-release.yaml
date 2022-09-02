@@ -20,6 +20,30 @@ spec:
       TZ: "${TIMEZONE}"
     metrics:
       enabled: true
+    persistence:
+      configuration:
+        enabled: true
+        type: configMap
+        name: ha-configuration
+        subPath: configuration.yaml
+        mountPath: /tmp/configuration.yaml
+        readOnly: true
+    initContainers:
+      load-configuration:
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+          - "sh"
+          - "-c"
+          - |
+            cat "/tmp/configuration.yaml" >> "/config/configuration.yaml"
+        volumeMounts:
+          - name: ha-configuration
+            mountPath: /tmp/configuration.conf
+          - name: config
+            mountPath: /config/
+        securityContext:
+          runAsUser: 0
     ingress:
       main:
         enabled: true
