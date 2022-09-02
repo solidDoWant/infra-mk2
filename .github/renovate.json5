@@ -30,6 +30,17 @@
       ],
       "datasourceTemplate": "helm"
     },
+    // regexManager to read and HACS updates
+    {
+      "fileMatch": [
+        "cluster/apps/home-monitoring/home-assistant/helm-release\\.yaml$"
+      ],
+      "matchStrings": [
+        // Github releases
+        "githubProject=(?<depName>.*?)\n *VERSION=(?<currentValue>.*)\n"
+      ],
+      "datasourceTemplate": "github-releases"
+    },
     // regexManager to read and process cert-manager CRD's
     {
       "fileMatch": [

@@ -30,6 +30,49 @@ spec:
         mountPath: /config/init_config/
         readOnly: true
     initContainers:
+      update-hacs:
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+          - "sh"
+          - "-c"
+          - |
+            set -x
+            # renovate: githubProject=hacs/integration
+            VERSION=1.27.0
+            HA_PATH="/config"
+
+            # Skip setup on first run
+            HA_CONFIG_FILE="$HA_PATH/configuration.yaml"
+            if ! [ -f "$HA_CONFIG_FILE" ]
+            then
+              echo "Config file $HA_CONFIG_FILE does not exist (probably first run), exiting..."
+              exit 0
+            fi
+
+            HACS_DIR="$HA_PATH/custom_components/hacs"
+            mkdir -pv "$HACS_DIR"
+
+            # Check the installed version
+            HACS_VERSION_FILE="$HACS_DIR/version.txt"
+            # if the file exists and the version matches, exit
+            if ([ -f "$HACS_VERSION_FILE" ] && [ "$VERSION" == $(cat "$HACS_VERSION_FILE") ])
+            then
+              echo "HACS version v$VERSION is already installed, exiting..."
+              exit 0
+            fi
+
+            echo "Installing HACS version v$VERSION to $HACS_DIR..."
+            rm -rf "$HACS_DIR/*"
+            DOWNLOADED_FILE_PATH="/tmp/hacs.zip"
+            wget "https://github.com/hacs/integration/releases/download/$VERSION/hacs.zip" -O "$DOWNLOADED_FILE_PATH"
+            unzip "$DOWNLOADED_FILE_PATH" -d "$HACS_DIR" > /dev/null
+            rm "$DOWNLOADED_FILE_PATH"
+            echo "$VERSION" > "$HACS_VERSION_FILE"
+            echo "Installation complete"
+        volumeMounts:
+          - name: config
+            mountPath: /config/
       load-configuration:
         image: busybox
         imagePullPolicy: IfNotPresent
@@ -38,12 +81,15 @@ spec:
           - "-c"
           - |
             set -x
+
+            # Skip setup on first run
             HA_CONFIG_FILE="/config/configuration.yaml"
             if ! [ -f "$HA_CONFIG_FILE" ]
             then
               echo "Config file $HA_CONFIG_FILE does not exist (probably first run), exiting..."
               exit 0
             fi
+
             # Replace the content between the markers with a HA load command
             echo "Updating config to include init_config directory contents..."
             BLOCK_PREFIX=$(sed -n '/#START_MARKER/q;p' "$HA_CONFIG_FILE")
