@@ -37,6 +37,7 @@ spec:
           - "sh"
           - "-c"
           - |
+            set -x
             HA_CONFIG_FILE="/config/configuration.yaml"
             if ! ([ -f "$HA_CONFIG_FILE" ] && grep -q "#START_MARKER" "$HA_CONFIG_FILE")
             then
