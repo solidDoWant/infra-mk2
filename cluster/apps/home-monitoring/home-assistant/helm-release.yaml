@@ -44,20 +44,22 @@ spec:
               echo "Config file $HA_CONFIG_FILE does not exist (probably first run), exiting..."
               exit 0
             fi
-            if ! grep -q "#START_MARKER" "$HA_CONFIG_FILE"
-            then
-              echo "File or markers not found, adding them"
-              # If not marker not found
-              echo "#START_MARKER" >> "$HA_CONFIG_FILE"
-              echo "#END_MARKER" >> "$HA_CONFIG_FILE"
-            fi
             # Replace the content between the markers with a HA load command
-            echo "Updating config to include init_config directory..."
-            sed -ni '/#START_MARKER/{p;:a;N;/#END_MARKER/!ba;s/.*\n/!include_dir_named init_config\\/\n/};p' "$HA_CONFIG_FILE"
+            echo "Updating config to include init_config directory contents..."
+            BLOCK_PREFIX=$(sed -n '/#START_MARKER/q;p' "$HA_CONFIG_FILE")
+            BLOCK_SUFFIX=$(sed '1,/#END_MARKER/ d' "$HA_CONFIG_FILE")
+            INIT_CONFIG_CONTENTS=$(cat /config/init_config/*)
+            echo "$BLOCK_PREFIX" > "$HA_CONFIG_FILE"
+            echo "#START_MARKER" >> "$HA_CONFIG_FILE"
+            echo "$INIT_CONFIG_CONTENTS" >> "$HA_CONFIG_FILE"
+            echo "#END_MARKER" >> "$HA_CONFIG_FILE"
+            echo "$BLOCK_SUFFIX" >> "$HA_CONFIG_FILE"
             echo "Home-Assistant config updated"
         volumeMounts:
           - name: config
             mountPath: /config/
+          - name: ha-configuration
+            mountPath: /config/init_config/
         securityContext:
           runAsUser: 0
     ingress:
