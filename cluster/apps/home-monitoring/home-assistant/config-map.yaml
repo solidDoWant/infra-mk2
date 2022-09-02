@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: ha-configuration
 data:
-  configure.yaml: |
+  configuration.yaml: |
     http:
       server_host: 0.0.0.0
       ip_ban_enabled: true

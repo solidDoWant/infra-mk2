@@ -27,8 +27,7 @@ spec:
         enabled: true
         type: configMap
         name: ha-configuration
-        subPath: configuration.yaml
-        mountPath: /helmconfig/configuration.yaml
+        mountPath: /helmconfig/
         readOnly: true
     initContainers:
       load-configuration:
@@ -37,8 +36,7 @@ spec:
         command:
           - "sh"
           - "-c"
-          - |
-            cat "/helmconfig/configuration.yaml" >> "/config/configuration.yaml"
+          - cat "/helmconfig/configuration.yaml" >> "/config/configuration.yaml"
         volumeMounts:
           - name: ha-configuration
             mountPath: /helmconfig/
