@@ -116,6 +116,7 @@ spec:
         enabled: true
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-forward-auth@kubernetescrd
         hosts:
           - host: home-assistant.${SECRET_DOMAIN}
             paths:

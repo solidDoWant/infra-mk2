@@ -12,3 +12,11 @@ data:
       use_x_forwarded_for: true
       trusted_proxies:
         - ${CLUSTER_IP_RANGE}
+  auth_header.yaml: |
+    auth_header:
+      username_header: X-Forwarded-User
+      debug: true
+    logger:
+      default: info
+      logs:
+        custom_components.auth_header: debug
