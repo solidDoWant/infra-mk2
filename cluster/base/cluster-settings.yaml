@@ -5,6 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
+  CLUSTER_IP_RANGE: 10.42.0.0/16
   METALLB_LB_RANGE: 10.44.0.0/16
   SVC_TRAEFIK_ADDR: 10.44.0.1
   ZFS_ADDRESS: 10.2.1.2
