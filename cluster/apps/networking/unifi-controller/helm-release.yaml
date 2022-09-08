@@ -18,3 +18,23 @@ spec:
   values:
     env:
       TZ: "${TIMEZONE}"
+    persistence:
+      data:
+        enabled: true
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-forward-auth@kubernetescrd
+          nginx.ingress.kubernetes.io/backend-protocol: null
+        hosts:
+          - host: "unifi.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "unifi.${SECRET_DOMAIN}"
+            secretName: unifi-${SECRET_DOMAIN/./-}-tls

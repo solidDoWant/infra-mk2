@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "unifi-${SECRET_DOMAIN/./-}"
+spec:
+  secretName: "unifi-${SECRET_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "unifi.${SECRET_DOMAIN}"
+  dnsNames:
+    - "unifi.${SECRET_DOMAIN}"
