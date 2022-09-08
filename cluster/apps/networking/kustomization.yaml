@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: networking
 resources:
   - traefik
+  - unifi-controller
   - cloudflare-credentials.yaml
   - cloudflare-ddns
   - external-dns
