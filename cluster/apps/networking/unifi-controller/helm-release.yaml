@@ -19,8 +19,13 @@ spec:
     env:
       TZ: "${TIMEZONE}"
     persistence:
-      data:
+      config:
         enabled: true
+        mountPath: /unifi
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: "10.44.0.6"
     ingress:
       main:
         enabled: true
