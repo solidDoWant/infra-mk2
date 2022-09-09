@@ -20,6 +20,10 @@ spec:
       TZ: "${TIMEZONE}"
     metrics:
       enabled: true
+      serviceMonitor:
+        bearerTokenSecret:
+          name: prometheus-access-token
+          key: token
     persistence:
       config:
         enabled: true
