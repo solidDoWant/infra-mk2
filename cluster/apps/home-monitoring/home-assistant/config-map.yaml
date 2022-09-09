@@ -20,3 +20,6 @@ data:
       default: info
       logs:
         custom_components.auth_header: debug
+  prometheus.yaml: |
+    prometheus:
+      namespace: home-assistant
