@@ -5,6 +5,7 @@ namespace: networking
 resources:
   - traefik
   - unifi-controller
+  - unifi-poller
   - cloudflare-credentials.yaml
   - cloudflare-ddns
   - external-dns

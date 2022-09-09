@@ -25,7 +25,7 @@ spec:
     service:
       main:
         type: LoadBalancer
-        loadBalancerIP: "10.44.0.6"
+        loadBalancerIP: "${UNIFI_CONTROLLER_ADDRESS}"
     ingress:
       main:
         enabled: true
