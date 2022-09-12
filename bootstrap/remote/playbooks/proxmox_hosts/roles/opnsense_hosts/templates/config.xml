@@ -367,6 +367,16 @@
       <ipaddr>10.4.0.1</ipaddr>
       <subnet>16</subnet>
     </opt4>
+    <opt5>
+      <if>vtnet1_vlan600</if>
+      <descr>IoT</descr>
+      <enable>1</enable>
+      <spoofmac/>
+      <blockbogons>1</blockbogons>
+      <mtu>9000</mtu>
+      <ipaddr>10.5.0.1</ipaddr>
+      <subnet>16</subnet>
+    </opt5>
   </interfaces>
   <dhcpd>
     <lan>
@@ -429,6 +439,26 @@
       <dnsserver>10.4.0.1</dnsserver>
       <ntpserver/>
     </opt4>
+    <opt5>
+      <enable>1</enable>
+      <domainsearchlist>echozulu.local</domainsearchlist>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <numberoptions>
+        <item>
+          <number>121</number>
+          <type>string</type>
+          <value>08:0a:0a:04:00:02</value>
+        </item>
+      </numberoptions>
+      <interface_mtu>9000</interface_mtu>
+      <range>
+        <from>10.5.2.1</from>
+        <to>10.5.2.254</to>
+      </range>
+      <winsserver/>
+      <dnsserver>10.5.0.1</dnsserver>
+      <ntpserver/>
+    </opt5>
     <opt2>
       <enable>1</enable>
       <domainsearchlist>echozulu.local</domainsearchlist>
@@ -1047,6 +1077,13 @@
       <pcp>0</pcp>
       <descr>Guests</descr>
       <vlanif>vtnet1_vlan500</vlanif>
+    </vlan>
+    <vlan>
+      <if>vtnet1</if>
+      <tag>600</tag>
+      <pcp>0</pcp>
+      <descr>IoT</descr>
+      <vlanif>vtnet1_vlan600</vlanif>
     </vlan>
   </vlans>
 </opnsense>

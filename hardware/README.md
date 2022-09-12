@@ -59,6 +59,11 @@ The switch switch-01.echozulu.local has routing and ACL capabilities and handles
   ID: 500  
   IP range: 10.4.0.0/16  
   Gateway: 10.4.0.1 (switch)
+* Name: IoT  
+  Description: IoT devices, least privileged (the "s" in IoT stands for "secure")  
+  ID: 600  
+  IP range: 10.5.0.0/16  
+  Gateway: 10.5.0.1 (switch)
 
 ### Hardware:  
 * Switch:  
@@ -601,6 +606,15 @@ dual-mode 500
 interface ve500
 port-name guests
 ip address 10.4.0.2/16
+!
+! IoT VLAN
+vlan 600 name iot by port
+tagged ethernet 1/1/33 to 1/1/40
+tagged ethernet 1/3/8
+router-interface ve 600
+interface ve600
+port-name iot
+ip address 10.5.0.2/16
 ```
 
 #### Setup remote management
