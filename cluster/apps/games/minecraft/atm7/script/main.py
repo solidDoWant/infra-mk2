@@ -40,7 +40,6 @@ class ProgramArgs:
                             dest="curseforge_core_api_key",
                             help="API key for CurseForge Core",
                             default=os.environ["CURSEFORGE_API_KEY"])
-        print(f"KEY: {os.environ['CURSEFORGE_API_KEY']}")
         parser.add_argument("--download-directory", type=Path, required=True,
                             dest="download_directory",
                             help="Local path to download mods to for building")
