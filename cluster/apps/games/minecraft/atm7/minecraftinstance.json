@@ -1,8 +1,8 @@
 {
   "isUnlocked": true,
   "javaArgsOverride": null,
-  "lastPlayed": "2022-09-09T22:26:29.635328Z",
-  "playedCount": 6,
+  "lastPlayed": "2022-09-14T22:49:22.9336603Z",
+  "playedCount": 7,
   "manifest": {
     "minecraft": {
       "version": "1.18.2",
@@ -10413,38 +10413,29 @@
       "addonID": 298744,
       "gameInstanceID": "e4693ac3-afd8-41e9-b252-d5e4c4ba4880",
       "installedFile": {
-        "id": 3967595,
-        "fileName": "structurize-1.18.2-1.0.445-ALPHA.jar",
-        "fileDate": "2022-09-04T07:15:51.787Z",
-        "fileLength": 981125,
+        "id": 3909656,
+        "fileName": "structurize-1.18.2-1.0.424-ALPHA.jar",
+        "fileDate": "2022-07-31T15:53:07.077Z",
+        "fileLength": 833608,
         "releaseType": 3,
         "fileStatus": 4,
-        "downloadUrl": "https://edge.forgecdn.net/files/3967/595/structurize-1.18.2-1.0.445-ALPHA.jar",
+        "downloadUrl": "https://edge.forgecdn.net/files/3909/656/structurize-1.18.2-1.0.424-ALPHA.jar",
         "isAlternate": false,
-        "alternateFileId": 0,
-        "dependencies": [
-          {
-            "addonId": 527361,
-            "type": 3
-          },
-          {
-            "addonId": 522992,
-            "type": 3
-          }
-        ],
+        "alternateFileId": 3909657,
+        "dependencies": [],
         "isAvailable": true,
-        "packageFingerprint": 2472900694,
+        "packageFingerprint": 2389197630,
         "hasInstallScript": false,
         "isCompatibleWithClient": false,
         "restrictProjectFileAccess": 0,
         "projectStatus": 4,
         "projectId": 298744,
-        "FileNameOnDisk": "structurize-1.18.2-1.0.445-ALPHA.jar"
+        "FileNameOnDisk": "structurize-1.18.2-1.0.424-ALPHA.jar"
       },
-      "dateInstalled": "2022-09-09T19:24:18.9951804Z",
-      "dateUpdated": "2022-09-10T05:19:00.8999873Z",
-      "dateLastUpdateAttempted": "2022-09-10T05:19:00.8999873Z",
-      "status": 5,
+      "dateInstalled": "2022-09-14T22:48:28.7158286Z",
+      "dateUpdated": "2022-09-14T22:48:28.7248213Z",
+      "dateLastUpdateAttempted": "2022-09-14T22:48:28.7248213Z",
+      "status": 3,
       "installSource": 0,
       "preferenceAutoInstallUpdates": null,
       "preferenceAlternateFile": false,
@@ -10454,7 +10445,7 @@
       "isFuzzyMatch": false,
       "preferenceReleaseType": null,
       "manifestName": null,
-      "installedTargets": null
+      "installedTargets": []
     },
     {
       "addonID": 401648,
