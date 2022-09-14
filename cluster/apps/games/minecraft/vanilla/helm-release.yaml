@@ -25,10 +25,10 @@ spec:
       motd: "bepis"
       ops: "solidDoWant"
       pvp: true
-    memory: 2G
-    serviceType: LoadBalancer
-    servicePort: 25565
-    loadBalancerIP: 10.44.0.7
+      memory: 2G
+      serviceType: LoadBalancer
+      servicePort: 25565
+      loadBalancerIP: 10.44.0.7
     serviceAnnotations:
       metallb.universe.tf/allow-shared-ip: "minecraft-shared-ip"
     persistence:
