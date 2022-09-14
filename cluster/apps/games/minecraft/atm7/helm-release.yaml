@@ -34,7 +34,7 @@ spec:
         args:
           - /script/main.py
           - --minecraft-server-path
-          - /data
+          - /data/FeedTheBeast
           - --minecraftinstance-json-path
           - /config/minecraftinstance.json
           - --download-directory
