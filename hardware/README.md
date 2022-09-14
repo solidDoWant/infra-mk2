@@ -715,6 +715,8 @@ network:
           via: 10.1.0.1
         - to: 10.0.0.0/8
           via: 10.1.0.2
+        - to: 10.5.0.0/16
+          via: 10.1.0.1
       mtu: 9000
 ```  
 All other interfaces are removed from the netplan to reduce boot time added by asking for DHCP leases on disconnected interfaces.
