@@ -1,0 +1,74 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: atm7
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
+      chart: minecraft
+      version: 4.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: minecraft-server-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    resources:
+      requests:
+        memory: 16Gi
+        cpu: 4000m
+    initContainers:
+      - name: update-modpack
+        image: python:3
+        env:
+          - name: CURSEFORGE_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: curseforge-api-key
+                key: CURSEFORGE_API_KEY
+        args:
+          - /script/main.py
+          - --minecraft-server-path
+          - /data
+          - --minecraftinstance-json-path
+          - /config/minecraftinstance.json
+          - --curseforge-core-api-key
+          - $CURSEFORGE_API_KEY
+          - --download-directory
+          - /tmp/download
+        volumeMounts:
+          - name: update-modpack
+            mountPath: /script
+          - name: minecraftinstance
+            mountPath: /config
+          - name: datadir
+            mountPath: /data
+    extraVolumes:
+      - volumes:
+          - name: update-modpack
+            configMap:
+              name: update-modpack-script
+          - name: minecraftinstance
+            configMap:
+              name: minecraftinstance
+    minecraftServer:
+      eula: "TRUE"
+      difficulty: normal
+      motd: "bepis"
+      ops: "solidDoWant"
+      pvp: true
+      memory: 16G
+      serviceType: LoadBalancer
+      servicePort: 25566
+      loadBalancerIP: 10.44.0.7
+    serviceAnnotations:
+      metallb.universe.tf/allow-shared-ip: "minecraft-shared-ip"
+    persistence:
+      dataDir:
+        enabled: true
+        Size: 16Gi
+    extraEnv:
+      TZ: ${TZ}
