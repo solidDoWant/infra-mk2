@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: minecraft-1
+  name: vanilla
 spec:
   interval: 5m
   chart:
@@ -16,19 +16,24 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    nameOverride: "-"
     resources:
       requests:
-        memory: 1Gi
-    securityContext:
-      fsGroup: ${NFS_GROUP_ID}
+        memory: 2Gi
     minecraftServer:
       eula: "TRUE"
       difficulty: normal
       motd: "bepis"
       ops: "solidDoWant"
       pvp: true
+    memory: 2G
+    serviceType: LoadBalancer
+    servicePort: 25565
+    loadBalancerIP: 10.44.0.7
+    serviceAnnotations:
+      metallb.universe.tf/allow-shared-ip: "minecraft-shared-ip"
     persistence:
       dataDir:
         enabled: true
         Size: 5Gi
+    extraEnv:
+      TZ: ${TZ}
