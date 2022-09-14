@@ -13,3 +13,5 @@ configMapGenerator:
   - name: minecraftinstance
     files:
       - minecraftinstance.json
+generatorOptions:
+  disableNameSuffixHash: true
