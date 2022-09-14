@@ -9,6 +9,7 @@ configMapGenerator:
     files:
       - script/requirements.txt
       - script/main.py
+  # Run reduce-minecraftinstance-size.sh first to reduce file size
   - name: minecraftinstance
     files:
       - minecraftinstance.json
