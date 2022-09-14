@@ -37,8 +37,6 @@ spec:
           - /data
           - --minecraftinstance-json-path
           - /config/minecraftinstance.json
-          - --curseforge-core-api-key
-          - $CURSEFORGE_API_KEY
           - --download-directory
           - /tmp/download
         volumeMounts:

@@ -36,9 +36,11 @@ class ProgramArgs:
                             dest="minecraftinstance_json_path",
                             help="Path to the new \"minecraftinstance.json\" file from created by the CurseForge "
                                  "launcher")
-        parser.add_argument("--curseforge-core-api-key", type=str, required=True,
+        parser.add_argument("--curseforge-core-api-key", type=str,
                             dest="curseforge_core_api_key",
-                            help="API key for CurseForge Core")
+                            help="API key for CurseForge Core",
+                            default=os.environ["CURSEFORGE_API_KEY"])
+        print(f"KEY: {os.environ['CURSEFORGE_API_KEY']}")
         parser.add_argument("--download-directory", type=Path, required=True,
                             dest="download_directory",
                             help="Local path to download mods to for building")
