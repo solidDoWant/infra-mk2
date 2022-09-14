@@ -29,6 +29,8 @@ spec:
               secretKeyRef:
                 name: curseforge-api-key
                 key: CURSEFORGE_API_KEY
+        command:
+          - python
         args:
           - /script/main.py
           - --minecraft-server-path
