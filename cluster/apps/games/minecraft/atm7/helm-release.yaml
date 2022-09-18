@@ -21,10 +21,10 @@ spec:
         memory: 16Gi
         cpu: 4000m
     livenessProbe:
-      initialDelaySeconds: 150
+      initialDelaySeconds: 600
       periodSeconds: 30
     readinessProbe:
-      initialDelaySeconds: 150
+      initialDelaySeconds: 600
       periodSeconds: 30
     initContainers:
       - name: update-modpack
