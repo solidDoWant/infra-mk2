@@ -164,6 +164,7 @@ def main():
     print("Finished donwloading mods")
 
     print("Packaging new zip...")
+    args.minecraft_server_path.mkdir(exist_ok=True, parents=True)
     mods_path = Path("mods")
     with ZipFile(base_modpack_zip_path, 'r') as base_modpack_zip, ZipFile(modpack_zip_path, 'w') as modpack_zip:
         for item in base_modpack_zip.infolist():
