@@ -72,7 +72,7 @@ spec:
       ops: "solidDoWant"
       pvp: true
       type: CURSEFORGE
-      cfServerMod: /data/FeedTheBeast/modpack.zip
+      cfServerMod: /data/modpack.zip
       memory: 16G
       serviceType: LoadBalancer
       servicePort: 25566

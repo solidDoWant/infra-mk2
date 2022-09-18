@@ -188,7 +188,7 @@ def main():
     shutil.rmtree(args.download_directory, ignore_errors=True)
     shutil.copy2(new_json_file_path, old_json_file_path)
 
-    print("Finished")
+    print(f"Finished building modpack {str(modpack_zip_path)}")
 
 
 if __name__ == '__main__':
