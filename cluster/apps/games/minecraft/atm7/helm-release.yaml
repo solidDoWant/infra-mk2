@@ -45,6 +45,8 @@ spec:
           - /config/minecraftinstance.json
           - --download-directory
           - /tmp/download
+          - --modpack-zip-directory
+          - /data
         volumeMounts:
           - name: update-modpack
             mountPath: /script

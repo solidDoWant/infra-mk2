@@ -21,6 +21,7 @@ class ProgramArgs:
     minecraftinstance_json_path: Path
     curseforge_core_api_key: str
     download_directory: Path
+    modpack_zip_directory: Path
 
     def __init__(self):
         pass
@@ -43,6 +44,9 @@ class ProgramArgs:
         parser.add_argument("--download-directory", type=Path, required=True,
                             dest="download_directory",
                             help="Local path to download mods to for building")
+        parser.add_argument("--modpack-zip-directory", type=Path, required=True,
+                            dest="modpack_zip_directory",
+                            help="Local path where the build zip should be stored")
 
         program_args = ProgramArgs()
         parser.parse_args(namespace=program_args)
@@ -69,8 +73,8 @@ def main():
     print("Beginning modpack update script...")
     args = ProgramArgs.parse_args()
     new_json_file_path = args.minecraftinstance_json_path
-    old_json_file_path = args.minecraft_server_path.joinpath("minecraftinstance.json")
-    modpack_zip_path = args.minecraft_server_path.joinpath("modpack.zip")
+    old_json_file_path = args.modpack_zip_directory.joinpath("minecraftinstance.json")
+    modpack_zip_path = args.modpack_zip_directory.joinpath("modpack.zip")
 
     if old_json_file_path.is_file() and filecmp.cmp(new_json_file_path, old_json_file_path):
         print("No changes detected, not updating")
