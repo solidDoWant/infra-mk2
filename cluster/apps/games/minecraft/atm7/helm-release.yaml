@@ -20,6 +20,23 @@ spec:
       requests:
         memory: 16Gi
         cpu: 4000m
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 25
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-host-01
+          - weight: 75
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-host-04
     livenessProbe:
       initialDelaySeconds: 600
       periodSeconds: 30
