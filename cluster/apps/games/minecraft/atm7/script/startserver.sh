@@ -1,8 +1,8 @@
 #!/bin/sh
 set -eu
 DEFAULT_FORGE_VERSION=40.1.74
-if [ -z ${FORGE_VERSION+x} ]
-    if [ -f "forge_version.txt" ]
+if [ -z ${FORGE_VERSION+x} ]; then
+    if [ -f "forge_version.txt" ]; then
         FORGE_VERSION=$(cat "forge_version.txt")
     else
         FORGE_VERSION=$DEFAULT_FORGE_VERSION
@@ -51,7 +51,7 @@ if [ ! -f "$CHECKFILE_NAME" ]; then
         fi
     fi
 
-    if [ -d "libraries" ]
+    if [ -d "libraries" ]; then
         echo "Removing potentially old libraries"
         rm rf "libraries"
     fi
