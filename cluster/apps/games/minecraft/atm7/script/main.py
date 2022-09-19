@@ -146,7 +146,7 @@ def main():
     for project_id, addon_file in disabled_mods.items():
         print(f"{project_id}: {addon_file['fileName']}")
 
-    files_to_delete = []
+    files_to_delete = ["startserver.sh"]    # This will be replaced
     for projectId, addon_file in {**updated_mods, **disabled_mods}.items():
         if projectId not in base_modpack_mods:
             continue
@@ -167,6 +167,13 @@ def main():
 
     print("Finished donwloading mods")
 
+    build_dir = Path("/tmp/build")
+    shutil.copy2(Path("startserver.sh"), build_dir.joinpath("startserver.sh"))
+    forge_version: int = new_json_file["baseModLoader"]["forgeVersion"]
+    with open(build_dir.joinpath("forge_version.txt"), "w") as forge_version_file:
+        forge_version_file.write(forge_version)
+
+
     print("Packaging new zip...")
     args.minecraft_server_path.mkdir(exist_ok=True, parents=True)
     mods_path = Path("mods")
@@ -178,7 +185,7 @@ def main():
                 continue
             buffer = base_modpack_zip.read(item.filename)
             modpack_zip.writestr(item, buffer)
-        for file in args.download_directory.glob("*"):
+        for file in (file for file in args.download_directory.glob("*") + build_dir.glob("*")):
             print(f"Adding {file} to zip")
             if file.name == base_modpack_zip_path.name:
                 continue
