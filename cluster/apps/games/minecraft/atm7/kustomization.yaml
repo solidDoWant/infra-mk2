@@ -7,8 +7,9 @@ resources:
 configMapGenerator:
   - name: update-modpack-script
     files:
-      - script/requirements.txt
       - script/main.py
+      - script/requirements.txt
+      - script/startserver.sh
   # Run reduce-minecraftinstance-size.sh first to reduce file size
   - name: minecraftinstance
     files:
