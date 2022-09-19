@@ -168,6 +168,7 @@ def main():
     print("Finished donwloading mods")
 
     build_dir = Path("/tmp/build")
+    build_dir.mkdir(exist_ok=True, parents=True)
     shutil.copy2(Path("startserver.sh"), build_dir.joinpath("startserver.sh"))
     forge_version: int = new_json_file["baseModLoader"]["forgeVersion"]
     with open(build_dir.joinpath("forge_version.txt"), "w") as forge_version_file:
@@ -185,12 +186,15 @@ def main():
                 continue
             buffer = base_modpack_zip.read(item.filename)
             modpack_zip.writestr(item, buffer)
-        for file in (file for file in args.download_directory.glob("*") + build_dir.glob("*")):
+        for file in args.download_directory.glob("*"):
             print(f"Adding {file} to zip")
             if file.name == base_modpack_zip_path.name:
                 continue
             zip_file_path = mods_path.joinpath(file.name)
             modpack_zip.write(file, zip_file_path)
+        for file in build_dir.glob("*"):
+            print(f"Adding {file} to zip")
+            modpack_zip.write(file, file.name)
 
     shutil.rmtree(args.download_directory, ignore_errors=True)
     shutil.copy2(new_json_file_path, old_json_file_path)
