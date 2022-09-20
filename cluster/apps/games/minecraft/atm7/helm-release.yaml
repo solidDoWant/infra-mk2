@@ -105,11 +105,11 @@ spec:
       memory: 16G
       serviceType: LoadBalancer
       loadBalancerIP: 10.44.0.8
-    rcon:
-      enabled: true
-      existingSecret: rcon-password
-      serviceType: LoadBalancer
-      loadBalancerIP: 10.44.0.8
+      rcon:
+        enabled: true
+        existingSecret: rcon-password
+        serviceType: LoadBalancer
+        loadBalancerIP: 10.44.0.8
     rconServiceAnnotations:
       metallb.universe.tf/allow-shared-ip: "minecraft-atm7-shared-ip"
     serviceAnnotations:
