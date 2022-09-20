@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - curseforge-api-key.yaml
   - helm-release.yaml
+  - rcon-password.yaml
 configMapGenerator:
   - name: update-modpack-script
     files:

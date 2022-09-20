@@ -38,10 +38,10 @@ spec:
                   values:
                     - k8s-host-04
     livenessProbe:
-      initialDelaySeconds: 600
+      initialDelaySeconds: 900
       periodSeconds: 30
     readinessProbe:
-      initialDelaySeconds: 600
+      initialDelaySeconds: 900
       periodSeconds: 30
     initContainers:
       - name: update-modpack
@@ -106,8 +106,15 @@ spec:
       serviceType: LoadBalancer
       servicePort: 25566
       loadBalancerIP: 10.44.0.7
+    rcon:
+      enabled: true
+      existingSecret: rcon-password
+      serviceType: LoadBalancer
+      loadBalancerIP: 10.44.0.7
+    rconServiceAnnotations:
+      metallb.universe.tf/allow-shared-ip: "minecraft-atm7-shared-ip"
     serviceAnnotations:
-      metallb.universe.tf/allow-shared-ip: "minecraft-shared-ip"
+      metallb.universe.tf/allow-shared-ip: "minecraft-atm7-shared-ip"
     persistence:
       dataDir:
         enabled: true
