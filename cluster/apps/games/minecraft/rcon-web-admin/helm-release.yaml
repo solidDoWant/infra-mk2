@@ -18,7 +18,7 @@ spec:
   values:
     resources:
       requests:
-        memory: 512Gi
+        memory: 512Mi
         cpu: 200m
     ingress:
       enabled: true
