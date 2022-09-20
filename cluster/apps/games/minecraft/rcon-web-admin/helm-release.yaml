@@ -1,0 +1,39 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rcon-web-admin
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
+      chart: rcon-web-admin
+      version: 1.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: minecraft-server-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    resources:
+      requests:
+        memory: 512Gi
+        cpu: 200m
+    ingress:
+      enabled: true
+      host: rcon.${SECRET_DOMAIN}"
+      tls:
+        - secretName: gitea-${SECRET_DOMAIN/./-}-tls
+          hosts:
+            - gitea.${SECRET_DOMAIN}
+            - git.${SECRET_DOMAIN}
+      pathType: Prefix
+    rconWeb:
+      isAdmin: true
+      passwordExistingSecret: rcon-password
+      passwordKey: rcon-password
+      rconHost: 10.44.0.8
+      rconPasswordExistingSecret: rcon-password
+    extraEnv:
+      TZ: ${TZ}
