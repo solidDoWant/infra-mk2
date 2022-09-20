@@ -22,12 +22,11 @@ spec:
         cpu: 200m
     ingress:
       enabled: true
-      host: rcon.${SECRET_DOMAIN}"
+      host: rcon.${SECRET_DOMAIN}
       tls:
-        - secretName: gitea-${SECRET_DOMAIN/./-}-tls
+        - secretName: rcon-${SECRET_DOMAIN/./-}-tls
           hosts:
-            - gitea.${SECRET_DOMAIN}
-            - git.${SECRET_DOMAIN}
+            - rcon.${SECRET_DOMAIN}
       pathType: Prefix
     rconWeb:
       isAdmin: true
