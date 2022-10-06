@@ -16,6 +16,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      tag: java8
     resources:
       requests:
         memory: 16Gi
@@ -45,7 +47,7 @@ spec:
       periodSeconds: 30
     minecraftServer:
       eula: "TRUE"
-      difficulty: normal
+      difficulty: peaceful
       motd: "nomi"
       ops: "solidDoWant"
       pvp: true
