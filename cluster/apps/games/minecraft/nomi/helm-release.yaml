@@ -1,0 +1,71 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nomi
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
+      chart: minecraft
+      version: 4.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: minecraft-server-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    resources:
+      requests:
+        memory: 16Gi
+        cpu: 4000m
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 25
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-host-01
+          - weight: 75
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-host-04
+    livenessProbe:
+      initialDelaySeconds: 300
+      periodSeconds: 30
+    readinessProbe:
+      initialDelaySeconds: 300
+      periodSeconds: 30
+    minecraftServer:
+      eula: "TRUE"
+      difficulty: normal
+      motd: "nomi"
+      ops: "solidDoWant"
+      pvp: true
+      type: CURSEFORGE
+      cfServerMod: https://edge.forgecdn.net/files/4014/139/nomi-ceu-server-1.4.1a.zip
+      memory: 16G
+      serviceType: LoadBalancer
+      loadBalancerIP: 10.44.0.9
+      rcon:
+        enabled: true
+        existingSecret: rcon-password
+        serviceType: LoadBalancer
+        loadBalancerIP: 10.44.0.9
+    rconServiceAnnotations:
+      metallb.universe.tf/allow-shared-ip: "minecraft-nomi-shared-ip"
+    serviceAnnotations:
+      metallb.universe.tf/allow-shared-ip: "minecraft-nomi-shared-ip"
+    persistence:
+      dataDir:
+        enabled: true
+        Size: 16Gi
+    extraEnv:
+      TZ: ${TZ}
