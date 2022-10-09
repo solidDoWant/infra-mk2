@@ -22,8 +22,22 @@ spec:
         type: pvc
         accessMode: ReadWriteOnce
         size: 10Gi
-    graphic_resources:
-      nvidia.com/gpu: 1
+      nvidia-drv:
+        enabled: true
+        type: hostPath
+        hostPathType: File
+        readOnly: true
+        mountPath: /nvidia/xorg/nvidia_drv.so
+        hostPath: /usr/lib/x86_64-linux-gnu/nvidia/xorg/nvidia_drv.so
+      libglxserver-nvidia:
+        enabled: true
+        type: hostPath
+        hostPathType: File
+        readOnly: true
+        mountPath: /nvidia/xorg/libglxserver_nvidia.so
+        hostPath: /usr/lib/x86_64-linux-gnu/nvidia/xorg/libglxserver_nvidia.so
+    # graphic_resources:
+    #   nvidia.com/gpu: 1
     service:
       main:
         type: LoadBalancer
@@ -50,6 +64,16 @@ spec:
           - secretName: gow-${SECRET_DOMAIN/./-}-tls
             hosts:
               - gow.${SECRET_DOMAIN}
+    xorg:
+      refreshrate: 60
+      resolution: 1920x1080
+      volumeMounts:
+        - name: nvidia-drv
+          mountPath: /nvidia/xorg/nvidia_drv.so
+          readOnly: true
+        - name: libglxserver-nvidia
+          mountPath: /nvidia/xorg/libglxserver_nvidia.so
+          readOnly: true
     firefox:
       enabled: false
     steam:

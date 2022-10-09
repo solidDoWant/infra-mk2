@@ -1,0 +1,33 @@
+---
+- name: Install headers
+  apt:
+    name:
+      - linux-headers-{{ ansible_kernel }}
+    state: latest
+    update_cache: true
+    autoclean: true
+    autoremove: true
+
+- name: Download the cuda keyring package file
+  get_url:
+    url: https://developer.download.nvidia.com/compute/cuda/repos/{{ ansible_distribution | lower }}{{ ansible_distribution_version | replace('.', '') }}/x86_64/cuda-keyring_1.0-1_all.deb
+    dest: /tmp/cuda-keyring.deb
+  register: cuda_keyring_download
+
+- name: Install the cuda keyring package
+  apt: deb="{{ cuda_keyring_download.dest }}"
+  sudo: true
+
+- name: Remove the cuda keyring package file
+  file:
+    path: "{{ cuda_keyring_download.dest }}"
+    state: absent
+
+- name: Install the driver
+  apt:
+    name:
+      - cuda-drivers
+    state: latest
+    update_cache: true
+    autoclean: true
+    autoremove: true

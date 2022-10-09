@@ -1,0 +1,7 @@
+---
+- hosts: nvidia_hosts
+  become: true
+
+  roles:
+    - role: install_drivers
+      tags: install_drivers

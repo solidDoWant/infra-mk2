@@ -19,3 +19,6 @@ opnsense_hosts
 
 [zfs_hosts]
 10.1.1.2
+
+[nvidia_hosts]
+10.1.1.4

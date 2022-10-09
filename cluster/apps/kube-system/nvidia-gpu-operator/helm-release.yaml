@@ -19,6 +19,8 @@ spec:
   values:
     nfd:
       enabled: false
+    driver:
+      enabled: false
     toolkit:
       env:
         - name: CONTAINERD_SOCKET
