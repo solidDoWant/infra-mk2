@@ -16,13 +16,14 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    runtimeClassName: nvidia
     persistence:
       home:
         type: pvc
         accessMode: ReadWriteOnce
         size: 10Gi
     graphic_resources:
-      gpu.intel.com/i915: 1
+      nvidia.com/gpu: 1
     service:
       main:
         type: LoadBalancer
