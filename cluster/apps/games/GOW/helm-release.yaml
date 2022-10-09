@@ -71,21 +71,23 @@ spec:
       enabled: false
     steam:
       enabled: false
-  patches:
-    - patch: |-
-        $patch: merge
-        spec:
-          template:
-            spec:
-              containers:
-                - name: xorg
-                  volumeMounts:
-                    - name: libglxserver-nvidia
-                      readOnly: true
-                      mountPath: /nvidia/xorg/libglxserver_nvidia.so
-                    - name: nvidia-drv
-                      readOnly: true
-                      mountPath: /nvidia/xorg/nvidia_drv.so
-      target:
-        kind: Deployment
-        name: games-on-whales
+  postRenderers:
+    - kustomize:
+        patches:
+          - patch: |-
+              $patch: merge
+              spec:
+                template:
+                  spec:
+                    containers:
+                      - name: xorg
+                        volumeMounts:
+                          - name: libglxserver-nvidia
+                            readOnly: true
+                            mountPath: /nvidia/xorg/libglxserver_nvidia.so
+                          - name: nvidia-drv
+                            readOnly: true
+                            mountPath: /nvidia/xorg/nvidia_drv.so
+            target:
+              kind: Deployment
+              name: games-on-whales
