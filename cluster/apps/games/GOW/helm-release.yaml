@@ -75,6 +75,10 @@ spec:
     - kustomize:
         patches:
           - patch: |-
+              apiVersion: v1
+              kind: Deployment
+              metadata:
+                name: games-on-whales
               spec:
                 template:
                   spec:
