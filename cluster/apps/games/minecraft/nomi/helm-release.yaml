@@ -40,10 +40,10 @@ spec:
                   values:
                     - k8s-host-04
     livenessProbe:
-      initialDelaySeconds: 300
+      initialDelaySeconds: 120
       periodSeconds: 30
     readinessProbe:
-      initialDelaySeconds: 300
+      initialDelaySeconds: 120
       periodSeconds: 30
     minecraftServer:
       eula: "TRUE"
