@@ -75,7 +75,6 @@ spec:
     - kustomize:
         patches:
           - patch: |-
-              $patch: merge
               spec:
                 template:
                   spec:
