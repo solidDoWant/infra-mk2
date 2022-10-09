@@ -20,6 +20,15 @@ spec:
     worker:
       config:
         sources:
+          pci:
+            deviceClassWhitelist:
+              - "02"
+              - "0200"
+              - "0207"
+              - "0300"
+              - "0302"
+            deviceLabelFields:
+              - vendor
           custom:
             - name: "intel-gpu"
               matchOn:
