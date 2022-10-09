@@ -67,17 +67,25 @@ spec:
     xorg:
       refreshrate: 60
       resolution: 1920x1080
-
     firefox:
       enabled: false
     steam:
       enabled: false
-    additionalContainers:
-      xorg:
-        volumeMounts:
-          - name: nvidia-drv
-            mountPath: /nvidia/xorg/nvidia_drv.so
-            readOnly: true
-          - name: libglxserver-nvidia
-            mountPath: /nvidia/xorg/libglxserver_nvidia.so
-            readOnly: true
+  patches:
+    - patch: |-
+        $patch: merge
+        spec:
+          template:
+            spec:
+              containers:
+                - name: xorg
+                  volumeMounts:
+                    - name: libglxserver-nvidia
+                      readOnly: true
+                      mountPath: /nvidia/xorg/libglxserver_nvidia.so
+                    - name: nvidia-drv
+                      readOnly: true
+                      mountPath: /nvidia/xorg/nvidia_drv.so
+      target:
+        kind: Deployment
+        name: games-on-whales
