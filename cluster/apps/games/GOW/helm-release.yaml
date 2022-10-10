@@ -22,6 +22,10 @@ spec:
         type: pvc
         accessMode: ReadWriteOnce
         size: 10Gi
+      multimc:
+        type: pvc
+        accessMode: ReadWriteOnce
+        size: 20Gi
       nvidia-drv:
         enabled: true
         type: hostPath
@@ -67,10 +71,31 @@ spec:
     xorg:
       refreshrate: 60
       resolution: 1920x1080
+      display: :99
     firefox:
       enabled: false
     steam:
       enabled: false
+    additionalContainers:
+      multimc:
+        image: gitea.${SECRET_DOMAIN}/fheinecke/gow-multimc:latest
+        imagePullPolicy: Always
+        env:
+          - name: DISPLAY
+            value: :99
+        volumeMounts:
+          - name: dev-input
+            mountPath: /dev/input
+            readOnly: true
+          - name: udev
+            mountPath: /run/udev
+            readOnly: true
+          - name: xorg
+            mountPath: /tmp/.X11-unix
+          - name: dshm
+            mountPath: /dev/shm
+          - name: multimc
+            mountPath: /multimc
   postRenderers:
     - kustomize:
         patches:
