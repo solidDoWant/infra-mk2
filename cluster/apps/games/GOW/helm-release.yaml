@@ -20,9 +20,11 @@ spec:
     persistence:
       home:
         type: pvc
+        mountPath: "-"
         accessMode: ReadWriteOnce
         size: 10Gi
       multimc:
+        enabled: true
         type: pvc
         accessMode: ReadWriteOnce
         size: 20Gi
