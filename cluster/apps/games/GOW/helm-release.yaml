@@ -74,6 +74,8 @@ spec:
       refreshrate: 60
       resolution: 1920x1080
       display: :99
+    retroarch:
+      enabled: false
     firefox:
       enabled: false
     steam:
