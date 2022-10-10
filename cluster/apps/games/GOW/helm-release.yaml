@@ -26,7 +26,6 @@ spec:
         enabled: true
         type: configMap
         name: nvidia-xorg-config
-        subPath: 09-nvidia-custom-location.conf
         mountPath: "-"
       multimc:
         enabled: true
@@ -145,6 +144,7 @@ spec:
                           - name: nvidia-xorg-config
                             readOnly: true
                             mountPath: /usr/share/X11/xorg.conf.d/09-nvidia-custom-location.conf
+                            subPath: 09-nvidia-custom-location.conf
             target:
               kind: Deployment
               name: games-on-whales
