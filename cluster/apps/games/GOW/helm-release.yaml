@@ -96,6 +96,10 @@ spec:
             mountPath: /dev/shm
           # - name: multimc
           #   mountPath: /multimc
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
   postRenderers:
     - kustomize:
         patches:
