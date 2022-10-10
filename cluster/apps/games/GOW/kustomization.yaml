@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - external-certificate.yaml
   - helm-release.yaml
+  - nvidia-xorg-config.yaml

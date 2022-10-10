@@ -22,6 +22,12 @@ spec:
         type: pvc
         accessMode: ReadWriteOnce
         size: 10Gi
+      nvidia-xorg-config:
+        enabled: true
+        type: configMap
+        name: nvidia-xorg-config
+        subPath: 09-nvidia-custom-location.conf
+        mountPath: "-"
       multimc:
         enabled: true
         mountPath: "-"
@@ -136,6 +142,9 @@ spec:
                           - name: nvidia-drv
                             readOnly: true
                             mountPath: /nvidia/xorg/nvidia_drv.so
+                          - name: nvidia-xorg-config
+                            readOnly: true
+                            mountPath: /usr/share/X11/xorg.conf.d/09-nvidia-custom-location.conf
             target:
               kind: Deployment
               name: games-on-whales
