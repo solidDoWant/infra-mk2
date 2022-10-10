@@ -20,11 +20,11 @@ spec:
     persistence:
       home:
         type: pvc
-        mountPath: "-"
         accessMode: ReadWriteOnce
         size: 10Gi
       multimc:
         enabled: true
+        mountPath: "-"
         type: pvc
         accessMode: ReadWriteOnce
         size: 20Gi
@@ -96,8 +96,8 @@ spec:
             mountPath: /tmp/.X11-unix
           - name: dshm
             mountPath: /dev/shm
-          # - name: multimc
-          #   mountPath: /multimc
+          - name: multimc
+            mountPath: /multimc
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
