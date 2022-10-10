@@ -78,10 +78,22 @@ spec:
       enabled: false
     steam:
       enabled: false
+    initContainers:
+      mkhomemultimcdirs:
+        image: busybox:1.34.0
+        imagePullPolicy: IfNotPresent
+        command:
+          - sh
+          - -c
+          - chown -R 1000:1000 /home/multimc
+        volumeMounts:
+          - name: multimc
+            mountPath: /home/multimc
     additionalContainers:
       multimc:
         image: gitea.${SECRET_DOMAIN}/fheinecke/gow-multimc:latest
         imagePullPolicy: Always
+        workingDir: /workdir
         env:
           - name: DISPLAY
             value: :99
@@ -97,7 +109,7 @@ spec:
           - name: dshm
             mountPath: /dev/shm
           - name: multimc
-            mountPath: /multimc
+            mountPath: /home/multimc
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
