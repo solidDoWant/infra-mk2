@@ -94,8 +94,8 @@ spec:
             mountPath: /tmp/.X11-unix
           - name: dshm
             mountPath: /dev/shm
-          - name: multimc
-            mountPath: /multimc
+          # - name: multimc
+          #   mountPath: /multimc
   postRenderers:
     - kustomize:
         patches:
