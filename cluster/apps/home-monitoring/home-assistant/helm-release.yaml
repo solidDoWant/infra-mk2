@@ -35,7 +35,7 @@ spec:
         readOnly: true
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: 2022.10.2
+      tag: 2022.10.3
     initContainers:
       update-hacs:
         image: busybox
