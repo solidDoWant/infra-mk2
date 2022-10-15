@@ -18,8 +18,10 @@ spec:
   values:
     service:
       main:
-        type: ClusterIP
-        externalTrafficPolicy: null
+        type: LoadBalancer
+        loadBalancerIP: "10.44.0.10"
+        annotations:
+          metallb.universe.tf/allow-shared-ip: valheim
     persistence:
       config:
         enabled: true
