@@ -38,10 +38,10 @@ spec:
                   values:
                     - k8s-host-04
     livenessProbe:
-      initialDelaySeconds: 900
+      initialDelaySeconds: 300
       periodSeconds: 30
     readinessProbe:
-      initialDelaySeconds: 900
+      initialDelaySeconds: 300
       periodSeconds: 30
     initContainers:
       - name: update-modpack
