@@ -27,6 +27,7 @@ spec:
     persistence:
       config:
         enabled: true
+        size: 10Gi
       ha-configuration:
         enabled: true
         type: configMap
