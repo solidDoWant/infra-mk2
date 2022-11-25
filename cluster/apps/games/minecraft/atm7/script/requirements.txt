@@ -1,1 +1,1 @@
-cursepy==2.1.0
+cursepy==2.2.0
