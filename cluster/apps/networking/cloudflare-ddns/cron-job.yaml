@@ -17,7 +17,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: cloudflare-ddns
-              image: curlimages/curl:7.86.0
+              image: curlimages/curl:7.87.0
               envFrom:
                 - secretRef:
                     name: cloudflare-credentials
