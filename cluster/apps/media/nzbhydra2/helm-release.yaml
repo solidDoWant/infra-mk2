@@ -41,3 +41,16 @@ spec:
         size: 10Gi
     env:
       TZ: "${TIMEZONE}"
+    probes:
+      liveness:
+        spec:
+          httpGet:
+            path: /actuator/health/ping
+      readiness:
+        spec:
+          httpGet:
+            path: /actuator/health/ping
+      startup:
+        spec:
+          httpGet:
+            path: /actuator/health/ping
