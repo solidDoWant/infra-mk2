@@ -55,12 +55,12 @@ spec:
       cfServerMod: https://edge.forgecdn.net/files/4432/933/nomi-ceu-server-1.5.2.zip
       memory: 16G
       serviceType: LoadBalancer
-      loadBalancerIP: 10.44.0.10
+      loadBalancerIP: 10.44.0.11
       rcon:
         enabled: true
         existingSecret: rcon-password
         serviceType: LoadBalancer
-        loadBalancerIP: 10.44.0.10
+        loadBalancerIP: 10.44.0.11
     rconServiceAnnotations:
       metallb.universe.tf/allow-shared-ip: "minecraft-nomi2-shared-ip"
     serviceAnnotations:
