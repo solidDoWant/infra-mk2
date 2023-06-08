@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: games
 resources:
   - factorio
-  - GOW
+  # - GOW
   - minecraft
   - valheim
