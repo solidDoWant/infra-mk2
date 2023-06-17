@@ -1,4 +1,4 @@
-FROM docker.io/golang:1.20.4-alpine
+FROM docker.io/golang:1.20.5-alpine
 
 ARG VERSION
 ENV VERSION=v1.8.5
