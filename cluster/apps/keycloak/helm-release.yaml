@@ -27,6 +27,7 @@ spec:
       enabled: true
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-forward-auth@keycloak-iframe
       hostname: keycloak.${SECRET_DOMAIN}
       tls: false
       extraTls:
