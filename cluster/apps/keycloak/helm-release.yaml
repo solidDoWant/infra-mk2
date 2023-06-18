@@ -17,11 +17,7 @@ spec:
       interval: 5m
   values:
     auth:
-      existingSecret:
-        name: keycloak-credentials
-        keyMapping:
-          admin-password: admin-password
-          management-password: management-password
+      existingSecret: keycloak-credentials
     proxy: reencrypt
     service:
       type: ClusterIP
