@@ -22,3 +22,20 @@ spec:
       enableCSIHostNetwork: true
       pluginTolerations:
         - operator: "Exists"
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - patch:
+              - op: add
+                path: /rules/-
+                value:
+                  apiGroups:
+                    - monitoring.coreos.com
+                  resources:
+                    - servicemonitors
+                  verbs:
+                    - get
+                    - update
+            target:
+              kind: Role
+              name: rook-ceph-system
