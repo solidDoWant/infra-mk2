@@ -15,7 +15,8 @@ resources:
   - infracloudio-charts.yaml
   - jetstack-charts.yaml
   - k8s-at-home-charts.yaml
-  - kiali.yaml
+  - kiali-charts.yaml
+  - kubereboot-charts.yaml
   - metallb-charts.yaml
   - metrics-server-charts.yaml
   - minecraft-server-charts.yaml
@@ -27,4 +28,4 @@ resources:
   - rook-ceph-charts.yaml
   - stakater-charts.yaml
   - traefik-charts.yaml
-  - weaveworks-kured-charts.yaml
+  # - weaveworks-kured-charts.yaml
