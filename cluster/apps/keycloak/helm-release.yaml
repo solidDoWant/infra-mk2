@@ -18,10 +18,11 @@ spec:
   values:
     auth:
       existingSecret: keycloak-credentials
+      passwordSecretKey: admin-password
     proxy: reencrypt
     service:
       type: ClusterIP
-      externalTrafficPolicy: null
+      externalTrafficPolicy: Local
     ingress:
       enabled: true
       annotations:
