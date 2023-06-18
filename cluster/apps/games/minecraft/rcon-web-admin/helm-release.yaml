@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
       chart: rcon-web-admin
-      version: 1.0.0
+      version: 1.1.0
       sourceRef:
         kind: HelmRepository
         name: minecraft-server-charts
