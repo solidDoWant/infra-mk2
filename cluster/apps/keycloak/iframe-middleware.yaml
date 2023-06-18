@@ -7,3 +7,4 @@ spec:
   headers:
     accessControlAllowOriginListRegex:
       - "^(?:\\S+\\.)?${SECRET_DOMAIN/./\\.}$"
+    contentSecurityPolicy: "frame-src https://*.echozulu.games; object-src 'none'; script-src 'none';"
