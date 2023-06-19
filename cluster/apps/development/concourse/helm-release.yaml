@@ -21,7 +21,7 @@ spec:
   values:
     concourse:
       web:
-        externalUrl: https://concourse.echozulu.games
+        externalUrl: https://concourse.${SECRET_DOMAIN}
         encryption:
           enabled: true
         kubernetes:
@@ -35,6 +35,11 @@ spec:
         auth:
           mainTeam:
             localUser: concourse
+          oidc:
+            enabled: true
+            displayName: Keycloak
+            issuer: https://keycloak.${SECRET_DOMAIN}/realms/Development/.well-known/openid-configuration
+            groupsKey: resource_access.concourse.roles
     persistence:
       worker:
         storageClass: rook-fast-rust-block
