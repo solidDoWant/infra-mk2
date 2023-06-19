@@ -39,32 +39,13 @@ spec:
         enabled: true
         ServiceMonitor:
           enabled: true
-    # image:
-    #   repository: gitea/gitea
-    #   tag: 1.19.3
-    # gitea:
-    #   config:
-    #     server:
-    #       ROOT_URL: https://gitea.${SECRET_DOMAIN}/
-    #   metrics:
-    #     enabled: true
-    #     serviceMonitor:
-    #       enabled: true
-    # ingress:
-    #   enabled: true
-    #   annotations:
-    #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    #   hosts:
-    #     - host: gitea.${SECRET_DOMAIN}
-    #       paths:
-    #         - path: /
-    #           pathType: Prefix
-    #     - host: git.${SECRET_DOMAIN}
-    #       paths:
-    #         - path: /
-    #           pathType: Prefix
-    #   tls:
-    #     - secretName: gitea-${SECRET_DOMAIN/./-}-tls
-    #       hosts:
-    #         - gitea.${SECRET_DOMAIN}
-    #         - git.${SECRET_DOMAIN}
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - patch:
+              - op: replace
+                path: /spec/intContainers/0/env/2/valueFrom/secretKeyRef/key
+                value: postgres-password
+            target:
+              kind: Deployment
+              name: concourse-web
