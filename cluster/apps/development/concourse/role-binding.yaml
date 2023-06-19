@@ -1,6 +1,6 @@
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
   name: concourse-web
   labels:
@@ -13,4 +13,3 @@ subjects:
   - apiGroup: ServiceAccount
     kind: ServiceAccount
     name: concourse-web
-    namespace: development
