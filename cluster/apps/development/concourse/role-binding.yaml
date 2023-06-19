@@ -13,3 +13,4 @@ subjects:
   - apiGroup: ServiceAccount
     kind: ServiceAccount
     name: concourse-web
+    namespace: development
