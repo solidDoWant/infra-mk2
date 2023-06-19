@@ -23,6 +23,7 @@ spec:
       worker:
         storageClass: rook-fast-rust-block
     web:
+      externalUrl: https://concourse.echozulu.games
       kubernetes:
         teams:
           - development
