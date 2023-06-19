@@ -38,7 +38,7 @@ spec:
           oidc:
             enabled: true
             displayName: Keycloak
-            issuer: https://keycloak.${SECRET_DOMAIN}/realms/Development/.well-known/openid-configuration
+            issuer: https://keycloak.${SECRET_DOMAIN}/realms/Development/
             groupsKey: resource_access.concourse.roles
     persistence:
       worker:
