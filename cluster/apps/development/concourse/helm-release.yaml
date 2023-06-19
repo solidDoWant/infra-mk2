@@ -44,7 +44,7 @@ spec:
         patchesJson6902:
           - patch:
               - op: replace
-                path: /spec/initContainers/0/env/2/valueFrom/secretKeyRef/key
+                path: /spec/template/spec/initContainers/0/env/2/valueFrom/secretKeyRef/key
                 value: postgres-password
             target:
               kind: Deployment
