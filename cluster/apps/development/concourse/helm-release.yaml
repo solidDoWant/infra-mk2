@@ -39,13 +39,3 @@ spec:
         enabled: true
         ServiceMonitor:
           enabled: true
-  postRenderers:
-    - kustomize:
-        patchesJson6902:
-          - patch:
-              - op: replace
-                path: /spec/template/spec/initContainers/0/env/2/valueFrom/secretKeyRef/key
-                value: postgres-password
-            target:
-              kind: Deployment
-              name: concourse-web
