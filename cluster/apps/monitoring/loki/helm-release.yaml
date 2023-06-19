@@ -34,7 +34,10 @@ spec:
           s3ForcePathStyle: true
           insecure: true
         filesystem: null
+    monitoring:
       selfMonitoring:
+        grafanaAgent:
+          installOperator: false
         enabled: false
     # alerting_groups:
     #   #
