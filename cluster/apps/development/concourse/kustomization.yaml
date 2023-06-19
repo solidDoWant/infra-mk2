@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - external-certificate.yaml
   - helm-release.yaml
+  - role-binding.yaml
   - secrets.sops.yaml
