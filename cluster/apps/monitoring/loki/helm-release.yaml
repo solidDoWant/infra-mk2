@@ -39,6 +39,8 @@ spec:
         grafanaAgent:
           installOperator: false
         enabled: false
+    test:
+      enabled: false
     # alerting_groups:
     #   #
     #   # SMART Failures
