@@ -19,15 +19,23 @@ spec:
     - kind: Secret
       name: concourse-values
   values:
+    concourse:
+      web:
+        externalUrl: https://concourse.echozulu.games
+        encryption:
+          enabled: true
+        kubernetes:
+          teams:
+            - development
+          createTeamNamespaces: false
+        prometheus:
+          enabled: true
+          ServiceMonitor:
+            enabled: true
     persistence:
       worker:
         storageClass: rook-fast-rust-block
     web:
-      externalUrl: https://concourse.echozulu.games
-      kubernetes:
-        teams:
-          - development
-        createTeamNamespaces: false
       ingress:
         enabled: true
         hosts:
@@ -36,7 +44,3 @@ spec:
           - secretName: concourse-${SECRET_DOMAIN/./-}-tls
             hosts:
               - concourse.${SECRET_DOMAIN}
-      prometheus:
-        enabled: true
-        ServiceMonitor:
-          enabled: true
