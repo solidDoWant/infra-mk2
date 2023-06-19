@@ -7,6 +7,6 @@ spec:
   headers:
     accessControlAllowOriginListRegex:
       - "^(?:\\S+\\.)?${SECRET_DOMAIN/./\\.}$"
-    contentSecurityPolicy: "frame-src https://*.echozulu.games; object-src 'none'; script-src 'none';"
+    contentSecurityPolicy: "frame-src https://*.echozulu.games; object-src 'none';"
     customResponseHeaders:
       X-Frame-Options: "" # Remove this header, CSP frame-src will handle this
