@@ -34,6 +34,8 @@ spec:
           s3ForcePathStyle: true
           insecure: true
         filesystem: null
+      selfMonitoring:
+        enabled: false
     # alerting_groups:
     #   #
     #   # SMART Failures
