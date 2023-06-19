@@ -1,0 +1,70 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: concourse
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://concourse-charts.storage.googleapis.com/
+      chart: concourse
+      version: 17.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: concourse-charts
+        namespace: flux-system
+      interval: 5m
+  valuesFrom:
+    - kind: Secret
+      name: concourse-values
+  values:
+    persistence:
+      worker:
+        storageClass: rook-fast-rust-block
+    web:
+      kubernetes:
+        teams:
+          - development
+        createTeamNamespaces: false
+      ingress:
+        enabled: true
+        hosts:
+          - concourse.${SECRET_DOMAIN}
+        tls:
+          - secretName: concourse-${SECRET_DOMAIN/./-}-tls
+            hosts:
+              - concourse.${SECRET_DOMAIN}
+      prometheus:
+        enabled: true
+        ServiceMonitor:
+          enabled: true
+    # image:
+    #   repository: gitea/gitea
+    #   tag: 1.19.3
+    # gitea:
+    #   config:
+    #     server:
+    #       ROOT_URL: https://gitea.${SECRET_DOMAIN}/
+    #   metrics:
+    #     enabled: true
+    #     serviceMonitor:
+    #       enabled: true
+    # ingress:
+    #   enabled: true
+    #   annotations:
+    #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    #   hosts:
+    #     - host: gitea.${SECRET_DOMAIN}
+    #       paths:
+    #         - path: /
+    #           pathType: Prefix
+    #     - host: git.${SECRET_DOMAIN}
+    #       paths:
+    #         - path: /
+    #           pathType: Prefix
+    #   tls:
+    #     - secretName: gitea-${SECRET_DOMAIN/./-}-tls
+    #       hosts:
+    #         - gitea.${SECRET_DOMAIN}
+    #         - git.${SECRET_DOMAIN}
