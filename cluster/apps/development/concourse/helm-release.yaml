@@ -33,7 +33,8 @@ spec:
           ServiceMonitor:
             enabled: true
         auth:
-          localUser: concourse
+          mainTeam:
+            localUser: concourse
     persistence:
       worker:
         storageClass: rook-fast-rust-block
