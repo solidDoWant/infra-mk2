@@ -43,6 +43,7 @@ spec:
             issuer: https://keycloak.${SECRET_DOMAIN}/realms/Development
             groupsKey: resource_access.concourse.roles
             userNameKey: preferred_username
+            scope: profile offline_access roles
     persistence:
       worker:
         storageClass: rook-fast-rust-block
