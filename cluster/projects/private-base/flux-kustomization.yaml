@@ -1,0 +1,26 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: private-base
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  dependsOn:
+    - name: projects
+  path: ./cluster/projects
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: private-base
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+  postBuild:
+    substitute: {}
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+      - kind: Secret
+        name: cluster-secrets
