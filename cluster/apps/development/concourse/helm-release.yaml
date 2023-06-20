@@ -35,6 +35,8 @@ spec:
         auth:
           mainTeam:
             localUser: concourse
+            oidc:
+              group: main
           oidc:
             enabled: true
             displayName: Keycloak
