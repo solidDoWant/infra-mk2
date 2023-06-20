@@ -40,6 +40,7 @@ spec:
             displayName: Keycloak
             issuer: https://keycloak.${SECRET_DOMAIN}/realms/Development
             groupsKey: resource_access.concourse.roles
+            userNameKey: preferred_username
     persistence:
       worker:
         storageClass: rook-fast-rust-block
