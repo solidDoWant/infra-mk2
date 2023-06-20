@@ -41,7 +41,10 @@ spec:
             enabled: true
             displayName: Keycloak
             issuer: https://keycloak.${SECRET_DOMAIN}/realms/Development
-            groupsKey: resource_access.concourse.roles
+            # Important: Concourse does not appear to support nested claims for the groups key.
+            # The OIDC client in Keycloak must be configured to add a custom mapper to the dedicated
+            # client scope. This mapper must provide user client roles as token claim name `roles`.
+            groupsKey: roles
             userNameKey: preferred_username
             scope: profile offline_access roles
     persistence:
