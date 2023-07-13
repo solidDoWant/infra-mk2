@@ -118,5 +118,7 @@ spec:
       dataDir:
         enabled: true
         Size: 16Gi
+    podSecurityContext:
+      runAsNonRoot: false
     extraEnv:
       TZ: ${TZ}
