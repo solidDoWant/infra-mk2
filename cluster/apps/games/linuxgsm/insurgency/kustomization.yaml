@@ -4,3 +4,11 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - secrets.sops.yaml
+configMapGenerator:
+  - name: entrypoint-user.sh
+    files:
+      - entrypoint-user.sh
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled

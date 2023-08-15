@@ -26,6 +26,12 @@ spec:
                   operator: In
                   values:
                     - k8s-host-01
+    configMaps:
+      motd:
+        enabled: true
+        data: |
+          EchoZulu.games Insurgency modded Co-op
+          Rules: Don't suck
     image:
       repository: ghcr.io/gameservermanagers/gameserver
       pullPolicy: IfNotPresent
@@ -68,6 +74,13 @@ spec:
         type: secret
         name: insurgency
         mountPath: "-"
+      entrypoint-user.sh:
+        enabled: true
+        type: configMap
+        name: entrypoint-user.sh
+        subPath: entrypoint-user.sh
+        mountPath: /app/entrypoint-user.sh
+        readOnly: true
       # metrics-config:
       #   enabled: true
       #   type: secret
