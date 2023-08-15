@@ -5,9 +5,12 @@ resources:
   - helm-release.yaml
   - secrets.sops.yaml
 configMapGenerator:
-  - name: entrypoint-user.sh
+  - name: insurgency-entrypoint
     files:
       - entrypoint-user.sh
+  - name: insurgency-motd
+    files:
+      - motd.txt
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
