@@ -30,6 +30,23 @@ spec:
       repository: ghcr.io/gameservermanagers/gameserver
       pullPolicy: IfNotPresent
       tag: ins
+    initContainers:
+      ownership-fix:
+        image: busybox:latest
+        command:
+          - sh
+          - -c
+          - >-
+            mkdir -p /data/serverfiles/insurgency/cfg &&
+            cp /insserver.cfg /data/serverfiles/insurgency/cfg/insserver.cfg &&
+            chown -R linuxgsm:linuxgsm /data
+        volumeMounts:
+          - mountPath: /data
+            name: data
+          - mountPath: /insserver.cfg
+            name: server-config
+            readOnly: true
+            subPath: insserver.cfg
     persistence:
       data:
         enabled: true
@@ -49,14 +66,16 @@ spec:
         enabled: true
         type: secret
         name: insurgency
-        subPath: insserver.cfg
-        mountPath: /data/serverfiles/insurgency/cfg/insserver.cfg
-        readOnly: true
+        mountPath: "-"
       metrics-config:
         enabled: true
         type: secret
         name: insurgency
         mountPath: "-"
+    probes:
+      liveness:
+        spec:
+          initialDelaySeconds: 30
     service:
       main:
         type: LoadBalancer
@@ -83,12 +102,19 @@ spec:
           - port: metrics
     sidecars:
       metrics:
-        image: ghcr.io/galexrt/srcds_exporter:v1.5.1
         args:
           - --collectors.enabled
           - map,playercount,players
           - --config.file
           - /srcds.yaml
+        image: ghcr.io/galexrt/srcds_exporter:v1.5.1
+        readinessProbe:
+          tcpSocket:
+            port: 9137
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
         ports:
           - containerPort: 9137
             name: metrics
