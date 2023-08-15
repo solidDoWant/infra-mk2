@@ -1,10 +1,6 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: games
 resources:
-  - factorio
-  # - GOW
-  - linuxgsm
-  - minecraft
-  - valheim
+  - helm-release.yaml
+  - secrets.sops.yaml
