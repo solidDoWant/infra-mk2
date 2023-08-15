@@ -101,7 +101,7 @@ spec:
     #     enabled: true
     #     endpoints:
     #       - port: metrics
-    sidecars:
+    sidecars: {}
       # Disabled until https://github.com/galexrt/srcds_exporter/issues/5 is fixed
       # metrics:
       #   command:
