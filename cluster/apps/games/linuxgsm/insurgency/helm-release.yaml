@@ -81,6 +81,12 @@ spec:
         subPath: entrypoint-user.sh
         mountPath: /app/entrypoint-user.sh
         defaultMode: 0555
+      setup-scripts:
+        enabled: true
+        type: configMap
+        name: insurgency-setup-scripts
+        mountPath: /app/setup-scripts
+        defaultMode: 0555
       motd:
         enabled: true
         type: configMap

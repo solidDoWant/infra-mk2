@@ -57,6 +57,7 @@ if [ -z "${install}" ]; then
   echo -e "================================="
   ./"${GAMESERVER}" update
   ./"${GAMESERVER}" mods-update
+  /app/setup-scripts/custom-setup.sh
 fi
 
 echo -e ""

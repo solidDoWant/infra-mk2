@@ -14,6 +14,9 @@ configMapGenerator:
   - name: insurgency-mods
     files:
       - installed-mods.txt
+  - name: insurgency-setup-scripts
+    files:
+      - custom-setup.sh
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
