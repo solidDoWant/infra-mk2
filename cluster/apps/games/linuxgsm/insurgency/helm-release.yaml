@@ -75,7 +75,7 @@ spec:
         name: insurgency-entrypoint
         subPath: entrypoint-user.sh
         mountPath: /app/entrypoint-user.sh
-        defaultMode: 0550
+        defaultMode: 0555
       motd:
         enabled: true
         type: configMap
