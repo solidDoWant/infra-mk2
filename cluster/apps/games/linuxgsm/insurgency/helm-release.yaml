@@ -50,7 +50,7 @@ spec:
         type: secret
         name: insurgency
         subPath: insserver.cfg
-        mountPath: /app/serverfiles/insurgency/cfg/insserver.cfg
+        mountPath: /data/serverfiles/insurgency/cfg/insserver.cfg
         readOnly: true
       metrics-config:
         enabled: true
