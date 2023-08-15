@@ -39,7 +39,8 @@ spec:
           - >-
             mkdir -p /data/serverfiles/insurgency/cfg &&
             cp /insserver.cfg /data/serverfiles/insurgency/cfg/insserver.cfg &&
-            chown -R 1000:1000 /data
+            chown -R 1000:1000 /data &&
+            echo "Setup complete"
         volumeMounts:
           - mountPath: /data
             name: data
@@ -102,11 +103,13 @@ spec:
           - port: metrics
     sidecars:
       metrics:
-        args:
-          - --collectors.enabled
-          - map,playercount,players
-          - --config.file
-          - /srcds.yaml
+        command:
+          - sh
+          - -c
+          - >-
+            sleep 60 &&
+            echo "Starting metrics exporter" &&
+            /bin/srcds_exporter --collectors.enabled map,playercount,players --config.file /srcds.yaml
         image: ghcr.io/galexrt/srcds_exporter:v1.5.1
         readinessProbe:
           tcpSocket:
