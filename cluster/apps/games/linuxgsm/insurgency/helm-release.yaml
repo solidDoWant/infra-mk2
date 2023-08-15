@@ -112,7 +112,7 @@ spec:
     probes:
       liveness:
         spec:
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60 # Custom theater takes a bit to load
     service:
       main:
         type: LoadBalancer
