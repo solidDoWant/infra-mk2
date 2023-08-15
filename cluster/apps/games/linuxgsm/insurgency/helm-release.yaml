@@ -98,6 +98,8 @@ spec:
       #   type: secret
       #   name: insurgency
       #   mountPath: "-"
+    podSecurityContext:
+      fsGroup: 1000 # linuxgsm group
     probes:
       liveness:
         spec:
