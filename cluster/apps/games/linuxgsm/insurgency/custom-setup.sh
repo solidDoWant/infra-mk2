@@ -5,10 +5,12 @@ function download_file() {
     OUTPUT="$2"
 
     if wget -q "$URL" -o "$OUTPUT"; then
-        echo "Failed to download $URL to $OUTPUT"
-        exit 1
+        echo "Downloaded $OUTPUT"
+        return
     fi
-    echo "Downloaded $OUTPUT"
+
+    echo "Failed to download $URL to $OUTPUT"
+    exit 1
 }
 
 # Source mod plugins
