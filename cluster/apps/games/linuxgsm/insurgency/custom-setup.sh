@@ -4,7 +4,7 @@ function download_file() {
     URL="$1"
     OUTPUT="$2"
 
-    if wget -q "$URL" -o "$OUTPUT"; then
+    if wget -q "$URL" -O "$OUTPUT"; then
         echo "Downloaded $OUTPUT"
         return
     fi
@@ -15,7 +15,7 @@ function download_file() {
 
 # Source mod plugins
 PLUGIN_DIR="/data/serverfiles/insurgency/addons/sourcemod/plugins"
-download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143100" "$PLUGIN_DIR/MyCompass.smx"
+download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143209" "$PLUGIN_DIR/MyCompass.smx"
 download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143044" "$PLUGIN_DIR/SpecDetails.smx"
 download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/ammocheck.smx" "$PLUGIN_DIR/AmmoStatus.smx"
 download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/botcount.smx" "$PLUGIN_DIR/BotCount.smx"
