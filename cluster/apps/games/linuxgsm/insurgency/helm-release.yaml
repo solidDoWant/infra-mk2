@@ -59,7 +59,7 @@ spec:
         mountPath: "-"
     service:
       main:
-        type: ExternalIP
+        type: Loadbalancer
         annotations:
           metallb.universe.tf/allow-shared-ip: insurgency
         loadBalancerIP: 10.44.0.12
