@@ -35,4 +35,4 @@ download_file "https://github.com/rrrfffrrr/Insurgency-server-plugins/raw/master
 } > /data/serverfiles/insurgency/cfg/sourcemod/plugin.MyCompass.cfg
 
 # Setup workshop collection
-echo "3020499817" > /data/serverfiles/insurgency/subscribed_file_ids.txt
+echo "859127166" > /data/serverfiles/insurgency/subscribed_file_ids.txt
