@@ -40,6 +40,7 @@ spec:
           - >-
             mkdir -p /data/serverfiles/insurgency/cfg &&
             cp /insserver.cfg /data/serverfiles/insurgency/cfg/insserver.cfg &&
+            cp /motd.txt /data/serverfiles/insurgency/motd.txt &&
             chown -R 1000:1000 /data &&
             echo "Setup complete"
         volumeMounts:
@@ -49,6 +50,10 @@ spec:
             name: server-config
             readOnly: true
             subPath: insserver.cfg
+          - mountPath: /motd.txt
+            name: motd
+            readOnly: true
+            subPath: motd.txt
     persistence:
       data:
         enabled: true
@@ -80,9 +85,7 @@ spec:
         enabled: true
         type: configMap
         name: insurgency-motd
-        subPath: motd.txt
-        mountPath: /data/serverfiles/insurgency/motd.txt
-        defaultMode: 0440
+        mountPath: "-"
       # metrics-config:
       #   enabled: true
       #   type: secret
