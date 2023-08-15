@@ -86,6 +86,10 @@ spec:
         type: configMap
         name: insurgency-motd
         mountPath: "-"
+      mods-directory:
+        enabled: true
+        type: emptyDir
+        mountPath: /app/lgsm/mods/
       installed-mods:
         enabled: true
         type: configMap
