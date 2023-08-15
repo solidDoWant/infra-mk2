@@ -11,6 +11,9 @@ configMapGenerator:
   - name: insurgency-motd
     files:
       - motd.txt
+  - name: insurgency-mods
+    files:
+      - installed-mods.txt
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

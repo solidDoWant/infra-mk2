@@ -86,6 +86,13 @@ spec:
         type: configMap
         name: insurgency-motd
         mountPath: "-"
+      installed-mods:
+        enabled: true
+        type: configMap
+        name: insurgency-mods
+        subPath: installed-mods.txt
+        mountPath: /app/lgsm/mods/installed-mods.txt
+        defaultMode: 0444
       # metrics-config:
       #   enabled: true
       #   type: secret

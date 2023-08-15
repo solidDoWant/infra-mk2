@@ -56,6 +56,7 @@ if [ -z "${install}" ]; then
   echo -e "Checking for Update ${GAMESERVER}"
   echo -e "================================="
   ./"${GAMESERVER}" update
+  ./"${GAMESERVER}" mods-update
 fi
 
 echo -e ""
