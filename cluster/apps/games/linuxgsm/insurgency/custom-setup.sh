@@ -19,7 +19,7 @@ download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143100" "$PLUGIN
 download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143044" "$PLUGIN_DIR/SpecDetails.smx"
 download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/ammocheck.smx" "$PLUGIN_DIR/AmmoStatus.smx"
 download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/botcount.smx" "$PLUGIN_DIR/BotCount.smx"
-download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/restrictedareas.smx" "$PLUGIN_DIR/RestrictedAreasRemoval.smx"
+download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/restrictedarea.smx" "$PLUGIN_DIR/RestrictedAreaRemoval.smx"
 download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/respawn.smx" "$PLUGIN_DIR/Respawn.smx"
 
 # Source mod config
@@ -27,6 +27,6 @@ download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/pl
     echo '"STEAM_1:0:36668633" "99:z"'
 } > /data/serverfiles/insurgency/addons/sourcemod/configs/admins_simple.ini
 
-{
-    echo ""
-} > /data/serverfiles/insurgency/cfg/sourcemod/
+# {
+#     echo ""
+# } > /data/serverfiles/insurgency/cfg/sourcemod/
