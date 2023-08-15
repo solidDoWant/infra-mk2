@@ -68,11 +68,11 @@ spec:
         type: secret
         name: insurgency
         mountPath: "-"
-      metrics-config:
-        enabled: true
-        type: secret
-        name: insurgency
-        mountPath: "-"
+      # metrics-config:
+      #   enabled: true
+      #   type: secret
+      #   name: insurgency
+      #   mountPath: "-"
     probes:
       liveness:
         spec:
@@ -93,37 +93,38 @@ spec:
           game:
             port: 27015
             protocol: UDP
-          metrics:
-            port: 9137
-            protocol: HTTP
-    serviceMonitor:
-      main:
-        enabled: true
-        endpoints:
-          - port: metrics
+          # metrics:
+          #   port: 9137
+          #   protocol: HTTP
+    # serviceMonitor:
+    #   main:
+    #     enabled: true
+    #     endpoints:
+    #       - port: metrics
     sidecars:
-      metrics:
-        command:
-          - sh
-          - -c
-          - >-
-            sleep 60 &&
-            echo "Starting metrics exporter" &&
-            /bin/srcds_exporter --collectors.enabled map,playercount,players --config.file /srcds.yaml
-        image: ghcr.io/galexrt/srcds_exporter:v1.5.1
-        readinessProbe:
-          tcpSocket:
-            port: 9137
-          initialDelaySeconds: 60
-          timeoutSeconds: 1
-          periodSeconds: 10
-          successThreshold: 1
-          failureThreshold: 3
-        ports:
-          - containerPort: 9137
-            name: metrics
-        volumeMounts:
-          - mountPath: /srcds.yaml
-            name: metrics-config
-            readOnly: true
-            subPath: srcds.yaml
+      # Disabled until https://github.com/galexrt/srcds_exporter/issues/5 is fixed
+      # metrics:
+      #   command:
+      #     - sh
+      #     - -c
+      #     - >-
+      #       sleep 30 &&
+      #       echo "Starting metrics exporter" &&
+      #       /bin/srcds_exporter --collectors.enabled map,playercount,players --config.file /srcds.yaml --log-level debug
+      #   image: ghcr.io/galexrt/srcds_exporter:v1.5.1
+      #   readinessProbe:
+      #     tcpSocket:
+      #       port: 9137
+      #     initialDelaySeconds: 30
+      #     timeoutSeconds: 1
+      #     periodSeconds: 10
+      #     successThreshold: 1
+      #     failureThreshold: 3
+      #   ports:
+      #     - containerPort: 9137
+      #       name: metrics
+      #   volumeMounts:
+      #     - mountPath: /srcds.yaml
+      #       name: metrics-config
+      #       readOnly: true
+      #       subPath: srcds.yaml
