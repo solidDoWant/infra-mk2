@@ -18,8 +18,10 @@ PLUGIN_DIR="/data/serverfiles/insurgency/addons/sourcemod/plugins"
 download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143209" "$PLUGIN_DIR/MyCompass.smx"
 download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143044" "$PLUGIN_DIR/SpecDetails.smx"
 download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143459" "$PLUGIN_DIR/AmmoStatus.smx"
-download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/botcount.smx" "$PLUGIN_DIR/BotCount.smx"
+# download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/botcount.smx" "$PLUGIN_DIR/BotCount.smx"
 download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/restrictedarea.smx" "$PLUGIN_DIR/RestrictedAreaRemoval.smx"
+download_file "https://github.com/rrrfffrrr/Insurgency-server-plugins/raw/master/plugins/RespawnBots2.smx" "$PLUGIN_DIR/RespawnBots.smx"
+download_file "https://github.com/rrrfffrrr/Insurgency-server-plugins/raw/master/plugins/Medic.smx" "$PLUGIN_DIR/Medic.smx"
 
 # Source mod config
 {
@@ -31,3 +33,6 @@ download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/pl
     echo 'sm_comp_enabled "1"'
     echo 'sm_comp_pos "3"'
 } > /data/serverfiles/insurgency/cfg/sourcemod/plugin.MyCompass.cfg
+
+# Setup workshop collection
+echo "3020499817" > /data/serverfiles/insurgency/subscribed_file_ids.txt

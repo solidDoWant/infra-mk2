@@ -26,7 +26,6 @@ spec:
                   operator: In
                   values:
                     - k8s-host-01
-    configMaps:
     image:
       repository: ghcr.io/gameservermanagers/gameserver
       pullPolicy: IfNotPresent
