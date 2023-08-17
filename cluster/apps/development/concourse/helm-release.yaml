@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://concourse-charts.storage.googleapis.com/
       chart: concourse
-      version: 17.1.1
+      version: 17.2.0
       sourceRef:
         kind: HelmRepository
         name: concourse-charts
