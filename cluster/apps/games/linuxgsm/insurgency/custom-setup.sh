@@ -15,7 +15,7 @@ function download_file() {
 
 # Source mod plugins
 PLUGIN_DIR="/data/serverfiles/insurgency/addons/sourcemod/plugins"
-download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143209" "$PLUGIN_DIR/MyCompass.smx"
+# download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143209" "$PLUGIN_DIR/MyCompass.smx"
 download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143044" "$PLUGIN_DIR/SpecDetails.smx"
 download_file "https://www.sourcemod.net/vbcompiler.php?file_id=143459" "$PLUGIN_DIR/AmmoStatus.smx"
 # download_file "https://github.com/jaredballou/insurgency-sourcemod/raw/master/plugins/botcount.smx" "$PLUGIN_DIR/BotCount.smx"
@@ -28,11 +28,13 @@ download_file "https://github.com/rrrfffrrr/Insurgency-server-plugins/raw/master
     echo '"STEAM_1:0:36668633" "99:z"'
 } > /data/serverfiles/insurgency/addons/sourcemod/configs/admins_simple.ini
 
-{
-    echo 'sm_comp_bearing "1"'
-    echo 'sm_comp_enabled "1"'
-    echo 'sm_comp_pos "3"'
-} > /data/serverfiles/insurgency/cfg/sourcemod/plugin.MyCompass.cfg
+# {
+#     echo 'sm_comp_bearing "1"'
+#     echo 'sm_comp_enabled "1"'
+#     echo 'sm_comp_pos "3"'
+# } > /data/serverfiles/insurgency/cfg/sourcemod/plugin.MyCompass.cfg
 
-# Setup workshop collection
-echo "859127166" > /data/serverfiles/insurgency/subscribed_file_ids.txt
+# Setup workshop items
+{
+    echo "859127166"
+} > /data/serverfiles/insurgency/subscribed_file_ids.txt
