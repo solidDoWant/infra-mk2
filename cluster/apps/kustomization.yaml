@@ -14,6 +14,6 @@ resources:
   - tools
   - media
   - development
-  - istio-operator
-  - istio-system
+  # - istio-operator
+  # - istio-system
   - keycloak
