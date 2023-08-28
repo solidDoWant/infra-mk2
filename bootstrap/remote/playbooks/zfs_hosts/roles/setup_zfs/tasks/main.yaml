@@ -19,6 +19,9 @@
     state: directory
   when: zpool_list.rc != 0
 
+# TODO: The drive IDs are repeated here and in the multipath conf.
+# Move this to a variable somewhere rather than hard-coded in two
+# spots.
 - name: Create the zpool
   command: >-
     zpool create
@@ -32,18 +35,18 @@
     -O mountpoint=/mnt/{{ pool_name }}
     {{ pool_name }}
     raidz2
-    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy8-lun-0
-    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy9-lun-0
-    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy10-lun-0
-    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy11-lun-0
-    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy12-lun-0
-    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy13-lun-0
-    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy14-lun-0
-    pci-0000:43:00.0-sas-exp0x500a0980043c6b3f-phy15-lun-0
+    dm-uuid-mpath-35000039ac81a7285
+    dm-uuid-mpath-35000039a48092cc1
+    dm-uuid-mpath-35000039a8859fc21
+    dm-uuid-mpath-35000039a9803156d
+    dm-uuid-mpath-35000039a9803248d
+    dm-uuid-mpath-35000039aa82b269d
+    dm-uuid-mpath-35000039ac819d76d
+    dm-uuid-mpath-35000039ac819d789
   register: created_zpool
   when: zpool_list.rc != 0
 
-- name: Install NFS sharing pppackages
+- name: Install NFS sharing packages
   apt:
     name:
       - nfs-kernel-server
