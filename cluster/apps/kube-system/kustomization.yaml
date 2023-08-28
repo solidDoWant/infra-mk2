@@ -8,6 +8,6 @@ resources:
   - descheduler
   - node-problem-detector
   - kured
-  - nvidia-gpu-operator
+  # - nvidia-gpu-operator
   - reloader
   - intel-gpu-plugin
