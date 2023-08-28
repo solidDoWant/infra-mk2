@@ -11,5 +11,7 @@ stringData:
         secretKey: ${SECRET_MINIO_SECRET_KEY}
         policy: readwrite
     buckets:
-      - name: loki
+      - name: ruler
+        policy: none
+      - name: chunks
         policy: none
