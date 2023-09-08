@@ -6,4 +6,5 @@ resources:
   - traefik
   - rook-ceph
   - kube-prometheus-stack
+  - node-feature-discovery
   - istio-system
