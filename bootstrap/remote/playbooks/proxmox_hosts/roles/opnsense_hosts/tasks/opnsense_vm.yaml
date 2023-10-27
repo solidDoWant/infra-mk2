@@ -54,7 +54,7 @@
         --memory {{ vm_memory }}
         --name {{ vm_name }}
         --net0 virtio=72:BF:8F:3A:40:42,bridge=vmbr0,firewall=0
-        --net1 virtio=C6:3A:F1:C2:FA:0D,bridge=vmbr1,firewall=0,tag=1000
+        --net1 virtio=C6:3A:F1:C2:FA:0D,bridge=vmbr1,firewall=0,mtu=9000
         --onboot true
         --ostype other
         --protection false

@@ -1,0 +1,2 @@
+---
+coredns_working_dir_path: "{{ working_dir_path }}/coredns"

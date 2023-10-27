@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # PROVIDE: coredns
-# REQUIRE: DAEMON NETWORKING
+# REQUIRE: DAEMON NETWORKING frr
 # KEYWORD: shutdown
 #
 # Add the following to /etc/rc.conf[.local] to enable this service

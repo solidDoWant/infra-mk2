@@ -1,0 +1,36 @@
+---
+- name: Check if the CoreDNS binary file exists
+  ansible.builtin.stat:
+    path: "{{ coredns_working_dir_path }}/coredns"
+  register: coredns_binary
+
+- name: Create the coredns directory
+  ansible.builtin.file:
+    path: "{{ coredns_working_dir_path }}"
+    state: directory
+    mode: "0755"
+  register: coredns_directory
+  when: not coredns_binary.stat.exists
+
+# TODO version this with Renovate
+- name: Get the latest k8s_gateway release data from GitHub
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/ori-edge/k8s_gateway/releases/latest
+    method: GET
+    return_content: true
+    status_code: 200
+    body_format: json
+  register: github_k8s_gateway_page
+  when: not coredns_binary.stat.exists
+
+# TODO don't hardcode OS info
+- name: Download and extract the k8s_gateway version of CoreDNS from GitHub
+  ansible.builtin.unarchive:
+    src: "{{ github_k8s_gateway_page.json | json_query(query) | first }}"
+    dest: "{{ coredns_working_dir_path }}"
+    remote_src: true
+    include:
+      - coredns
+  vars:
+    query: assets[?ends_with(name, 'freebsd_amd64.tar.gz')].browser_download_url
+  when: not coredns_binary.stat.exists

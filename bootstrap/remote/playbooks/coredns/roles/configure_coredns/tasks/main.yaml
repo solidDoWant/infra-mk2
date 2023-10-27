@@ -3,7 +3,7 @@
   copy:
     src: "{{ local_kubeconfig_path }}"
     dest: /usr/local/etc/coredns/kubeconfig
-    mode: 0640
+    mode: "0600"
     owner: root
     group: wheel
   register: copied_kubeconfig
@@ -14,10 +14,10 @@
     dest: "/usr/local/etc/coredns/root_config.d/k8s_gateway_{{ secret_domain }}"
     owner: root
     group: wheel
-    mode: 0755
-  when: copied_kubeconfig.changed
+    mode: "0755"
+  register: created_coredns_config
 
 - name: Restart CoreDNS
   shell: |
     /usr/local/etc/rc.d/coredns restart
-  when: copied_kubeconfig.changed
+  when: created_coredns_config.changed

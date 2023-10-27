@@ -23,9 +23,14 @@
         state: present
         filename: pve-no-subscription
         update_cache: false
-    - name: Add Ceph Pacific repository
+    - name: Remove enterprise Ceph repository
       apt_repository:
-        repo: "deb http://download.proxmox.com/debian/ceph-pacific {{ ansible_distribution_release }} main"
+        repo: "deb https://enterprise.proxmox.com/debian/ceph-quincy {{ ansible_distribution_release }} enterprise"
+        state: absent
+        filename: pve-enterprise
+    - name: Add Ceph repository
+      apt_repository:
+        repo: "deb http://download.proxmox.com/debian/ceph-quincy {{ ansible_distribution_release }} main"
         state: present
         filename: ceph
         update_cache: false

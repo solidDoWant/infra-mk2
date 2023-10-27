@@ -1,2 +1,0 @@
----
-build_dir_path: "{{ role_path }}/files/build"

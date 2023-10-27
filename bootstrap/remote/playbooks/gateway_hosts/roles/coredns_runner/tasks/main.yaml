@@ -1,136 +1,141 @@
 ---
 - name: Create config directory
-  file:
+  ansible.builtin.file:
     path: /usr/local/etc/coredns
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Create zones directory
-  file:
+  ansible.builtin.file:
     path: /usr/local/etc/coredns/config.d
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Create root config directory
-  file:
+  ansible.builtin.file:
     path: /usr/local/etc/coredns/root_config.d
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Create zonefiles directory
-  file:
+  ansible.builtin.file:
     path: /usr/local/etc/coredns/zones
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Gather facts on all hosts for DNS record creation
-  setup: {}
+  ansible.builtin.setup: {}
   delegate_to: "{{ item }}"
   delegate_facts: true
   when: hostvars[item]['ansible_default_ipv4'] is not defined
   with_items: "{{ groups['all'] }}"
 
 - name: Create Corefile
-  template:
+  ansible.builtin.template:
     src: Corefile
     dest: /usr/local/etc/coredns/Corefile
-    mode: 0755
+    mode: "0755"
   vars:
     listening_addresses: "{{ ansible_interfaces | select('match', '^(lo\\d+|vtnet1\\S*)$') | join(' ') }}"
 
 - name: Create config files
-  template:
+  ansible.builtin.template:
     src: "{{ item }}"
     dest: /usr/local/etc/coredns/config.d
-    mode: 0755
+    mode: "0755"
   with_fileglob:
     - ../templates/config.d/*
 
 - name: Create zone files
-  template:
+  ansible.builtin.template:
     src: "{{ item }}"
     dest: /usr/local/etc/coredns/zones
-    mode: 0755
+    mode: "0755"
   with_fileglob:
     - ../templates/zones/*
 
 - name: Create CoreDNS rc.conf script
-  copy:
+  ansible.builtin.copy:
     src: coredns-rc.conf
     dest: /etc/rc.conf.d/coredns
-    mode: 0755
+    mode: "0755"
 
 - name: Create CoreDNS rc.d script
-  copy:
+  ansible.builtin.copy:
     src: coredns-rc.d
     dest: /usr/local/etc/rc.d/coredns
-    mode: 0755
+    mode: "0755"
 
 - name: Create CoreDNS action script
-  copy:
+  ansible.builtin.copy:
     src: actions_coredns.conf
     dest: /usr/local/opnsense/service/conf/actions.d/actions_coredns.conf
-    mode: 0755
+    mode: "0755"
 
 - name: Create CoreDNS start up script
-  copy:
+  ansible.builtin.copy:
     src: 99-coredns
     dest: /usr/local/etc/rc.syshook.d/start/99-coredns
-    mode: 0755
+    mode: "0755"
 
 - name: Create CoreDNS log rotation config
-  copy:
+  ansible.builtin.copy:
     src: coredns-newsyslog.conf
     dest: /etc/newsyslog.conf.d/coredns
-    mode: 0755
+    mode: "0755"
 
 - name: Stop running CoreDNS
-  shell: /usr/local/etc/rc.d/coredns stop
+  ansible.builtin.command: /usr/local/etc/rc.d/coredns stop
   ignore_errors: true
   register: coredns_stop
 
 - name: Copy CoreDNS
-  copy:
+  ansible.builtin.copy:
     src: "{{ working_dir_path }}/coredns/coredns"
     dest: /usr/local/sbin/coredns
-    mode: 0755
+    mode: "0755"
 
 - name: Disable Unbound DNS
+  when: coredns_stop.rc != 0
+
   block:
     - name: Pull the current OPNsense config
-      fetch:
+      ansible.builtin.fetch:
         src: "{{ remote_config_path }}"
         dest: "{{ local_config_path }}"
         flat: true
       register: downloaded_config
     - name: Disable Unbound
+      when: downloaded_config.changed
+      delegate_to: localhost
       block:
         - name: Remove /opnsense/unbound/enable
-          xml:
+          community.general.xml:
             path: "{{ local_config_path }}"
             xpath: /opnsense/unbound/enable
             state: absent
+        - name: Remove /opnsense/OPNsense/unboundplus/enabled
+          community.general.xml:
+            path: "{{ local_config_path }}"
+            xpath: /opnsense/OPNsense/unboundplus/enabled
+            state: absent
         - name: Remove /opnsense/OPNsense/unboundplus/service_enabled
-          xml:
+          community.general.xml:
             path: "{{ local_config_path }}"
             xpath: /opnsense/OPNsense/unboundplus/service_enabled
             state: absent
-      when: downloaded_config.changed
-      delegate_to: localhost
     - name: Copy the new OPNsense config
-      copy:
+      ansible.builtin.copy:
         src: "{{ local_config_path }}"
         dest: "{{ remote_config_path }}"
         backup: true
       register: return_config
       when: downloaded_config.changed
     - name: Reload OPNsense
-      command: "{{ item }}"
+      ansible.builtin.command: "{{ item }}"
       with_items:
         - configctl service reload all
         - configctl webgui restart
       when: downloaded_config.changed and return_config.changed
-  when: coredns_stop.rc != 0
-
 - name: Run CoreDNS
-  shell: /usr/local/etc/rc.d/coredns start
+  ansible.builtin.command: /usr/local/etc/rc.d/coredns start

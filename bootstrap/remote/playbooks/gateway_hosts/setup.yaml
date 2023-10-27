@@ -5,8 +5,8 @@
   become: true
 
   roles:
-    - role: coredns_builder
-      tags: coredns_builder
+    - role: coredns_downloader
+      tags: coredns_downloader
 
 - hosts: opnsense
   become: true

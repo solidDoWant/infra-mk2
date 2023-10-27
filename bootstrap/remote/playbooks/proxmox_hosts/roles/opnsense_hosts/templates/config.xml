@@ -311,7 +311,7 @@
       <descr>Hosts</descr>
       <enable>1</enable>
       <spoofmac/>
-      <mtu>9001</mtu>
+      <mtu>9000</mtu>
       <ipaddr>10.1.0.1</ipaddr>
       <subnet>16</subnet>
     </lan>
