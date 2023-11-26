@@ -21,7 +21,7 @@ spec:
   values:
     image:
       repository: gitea/gitea
-      tag: 1.21.0
+      tag: 1.21.1
     gitea:
       config:
         server:
