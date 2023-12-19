@@ -61,11 +61,9 @@ spec:
             bus = "002"
     metrics:
       enabled: true
+      exporter:
+        image: ghcr.io/druggeri/nut_exporter:3.1.1
     securityContext:
       privileged: true
     env:
       TZ: "${TIMEZONE}"
-    additionalContainers:
-      exporter:
-        name: exporter
-        image: ghcr.io/druggeri/nut_exporter:3.1.1
