@@ -49,6 +49,11 @@ spec:
       feature.node.kubernetes.io/custom-rack-ups: "true"
     config:
       files:
+        nut.conf: |
+          MODE=netserver
+        upsd.conf: |
+          MAXAGE 20
+          LISTEN 0.0.0.0
         ups.conf: |
           [rack-ups]
             driver = "usbhid-ups"
@@ -59,6 +64,17 @@ spec:
             serial = ""
             vendor = "Emerson Network Power"
             bus = "002"
+        upsd.users: |
+          [upsmon]
+            password  = "${SECRET_NUT_PASSWORD}"
+            actions = SET
+            instcmds = ALL
+            upsmon primary
+        upsmon.conf: |
+          MONITOR rack-ups@localhost:3493 1 upsmon "${SECRET_NUT_PASSWORD}" primary
+          POLLFREQ 15
+          POLLFREQALERT 5
+          HOSTSYNC 15
     metrics:
       enabled: true
       exporter:
