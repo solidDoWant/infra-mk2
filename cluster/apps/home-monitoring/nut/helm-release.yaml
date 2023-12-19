@@ -74,18 +74,6 @@ spec:
                   interval: 30s
                   scrapeTimeout: 10s
                   path: /ups_metrics
-                  params:
-                    target:
-                      - localhost:3493
-                  relabelings:
-                    - sourceLabels: [__param_target]
-                      targetLabel: target
-                    - sourceLabels: [__address__]
-                      targetLabel: __param_server
-                    - sourceLabels: [__param_server]
-                      targetLabel: instance
-                    - targetLabel: __address__
-                      replacement: nut-exporter.local:9199
             target:
               kind: ServiceMonitor
               name: nut-network-ups-tools
