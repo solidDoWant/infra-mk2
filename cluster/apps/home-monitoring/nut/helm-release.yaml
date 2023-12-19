@@ -80,11 +80,11 @@ spec:
                   relabelings:
                     - sourceLabels: [__param_target]
                       targetLabel: target
-                    - source_labels: [__address__]
-                      target_label: __param_server
-                    - source_labels: [__param_server]
-                      target_label: instance
-                    - target_label: __address__
+                    - sourceLabels: [__address__]
+                      targetLabel: __param_server
+                    - sourceLabels: [__param_server]
+                      targetLabel: instance
+                    - targetLabel: __address__
                       replacement: nut-exporter.local:9199
             target:
               kind: ServiceMonitor
