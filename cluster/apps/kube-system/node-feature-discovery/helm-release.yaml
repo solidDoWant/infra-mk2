@@ -29,6 +29,13 @@ spec:
               - "0302"
             deviceLabelFields:
               - vendor
+          usb:
+            deviceClassWhitelist:
+              - "03"
+            deviceLabelFields:
+              - class
+              - vendor
+              - device
           custom:
             - name: "intel-gpu"
               matchOn:
@@ -42,3 +49,12 @@ spec:
                       - "0300"
                     vendor:
                       - "1002"
+            - name: "rack-ups"
+              labels:
+                - ups: "rack-ups"
+              matchOn:
+                - usbId:
+                    class: ["03"]
+                    vendor: ["10af"]
+                    device: ["0001"]
+
