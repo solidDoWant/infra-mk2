@@ -62,6 +62,8 @@ spec:
     metrics:
       enabled: true
       exporter:
+        env:
+          port: 9995
         image:
           repository: ghcr.io/druggeri/nut_exporter
           tag: 3.1.1
