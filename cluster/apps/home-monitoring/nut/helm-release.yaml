@@ -20,9 +20,9 @@ spec:
       main:
         type: LoadBalancer
         loadBalancerIP: "10.44.0.13"
-        ports:
-          http:
-            enabled: true
+        # ports:
+        #   http:
+        #     enabled: true
     ingress:
       main:
         enabled: true
