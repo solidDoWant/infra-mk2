@@ -62,7 +62,9 @@ spec:
     metrics:
       enabled: true
       exporter:
-        image: ghcr.io/druggeri/nut_exporter:3.1.1
+        image:
+          repository: ghcr.io/druggeri/nut_exporter
+          tag: 3.1.1
     securityContext:
       privileged: true
     env:
