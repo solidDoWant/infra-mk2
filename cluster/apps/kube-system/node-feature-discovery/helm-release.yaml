@@ -51,10 +51,9 @@ spec:
                       - "1002"
             - name: "rack-ups"
               labels:
-                - ups: "rack-ups"
+                ups: "rack-ups"
               matchOn:
                 - usbId:
                     class: ["03"]
                     vendor: ["10af"]
                     device: ["0001"]
-
