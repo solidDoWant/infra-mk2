@@ -22,7 +22,7 @@ spec:
         hostPath: /dev/bus/usb/002/003
         mountPath: /dev/bus/usb/002/003
     nodeSelector:
-      feature.node.kubernetes.io/custom-rack-ups: "true"
+      ups.feature.node.kubernetes.io/rack: "true"
     config:
       files:
         nut.conf: |
