@@ -599,6 +599,7 @@ ip address 10.3.0.2/16
 ! Guests VLAN
 vlan 500 name guests by port
 tagged ethernet 1/1/33 to 1/1/40
+tagged ethernet 1/1/25
 tagged ethernet 1/3/8
 router-interface ve 500
 interface ethernet 1/1/33 to 1/1/40
@@ -610,6 +611,7 @@ ip address 10.4.0.2/16
 ! IoT VLAN
 vlan 600 name iot by port
 tagged ethernet 1/1/33 to 1/1/40
+tagged ethernet 1/1/25
 tagged ethernet 1/3/8
 router-interface ve 600
 interface ve600
