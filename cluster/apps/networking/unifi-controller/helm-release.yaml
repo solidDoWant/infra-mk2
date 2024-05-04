@@ -16,6 +16,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      tag: v8.1
     env:
       TZ: "${TIMEZONE}"
     persistence:
