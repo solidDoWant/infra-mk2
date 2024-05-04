@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: linuxserver/nzbhydra2
-      tag: 5.3.7
+      tag: 5.3.11
     ingress:
       dashboard:
         enabled: true
