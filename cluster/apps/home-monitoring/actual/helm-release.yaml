@@ -56,6 +56,10 @@ spec:
                 service:
                   identifier: app
                   port: http
+        tls:
+          - secretName: actual-${SECRET_DOMAIN/./-}-tls
+            hosts:
+              - actual.${SECRET_DOMAIN}
     persistence:
       data:
         type: persistentVolumeClaim
