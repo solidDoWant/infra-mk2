@@ -64,4 +64,4 @@ spec:
         advancedMounts:
           actual:
             app:
-              - path: /config
+              - path: /data
