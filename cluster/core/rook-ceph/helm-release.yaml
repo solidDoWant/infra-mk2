@@ -24,8 +24,8 @@ spec:
         - operator: "Exists"
   postRenderers:
     - kustomize:
-        patchesJson6902:
-          - patch:
+        patches:
+          - patch: |
               - op: add
                 path: /rules/-
                 value:

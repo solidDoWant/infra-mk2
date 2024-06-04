@@ -65,8 +65,8 @@ spec:
       TZ: "${TIMEZONE}"
   postRenderers:
     - kustomize:
-        patchesJson6902:
-          - patch:
+        patches:
+          - patch: |
               - op: add
                 path: /spec/endpoints/-
                 value:
