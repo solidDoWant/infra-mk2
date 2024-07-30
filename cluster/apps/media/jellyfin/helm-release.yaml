@@ -69,10 +69,10 @@ spec:
       intel.feature.node.kubernetes.io/quicksync: "true"
     resources:
       requests:
-        memory: 4Gi
+        memory: 8Gi
       limits:
         gpu.intel.com/i915: 1
-        memory: 4Gi
+        memory: 8Gi
     env:
       TZ: "${TIMEZONE}"
       JELLYFIN_DATA_DIR: /config/data
