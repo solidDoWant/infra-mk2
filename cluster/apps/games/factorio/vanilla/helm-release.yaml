@@ -21,6 +21,11 @@ spec:
     env:
       TZ: ${TZ}
       UPDATE_MODS_ON_START: true
+    resources:
+      requests:
+        memory: 4Gi
+      limits:
+        memory: 4Gi
     service:
       main:
         type: LoadBalancer
@@ -35,16 +40,16 @@ spec:
             port: 27015
             targetPort: 27015
     # This host has the newest/fastest CPU and RAM
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 50
-            preference:
-              matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - k8s-host-01
+    # affinity:
+    #   nodeAffinity:
+    #     preferredDuringSchedulingIgnoredDuringExecution:
+    #       - weight: 50
+    #         preference:
+    #           matchExpressions:
+    #             - key: kubernetes.io/hostname
+    #               operator: In
+    #               values:
+    #                 - k8s-host-01
     persistence:
       config:
         enabled: true

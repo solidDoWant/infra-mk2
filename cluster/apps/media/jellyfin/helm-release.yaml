@@ -69,6 +69,7 @@ spec:
       intel.feature.node.kubernetes.io/quicksync: "true"
     resources:
       requests:
+        gpu.intel.com/i915: 1
         memory: 12Gi
       limits:
         gpu.intel.com/i915: 1
