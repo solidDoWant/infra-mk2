@@ -113,7 +113,7 @@ def main():
     actual_modpack_mods = {
         addon["installedFile"]["projectId"]: addon["installedFile"]
         for addon in new_json_file["installedAddons"]
-        if not addon["installedFile"]["FileNameOnDisk"].endswith("disabled")
+        if not "FileNameOnDisk" in addon["installedFile"] or not addon["installedFile"]["FileNameOnDisk"].endswith("disabled")
     }
 
     print(f"Found {len(base_modpack_mods)} mods in the base modpack and {len(actual_modpack_mods)} added")
@@ -139,7 +139,7 @@ def main():
     disabled_mods = {
         addon["installedFile"]["projectId"]: addon["installedFile"]
         for addon in new_json_file["installedAddons"]
-        if addon["installedFile"]["FileNameOnDisk"].endswith("disabled")
+        if "FileNameOnDisk" in addon["installedFile"] and addon["installedFile"]["FileNameOnDisk"].endswith("disabled")
     }
 
     print("Disabled mods:")
