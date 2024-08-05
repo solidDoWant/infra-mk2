@@ -66,4 +66,4 @@ if [ ! -e server.properties ]; then
     echo -e "allow-flight=true" > server.properties
 fi
 
-"$JAVA_COMMAND" @libraries/net/minecraftforge/forge/1.18.2-$FORGE_VERSION/unix_args.txt nogui
+"$JAVA_COMMAND" @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.18.2-$FORGE_VERSION/unix_args.txt nogui
