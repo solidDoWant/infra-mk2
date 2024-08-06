@@ -50,11 +50,11 @@ spec:
       ops: "solidDoWant"
       pvp: true
       type: AUTO_CURSEFORGE
-      autoCurseForce:
+      autoCurseForge:
         apiKey:
           existingSecret: curseforge-api-key
           secretKey: CURSEFORGE_API_KEY
-        pageUrl: https://www.curseforge.com/minecraft/modpacks/all-the-mods-7
+        slug: all-the-mods-7
       memory: 16G
       serviceType: LoadBalancer # Temp disable
       loadBalancerIP: 10.44.0.8
