@@ -2,21 +2,20 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: atm7
+  name: atm7-updated
 spec:
   interval: 5m
   chart:
     spec:
       # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
       chart: minecraft
-      version: 4.19.0
+      version: 4.20.0
       sourceRef:
         kind: HelmRepository
         name: minecraft-server-charts
         namespace: flux-system
       interval: 5m
   values:
-    replicaCount: 0 # Temp disable
     resources:
       requests:
         memory: 16Gi
@@ -44,57 +43,6 @@ spec:
     readinessProbe:
       initialDelaySeconds: 300
       periodSeconds: 30
-    initContainers:
-      - name: update-modpack
-        image: python:3
-        env:
-          - name: CURSEFORGE_API_KEY
-            valueFrom:
-              secretKeyRef:
-                name: curseforge-api-key
-                key: CURSEFORGE_API_KEY
-        command:
-          - python
-        args:
-          - /script/main.py
-          - --minecraft-server-path
-          - /data/FeedTheBeast
-          - --minecraftinstance-json-path
-          - /config/minecraftinstance.json
-          - --download-directory
-          - /tmp/download
-          - --modpack-zip-directory
-          - /data
-        volumeMounts:
-          - name: update-modpack
-            mountPath: /script
-          - name: minecraftinstance
-            mountPath: /config
-          - name: datadir
-            mountPath: /data
-        securityContext:
-          allowPrivilegeEscalation: false
-          runAsUser: 0
-      - name: update-data-permissions
-        image: alpine
-        command:
-          - sh
-          - -c
-          - chown -R 1000:2000 /data && chmod -R 777 /data
-        volumeMounts:
-          - name: datadir
-            mountPath: /data
-        securityContext:
-          allowPrivilegeEscalation: false
-          runAsUser: 0
-    extraVolumes:
-      - volumes:
-          - name: update-modpack
-            configMap:
-              name: update-modpack-script
-          - name: minecraftinstance
-            configMap:
-              name: minecraftinstance
     minecraftServer:
       eula: "TRUE"
       difficulty: normal
@@ -102,9 +50,9 @@ spec:
       ops: "solidDoWant"
       pvp: true
       type: CURSEFORGE
-      cfServerMod: /data/modpack.zip
+      cfServerMod: https://www.curseforge.com/minecraft/modpacks/all-the-mods-7/download/5199628
       memory: 16G
-      # serviceType: LoadBalancer # Temp disable
+      serviceType: LoadBalancer # Temp disable
       loadBalancerIP: 10.44.0.8
       rcon:
         enabled: true
