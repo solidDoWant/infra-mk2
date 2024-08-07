@@ -16,7 +16,6 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    replicaCount: 0 # Temp disable
     resources:
       requests:
         memory: 16Gi
@@ -104,12 +103,12 @@ spec:
       type: CURSEFORGE
       cfServerMod: /data/modpack.zip
       memory: 16G
-      # serviceType: LoadBalancer # Temp disable
+      serviceType: LoadBalancer
       loadBalancerIP: 10.44.0.8
       rcon:
         enabled: true
         existingSecret: rcon-password
-        # serviceType: LoadBalancer
+        serviceType: LoadBalancer
         loadBalancerIP: 10.44.0.8
     rconServiceAnnotations:
       metallb.universe.tf/allow-shared-ip: "minecraft-atm7-shared-ip"
