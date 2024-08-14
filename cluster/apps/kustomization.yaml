@@ -13,7 +13,7 @@ resources:
   - calico-system
   - tools
   - media
-  - development
+  # - development
   # - istio-operator
   # - istio-system
   - keycloak
