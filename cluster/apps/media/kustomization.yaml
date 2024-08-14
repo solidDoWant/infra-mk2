@@ -4,19 +4,19 @@ kind: Kustomization
 namespace: media
 resources:
   # - transmission
-  - flood
-  - flaresolverr
+  # - flood
+  # - flaresolverr
   - nzbget
-  - jackett
+  # - jackett
   - nzbhydra2
   - lidarr
   - radarr
   - sonarr
   - bazarr
   - readarr
-  - calibre
-  - calibre-web
-  - mylarr
+  # - calibre
+  # - calibre-web
+  # - mylarr
   - jellyfin
   - ombi
   - youtubedl
