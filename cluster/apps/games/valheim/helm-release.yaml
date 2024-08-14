@@ -19,6 +19,8 @@ spec:
     - kind: Secret
       name: valheim-secrets
   values:
+    controller:
+      replicas: 0 # Disable for now, but don't delete other resources (PVC)
     service:
       main:
         type: LoadBalancer
