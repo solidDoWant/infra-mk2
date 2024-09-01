@@ -1,0 +1,78 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vpn-gateway
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: pod-gateway
+      version: 6.5.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: angelnu
+        namespace: flux-system
+  values:
+    routed_namespaces:
+      - media
+    settings:
+      NOT_ROUTED_TO_GATEWAY_CIDRS: &not-routed-cidrs "10.0.0.0/8"
+      VPN_INTERFACE: &vpn-interface wg0
+      VPN_BLOCK_OTHER_TRAFFIC: true
+      VPN_LOCAL_CIDRS: *not-routed-cidrs
+    publicPorts:
+      - hostname: transmission
+        IP: 10 # must be an integer between 2 and VXLAN_GATEWAY_FIRST_DYNAMIC_IP (20 by default)
+        ports:
+          - type: udp
+            port: ${SECRET_GLUETUN_PUBLIC_PORT}
+          - type: tcp
+            port: ${SECRET_GLUETUN_PUBLIC_PORT}
+    addons:
+      vpn:
+        enabled: true
+        type: gluetun
+        gluetun:
+          image:
+            repository: ghcr.io/qdm12/gluetun
+            tag: v3.39.0
+        env:
+          - name: VPN_TYPE
+            value: wireguard
+          - name: VPN_INTERFACE
+            value: *vpn-interface
+          - name: FIREWALL_VPN_INPUT_PORTS
+            value: "${SECRET_GLUETUN_PUBLIC_PORT}"
+          - name: DOT
+            value: "off"
+          - name: LOG_LEVEL
+            value: "debug"
+          - name: HEALTH_VPN_DURATION_INITIAL
+            value: 30s
+        envFrom:
+          - secretRef:
+              name: vpn-gateway-config
+        livenessProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - >-
+                COUNTRY="$(wget -qO- https://ipinfo.io/country)" &&
+                [ "${{COUNTRY}}" != '${SECRET_CLUSTER_COUNTRY_CODE}' ]
+          initialDelaySeconds: 30
+          periodSeconds: 60
+          failureThreshold: 3
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+    webhook:
+      gatewayDefault: false
+      gatewayLabel:
+      gatewayAnnotation: setGateway
+      gatewayAnnotationValue: "true"
+      namespaceSelector:
+        label: "vpn-routed-gateway"
