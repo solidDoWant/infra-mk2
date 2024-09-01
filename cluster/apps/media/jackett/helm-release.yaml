@@ -48,6 +48,8 @@ spec:
     securityContext:
       runAsUser: ${NFS_USER_ID}
       runAsGroup: ${NFS_GROUP_ID}
+      fsGroup: 2000
+      fsGroupChangePolicy: "OnRootMismatch"
     env:
       TZ: "${TIMEZONE}"
       XDG_CONFIG_HOME: /config
