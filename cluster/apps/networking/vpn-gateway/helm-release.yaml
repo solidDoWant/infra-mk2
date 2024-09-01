@@ -61,7 +61,7 @@ spec:
               - -c
               - >-
                 COUNTRY="$(wget -qO- https://ipinfo.io/country)" &&
-                [ "${{COUNTRY}}" != '${SECRET_CLUSTER_COUNTRY_CODE}' ]
+                [ "$${COUNTRY}" != '${SECRET_CLUSTER_COUNTRY_CODE}' ]
           initialDelaySeconds: 30
           periodSeconds: 60
           failureThreshold: 3
