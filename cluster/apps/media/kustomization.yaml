@@ -5,9 +5,9 @@ namespace: media
 resources:
   # - transmission
   # - flood
-  # - flaresolverr
+  - flaresolverr
   - nzbget
-  # - jackett
+  - jackett
   - nzbhydra2
   - lidarr
   - radarr
