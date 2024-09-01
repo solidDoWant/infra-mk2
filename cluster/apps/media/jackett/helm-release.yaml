@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -7,19 +8,47 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: jackett
-      version: 11.7.2
+      chart: app-template
+      version: 3.2.1
+      interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
   values:
-    ingress:
-      dashboard:
+    controllers:
+      jackett:
+        containers:
+          jackett:
+            image:
+              repository: linuxserver/jackett
+              tag: 0.22.545
+            env:
+              PUID: 1000
+              PGID: 1000
+              TZ: "${TIMEZONE}"
+            probes:
+              liveness: &probe
+                type: AUTO
+              readiness: *probe
+              startup:
+                <<: *probe
+                spec:
+                  periodSeconds: 5
+                  failureThreshold: 30
+    persistence:
+      config:
         enabled: true
-        ingressClassName: "traefik"
+        size: 1Gi
+        accessMode: ReadWriteOnce
+    service:
+      jackett:
+        controller: jackett
+        ports:
+          http:
+            port: 9117
+    ingress:
+      jackett:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-forward-auth@kubernetescrd
@@ -27,30 +56,9 @@ spec:
           - host: "jackett.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
+                service:
+                  identifier: jackett
         tls:
           - hosts:
               - "jackett.${SECRET_DOMAIN}"
             secretName: jackett-${SECRET_DOMAIN/./-}-tls
-    persistence:
-      config:
-        enabled: true
-        mountPath: /config
-      media:
-        enabled: true
-        type: custom
-        accessMode: ReadWriteMany
-        mountPath: /mnt/media
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDRESS}
-            path: ${NFS_MEDIA_PATH}
-    securityContext:
-      runAsUser: ${NFS_USER_ID}
-      runAsGroup: ${NFS_GROUP_ID}
-      fsGroup: 2000
-      fsGroupChangePolicy: "OnRootMismatch"
-    env:
-      TZ: "${TIMEZONE}"
-      XDG_CONFIG_HOME: /config
-      XDG_DATA_HOME: /mnt/media/jackett/data
