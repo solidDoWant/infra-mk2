@@ -12,7 +12,7 @@ spec:
       interval: 15m
       sourceRef:
         kind: HelmRepository
-        name: angelnu
+        name: angelnu-charts
         namespace: flux-system
   values:
     routed_namespaces:
