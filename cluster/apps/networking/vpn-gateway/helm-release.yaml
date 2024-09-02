@@ -30,6 +30,10 @@ spec:
             port: ${SECRET_GLUETUN_PUBLIC_PORT}
           - type: tcp
             port: ${SECRET_GLUETUN_PUBLIC_PORT}
+    securityContext:
+      sysctl:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "1"
     addons:
       vpn:
         enabled: true
