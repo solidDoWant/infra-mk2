@@ -71,8 +71,15 @@ spec:
               - NET_ADMIN
         networkPolicy:
           egress:
-            - ports:
-                - port: "${SECRET_VPN_SERVER_PORT}"
+            - to:
+                - ipBlock:
+                    cidr: 0.0.0.0/0
+              ports:
+                - protocol: UDP
+                  port: ${SECRET_VPN_SERVER_PORT}
+            - to:
+                - ipBlock:
+                    cidr: 10.0.0.0/8
           # ingress:
           #   - from:
           #       - ipBlock:
