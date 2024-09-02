@@ -29,7 +29,7 @@
     k3s_server:
       cluster-cidr: 10.42.0.0/16
       service-cidr: 10.43.0.0/16
-      flannel-backend: 'none'
+      flannel-backend: "none"
       disable-network-policy: true
       tls-san:
         - 10.43.0.1
@@ -42,6 +42,7 @@
       kubelet-arg:
         - "feature-gates=GracefulNodeShutdown=true"
         - "feature-gates=MixedProtocolLBService=true"
+        - "allowed-unsafe-sysctls=net.ipv6.conf.all.disable_ipv6"
       kube-apiserver-arg:
         - "feature-gates=MixedProtocolLBService=true"
       # Monitoring vars
