@@ -52,17 +52,19 @@ spec:
             value: "debug"
           - name: HEALTH_VPN_DURATION_INITIAL
             value: 30s
+          - name: HEALTH_TARGET_ADDRESS
+            value: 1.1.1.1:443
         envFrom:
           - secretRef:
               name: vpn-gateway-config
         livenessProbe:
+          # Check liveness via the healthcheck endpoint,
+          # but without exposing the endpoint further
           exec:
             command:
-              - sh
-              - -c
-              - >-
-                COUNTRY="$(wget -qO- https://ipinfo.io/country)" &&
-                [ "$${COUNTRY}" != '${SECRET_CLUSTER_COUNTRY_CODE}' ]
+              - wget
+              - -qO-
+              - http://localhost:9999
           initialDelaySeconds: 30
           periodSeconds: 60
           failureThreshold: 3
