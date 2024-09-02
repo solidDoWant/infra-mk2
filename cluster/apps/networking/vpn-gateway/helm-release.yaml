@@ -18,10 +18,11 @@ spec:
     routed_namespaces:
       - media
     settings:
-      NOT_ROUTED_TO_GATEWAY_CIDRS: &not-routed-cidrs "10.0.0.0/8"
+      NOT_ROUTED_TO_GATEWAY_CIDRS: &not-routed-cidrs "10.0.0.0/9"
       VPN_INTERFACE: &vpn-interface wg0
       VPN_BLOCK_OTHER_TRAFFIC: true
       VPN_LOCAL_CIDRS: *not-routed-cidrs
+      VPN_TRAFFIC_PORT: ${SECRET_GLUETUN_PUBLIC_PORT}
     publicPorts:
       - hostname: transmission
         IP: 10 # must be an integer between 2 and VXLAN_GATEWAY_FIRST_DYNAMIC_IP (20 by default)
