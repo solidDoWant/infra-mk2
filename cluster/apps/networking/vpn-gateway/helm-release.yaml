@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -70,6 +69,19 @@ spec:
           capabilities:
             add:
               - NET_ADMIN
+        networkPolicy:
+          egress:
+            - ports:
+                - port: "${SECRET_VPN_SERVER_PORT}"
+          # ingress:
+          #   - from:
+          #       - ipBlock:
+          #           cidr: 0.0.0.0/0
+          #         ports:
+          #           - protocol: TCP
+          #             port: "${SECRET_GLUETUN_PUBLIC_PORT}"
+          #           - protocol: UDP
+          #             port: "${SECRET_GLUETUN_PUBLIC_PORT}"
     webhook:
       gatewayDefault: false
       gatewayLabel:
