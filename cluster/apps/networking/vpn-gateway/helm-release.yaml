@@ -55,20 +55,6 @@ spec:
         envFrom:
           - secretRef:
               name: vpn-gateway-config
-        livenessProbe:
-          # The vpn-gateway container blocks traffic on port 9999,
-          # so the normal gluetun health check endpoint is not
-          # reachable
-          exec:
-            command:
-              - sh
-              - -c
-              - >-
-                COUNTRY="$(wget -qO- https://ipinfo.io/country)" &&
-                [ "$${COUNTRY}" != '${SECRET_CLUSTER_COUNTRY_CODE}' ]
-          initialDelaySeconds: 30
-          periodSeconds: 60
-          failureThreshold: 3
         securityContext:
           capabilities:
             add:
