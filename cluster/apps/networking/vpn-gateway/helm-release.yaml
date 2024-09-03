@@ -15,14 +15,17 @@ spec:
         name: angelnu-charts
         namespace: flux-system
   values:
+    image:
+      tag: v1.10.0
     routed_namespaces:
       - media
     settings:
-      NOT_ROUTED_TO_GATEWAY_CIDRS: &not-routed-cidrs "10.0.0.0/11"
+      NOT_ROUTED_TO_GATEWAY_CIDRS: &not-routed-cidrs "10.0.0.0/10"
       VPN_INTERFACE: &vpn-interface wg0
       VPN_BLOCK_OTHER_TRAFFIC: true
       VPN_LOCAL_CIDRS: *not-routed-cidrs
       VPN_TRAFFIC_PORT: ${SECRET_VPN_SERVER_PORT}
+      VXLAN_ID: 65 # Avoid a collision with the default value
     publicPorts:
       - hostname: transmission
         IP: 10 # must be an integer between 2 and VXLAN_GATEWAY_FIRST_DYNAMIC_IP (20 by default)
