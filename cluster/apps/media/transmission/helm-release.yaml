@@ -82,6 +82,7 @@ spec:
       TRANSMISSION_WATCH_DIR_ENABLED: true
       TRANSMISSION_DOWNLOAD_QUEUE_ENABLED: false
       TRANSMISSION_WATCH_FORCE_GENERIC: true
+      TRANSMISSION_PEER_PORT: ${SECRET_GLUETUN_PUBLIC_PORT}
       TRANSMISSION_RPC_USERNAME:
         valueFrom:
           secretKeyRef:
@@ -92,6 +93,11 @@ spec:
           secretKeyRef:
             name: transmission-credentials
             key: password
+    podSecurityContext:
+      fsGroup: ${NFS_GROUP_ID}
+      sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "1"
     securityContext:
       runAsUser: ${NFS_USER_ID}
       runAsGroup: ${NFS_GROUP_ID}
@@ -118,6 +124,10 @@ spec:
             value: "${SECRET_GLUETUN_PUBLIC_PORT}"
           - name: HEALTH_VPN_DURATION_INITIAL
             value: 30s
+          - name: FIREWALL_INPUT_PORTS
+            value: 9091
+          - name: FIREWALL_OUTBOUND_SUBNETS
+            value: 10.0.0.0/10
         envFrom:
           - secretRef:
               name: gluetun-config
