@@ -113,15 +113,11 @@ spec:
           - name: VPN_TYPE
             value: wireguard
           - name: VPN_INTERFACE
-            value: *vpn-interface
+            value: wg0
           - name: FIREWALL_VPN_INPUT_PORTS
             value: "${SECRET_GLUETUN_PUBLIC_PORT}"
-          - name: DOT
-            value: "off"
           - name: HEALTH_VPN_DURATION_INITIAL
             value: 30s
-          # - name: HEALTH_TARGET_ADDRESS
-          #   value: 1.1.1.1:443
         envFrom:
           - secretRef:
               name: gluetun-config
