@@ -34,13 +34,27 @@ spec:
           - hosts:
               - "nzbhydra2.${SECRET_DOMAIN}"
             secretName: nzbhydra2-${SECRET_DOMAIN/./-}-tls
+    podSecurityContext:
+      fsGroup: ${NFS_GROUP_ID}
+      fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       config:
         enabled: true
         mountPath: /config
         size: 10Gi
+      media:
+        enabled: true
+        type: custom
+        accessMode: ReadWriteMany
+        mountPath: /mnt/media
+        volumeSpec:
+          nfs:
+            server: ${NFS_ADDRESS}
+            path: ${NFS_MEDIA_PATH}
     env:
       TZ: "${TIMEZONE}"
+      PUID: ${NFS_USER_ID}
+      PGID: ${NFS_GROUP_ID}
     probes:
       liveness:
         spec:
