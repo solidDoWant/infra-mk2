@@ -16,8 +16,6 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    podAnnotations:
-      setGateway: "true"
     ingress:
       dashboard:
         enabled: true
@@ -103,3 +101,42 @@ spec:
       requests:
         cpu: 100m
         memory: 256Mi
+    addons:
+      vpn:
+        enabled: true
+        type: gluetun
+        gluetun:
+          image:
+            repository: ghcr.io/qdm12/gluetun
+            tag: v3.39.0
+        env:
+          - name: VPN_TYPE
+            value: wireguard
+          - name: VPN_INTERFACE
+            value: *vpn-interface
+          - name: FIREWALL_VPN_INPUT_PORTS
+            value: "${SECRET_GLUETUN_PUBLIC_PORT}"
+          - name: DOT
+            value: "off"
+          - name: HEALTH_VPN_DURATION_INITIAL
+            value: 30s
+          # - name: HEALTH_TARGET_ADDRESS
+          #   value: 1.1.1.1:443
+        envFrom:
+          - secretRef:
+              name: gluetun-config
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        networkPolicy:
+          egress:
+            - to:
+                - ipBlock:
+                    cidr: 0.0.0.0/0
+              ports:
+                - protocol: UDP
+                  port: ${SECRET_VPN_SERVER_PORT}
+            - to:
+                - ipBlock:
+                    cidr: 10.0.0.0/8
