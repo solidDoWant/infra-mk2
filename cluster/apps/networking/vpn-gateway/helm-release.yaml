@@ -48,23 +48,24 @@ spec:
             value: "${SECRET_GLUETUN_PUBLIC_PORT}"
           - name: DOT
             value: "off"
-          - name: LOG_LEVEL
-            value: "debug"
           - name: HEALTH_VPN_DURATION_INITIAL
             value: 30s
-          - name: HEALTH_TARGET_ADDRESS
-            value: 1.1.1.1:443
+          # - name: HEALTH_TARGET_ADDRESS
+          #   value: 1.1.1.1:443
         envFrom:
           - secretRef:
               name: vpn-gateway-config
         livenessProbe:
-          # Check liveness via the healthcheck endpoint,
-          # but without exposing the endpoint further
+          # The vpn-gateway container blocks traffic on port 9999,
+          # so the normal gluetun health check endpoint is not
+          # reachable
           exec:
             command:
-              - wget
-              - -qO-
-              - http://localhost:9999
+              - sh
+              - -c
+              - >-
+                COUNTRY="$(wget -qO- https://ipinfo.io/country)" &&
+                [ "$${COUNTRY}" != '${SECRET_CLUSTER_COUNTRY_CODE}' ]
           initialDelaySeconds: 30
           periodSeconds: 60
           failureThreshold: 3
