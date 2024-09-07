@@ -16,6 +16,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      tag: 1.32.0
     ingress:
       main:
         enabled: true
