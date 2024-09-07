@@ -35,7 +35,7 @@
     -O mountpoint=/mnt/{{ pool_name }}
     {{ pool_name }}
     raidz2
-    dm-uuid-mpath-35000039ac81a7285
+    dm-uuid-mpath-35000039a48090cf9
     dm-uuid-mpath-35000039a48092cc1
     dm-uuid-mpath-35000039a8859fc21
     dm-uuid-mpath-35000039aa82b3c9d
