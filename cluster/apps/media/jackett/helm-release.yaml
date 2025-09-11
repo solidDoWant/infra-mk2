@@ -22,7 +22,7 @@ spec:
           jackett:
             image:
               repository: linuxserver/jackett
-              tag: 0.22.2451
+              tag: 0.23.8
             env:
               PUID: 1000
               PGID: 1000
