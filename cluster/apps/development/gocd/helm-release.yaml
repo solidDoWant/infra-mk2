@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://gocd.github.io/helm-chart
       chart: gocd
-      version: 2.14.2
+      version: 2.15.1
       sourceRef:
         kind: HelmRepository
         name: gocd-charts
