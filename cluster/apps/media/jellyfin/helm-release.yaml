@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: linuxserver/jellyfin
-      tag: 10.11.3
+      tag: 10.11.5
     command:
       - /bin/bash
     args:
