@@ -47,7 +47,7 @@ spec:
           - |
             set -x
             # renovate: githubProject=hacs/integration
-            VERSION=1.34.0
+            VERSION=2.0.5
             HA_PATH="/config"
 
             # Skip setup on first run
